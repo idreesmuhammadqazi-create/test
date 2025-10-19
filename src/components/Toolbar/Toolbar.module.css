@@ -1,0 +1,85 @@
+.toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #cccccc;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  height: 36px;
+  transition: background-color 0.2s;
+}
+
+.runButton {
+  composes: button;
+  background-color: #4caf50;
+  color: #ffffff;
+}
+
+.runButton:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.runButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  composes: button;
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+.secondaryButton:hover {
+  background-color: #d0d0d0;
+}
+
+.fileInput {
+  display: none;
+}
+
+.examplesContainer {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  z-index: 1000;
+}
+
+.dropdownItem {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.dropdownItem:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdownItem:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.dropdownItem:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
