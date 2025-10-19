@@ -3,7 +3,7 @@
  * Converts source code into tokens
  */
 
-import { Token, TokenType } from './types';
+import { Token } from './types';
 
 const KEYWORDS = new Set([
   'DECLARE', 'CONSTANT', 'IF', 'THEN', 'ELSE', 'ENDIF', 'WHILE', 'DO', 'ENDWHILE',
