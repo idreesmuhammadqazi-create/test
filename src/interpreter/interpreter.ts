@@ -679,10 +679,16 @@ export class Interpreter {
   }
 
   private executeSyncFor(node: ForNode, context: ExecutionContext): void {
-    const variable = this.getVariable(node.variable, context);
+    let variable = this.getVariable(node.variable, context);
 
+    // Auto-declare loop variable if it doesn't exist (implicit INTEGER type)
     if (!variable) {
-      throw new RuntimeError(`Loop variable '${node.variable}' not declared`, node.line);
+      context.variables.set(node.variable, {
+        type: 'INTEGER',
+        value: 0,
+        initialized: false
+      });
+      variable = context.variables.get(node.variable)!;
     }
 
     const start = this.evaluateExpression(node.start, context);
