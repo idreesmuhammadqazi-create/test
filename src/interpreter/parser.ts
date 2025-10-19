@@ -148,8 +148,6 @@ export class Parser {
 
     if (token.type === 'KEYWORD') {
       switch (token.value) {
-        case 'DECLARE':
-          return this.parseDeclare();
         case 'OUTPUT':
           return this.parseOutput();
         case 'INPUT':
