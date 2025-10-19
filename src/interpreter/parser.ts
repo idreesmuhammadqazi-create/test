@@ -653,9 +653,15 @@ export class Parser {
 
       if (this.isAtEnd()) break;
 
-      const stmt = this.parseStatement();
-      if (stmt) {
-        statements.push(stmt);
+      // Special handling for DECLARE to support comma-separated identifiers
+      if (this.check('KEYWORD') && this.peek().value === 'DECLARE') {
+        const declareNodes = this.parseDeclareStatements();
+        statements.push(...declareNodes);
+      } else {
+        const stmt = this.parseStatement();
+        if (stmt) {
+          statements.push(stmt);
+        }
       }
     }
 
