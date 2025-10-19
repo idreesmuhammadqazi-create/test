@@ -23,7 +23,6 @@ import {
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
-  FunctionCallNode,
   DataType,
   Parameter
 } from './types';
