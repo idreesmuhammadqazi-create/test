@@ -21,32 +21,6 @@ const igcseHighlightStyle = HighlightStyle.define([
   { tag: t.number, color: '#9933cc' },
 ]);
 
-const keywords = new Set([
-  'DECLARE', 'CONSTANT', 'IF', 'THEN', 'ELSE', 'ENDIF', 'WHILE', 'DO', 'ENDWHILE',
-  'REPEAT', 'UNTIL', 'FOR', 'TO', 'STEP', 'NEXT', 'CASE', 'OF', 'OTHERWISE', 'ENDCASE',
-  'INPUT', 'OUTPUT', 'PROCEDURE', 'ENDPROCEDURE', 'FUNCTION', 'ENDFUNCTION',
-  'RETURN', 'CALL', 'BYVAL', 'BYREF', 'TRUE', 'FALSE',
-  'AND', 'OR', 'NOT', 'DIV', 'MOD',
-  'OPENFILE', 'CLOSEFILE', 'READFILE', 'WRITEFILE', 'EOF'
-]);
-
-const dataTypes = new Set([
-  'INTEGER', 'REAL', 'STRING', 'CHAR', 'BOOLEAN', 'ARRAY', 'OF'
-]);
-
-// Simple token-based highlighter
-function createIGCSEHighlighter() {
-  return EditorView.updateListener.of((update) => {
-    if (update.docChanged) {
-      // Syntax highlighting happens via decorations
-      // For simplicity, we'll use a regex-based approach
-    }
-  });
-}
-
-// Basic token parser for highlighting
-const igcseLanguageSupport = EditorView.domEventHandlers({});
-
 export default function Editor({ value, onChange }: EditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const viewRef = useRef<EditorView | null>(null);
