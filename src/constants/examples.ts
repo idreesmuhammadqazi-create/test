@@ -47,7 +47,7 @@ ENDIF`
     code: `// Count from 1 to 10
 DECLARE counter : INTEGER
 
-FOR counter <- 1 TO 10
+FOR counter <-- 1 TO 10
     OUTPUT counter
 NEXT counter
 
@@ -59,12 +59,12 @@ OUTPUT "Done!"`
 DECLARE total : INTEGER
 DECLARE number : INTEGER
 
-total <- 0
-number <- 1
+total <-- 0
+number <-- 1
 
 WHILE number <= 10 DO
-    total <- total + number
-    number <- number + 1
+    total <-- total + number
+    number <-- number + 1
 ENDWHILE
 
 OUTPUT "Sum: ", total`
@@ -77,15 +77,15 @@ DECLARE i : INTEGER
 DECLARE sum : INTEGER
 
 // Fill array
-FOR i <- 1 TO 5
+FOR i <-- 1 TO 5
     OUTPUT "Enter number ", i, ": "
     INPUT numbers[i]
 NEXT i
 
 // Calculate sum
-sum <- 0
-FOR i <- 1 TO 5
-    sum <- sum + numbers[i]
+sum <-- 0
+FOR i <-- 1 TO 5
+    sum <-- sum + numbers[i]
 NEXT i
 
 OUTPUT "Sum: ", sum
@@ -98,9 +98,9 @@ FUNCTION Factorial(n : INTEGER) RETURNS INTEGER
     DECLARE result : INTEGER
     DECLARE i : INTEGER
 
-    result <- 1
-    FOR i <- 1 TO n
-        result <- result * i
+    result <-- 1
+    FOR i <-- 1 TO n
+        result <-- result * i
     NEXT i
 
     RETURN result
@@ -112,7 +112,7 @@ DECLARE answer : INTEGER
 
 OUTPUT "Enter a number: "
 INPUT num
-answer <- Factorial(num)
+answer <-- Factorial(num)
 OUTPUT "Factorial: ", answer`
   },
   {
@@ -147,8 +147,8 @@ ENDIF`
 DECLARE text : STRING
 DECLARE len : INTEGER
 
-text <- "Hello World"
-len <- LENGTH(text)
+text <-- "Hello World"
+len <-- LENGTH(text)
 
 OUTPUT "Original: ", text
 OUTPUT "Length: ", len
