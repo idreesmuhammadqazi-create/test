@@ -753,7 +753,8 @@ export class Interpreter {
         return this.evaluateFunctionCall(expr as FunctionCallNode, context);
 
       default:
-        throw new RuntimeError(`Unknown expression type: ${expr.type}`, expr.line);
+        // This should never happen due to exhaustive checking above
+        throw new RuntimeError(`Unknown expression type: ${(expr as any).type}`, (expr as any).line);
     }
   }
 
