@@ -155,5 +155,216 @@ OUTPUT "Length: ", len
 OUTPUT "Uppercase: ", UCASE(text)
 OUTPUT "Lowercase: ", LCASE(text)
 OUTPUT "Substring: ", SUBSTRING(text, 1, 5)`
+  },
+  {
+    title: '2D Arrays',
+    code: `// 2D Array - Student grades
+DECLARE grades : ARRAY[1:3, 1:4] OF INTEGER
+DECLARE student, subject : INTEGER
+DECLARE total, average : REAL
+
+// Initialize grades (3 students, 4 subjects each)
+grades[1, 1] <-- 85
+grades[1, 2] <-- 90
+grades[1, 3] <-- 78
+grades[1, 4] <-- 92
+
+grades[2, 1] <-- 76
+grades[2, 2] <-- 88
+grades[2, 3] <-- 91
+grades[2, 4] <-- 84
+
+grades[3, 1] <-- 95
+grades[3, 2] <-- 87
+grades[3, 3] <-- 89
+grades[3, 4] <-- 93
+
+// Calculate and display average for each student
+FOR student <-- 1 TO 3
+    total <-- 0
+    FOR subject <-- 1 TO 4
+        total <-- total + grades[student, subject]
+    NEXT subject
+    average <-- total / 4
+    OUTPUT "Student ", student, " average: ", average
+NEXT student`
+  },
+  {
+    title: 'Bubble Sort',
+    code: `// Bubble Sort Algorithm
+DECLARE nums : ARRAY[1:5] OF INTEGER
+DECLARE temp, index : INTEGER
+DECLARE isSorted : BOOLEAN
+DECLARE endIndex : INTEGER
+
+// Initialize array
+nums[1] <-- 64
+nums[2] <-- 34
+nums[3] <-- 25
+nums[4] <-- 12
+nums[5] <-- 22
+
+OUTPUT "Original array:"
+FOR index <-- 1 TO 5
+    OUTPUT nums[index]
+NEXT index
+
+// Bubble sort
+endIndex <-- 4
+isSorted <-- FALSE
+
+WHILE isSorted = FALSE DO
+    isSorted <-- TRUE
+    FOR index <-- 1 TO endIndex
+        IF nums[index] > nums[index + 1] THEN
+            temp <-- nums[index]
+            nums[index] <-- nums[index + 1]
+            nums[index + 1] <-- temp
+            isSorted <-- FALSE
+        ENDIF
+    NEXT index
+    endIndex <-- endIndex - 1
+ENDWHILE
+
+OUTPUT "Sorted array:"
+FOR index <-- 1 TO 5
+    OUTPUT nums[index]
+NEXT index`
+  },
+  {
+    title: 'Linear Search',
+    code: `// Linear Search Algorithm
+DECLARE numbers : ARRAY[1:8] OF INTEGER
+DECLARE target, position, index : INTEGER
+DECLARE found : BOOLEAN
+
+// Initialize array
+numbers[1] <-- 45
+numbers[2] <-- 23
+numbers[3] <-- 78
+numbers[4] <-- 12
+numbers[5] <-- 56
+numbers[6] <-- 34
+numbers[7] <-- 89
+numbers[8] <-- 67
+
+OUTPUT "Enter number to search: "
+INPUT target
+
+// Linear search
+found <-- FALSE
+position <-- 0
+
+FOR index <-- 1 TO 8
+    IF numbers[index] = target THEN
+        found <-- TRUE
+        position <-- index
+    ENDIF
+NEXT index
+
+IF found = TRUE THEN
+    OUTPUT "Found at position: ", position
+ELSE
+    OUTPUT "Not found"
+ENDIF`
+  },
+  {
+    title: 'CASE Statement',
+    code: `// Calculator using CASE
+DECLARE num1, num2 : REAL
+DECLARE operator : STRING
+DECLARE result : REAL
+
+OUTPUT "Enter first number: "
+INPUT num1
+OUTPUT "Enter operator (+, -, *, /): "
+INPUT operator
+OUTPUT "Enter second number: "
+INPUT num2
+
+CASE OF operator
+    "+" : result <-- num1 + num2
+    "-" : result <-- num1 - num2
+    "*" : result <-- num1 * num2
+    "/" : result <-- num1 / num2
+    OTHERWISE : OUTPUT "Invalid operator"
+ENDCASE
+
+OUTPUT "Result: ", result`
+  },
+  {
+    title: 'REPEAT UNTIL Loop',
+    code: `// Number guessing game
+DECLARE secretNumber, guess, attempts : INTEGER
+
+secretNumber <-- 42
+attempts <-- 0
+
+OUTPUT "Guess the number (1-100)!"
+
+REPEAT
+    OUTPUT "Enter your guess: "
+    INPUT guess
+    attempts <-- attempts + 1
+    
+    IF guess < secretNumber THEN
+        OUTPUT "Too low!"
+    ENDIF
+    
+    IF guess > secretNumber THEN
+        OUTPUT "Too high!"
+    ENDIF
+UNTIL guess = secretNumber
+
+OUTPUT "Correct! You guessed in ", attempts, " attempts"`
+  },
+  {
+    title: 'BYREF Parameters',
+    code: `// Pass by reference example
+PROCEDURE Swap(BYREF a : INTEGER, BYREF b : INTEGER)
+    DECLARE temp : INTEGER
+    temp <-- a
+    a <-- b
+    b <-- temp
+ENDPROCEDURE
+
+// Main program
+DECLARE x, y : INTEGER
+
+x <-- 10
+y <-- 20
+
+OUTPUT "Before swap:"
+OUTPUT "x = ", x
+OUTPUT "y = ", y
+
+CALL Swap(x, y)
+
+OUTPUT "After swap:"
+OUTPUT "x = ", x
+OUTPUT "y = ", y`
+  },
+  {
+    title: 'Nested Loops - Pattern',
+    code: `// Print a number pattern
+DECLARE row, col : INTEGER
+
+OUTPUT "Number Triangle Pattern:"
+
+FOR row <-- 1 TO 5
+    FOR col <-- 1 TO row
+        OUTPUT col
+    NEXT col
+    OUTPUT ""
+NEXT row
+
+OUTPUT "Multiplication Table (3x3):"
+
+FOR row <-- 1 TO 3
+    FOR col <-- 1 TO 3
+        OUTPUT row * col, " "
+    NEXT col
+    OUTPUT ""
+NEXT row`
   }
 ];
