@@ -43,14 +43,104 @@ export class Parser {
       this.skipNewlines();
       if (this.isAtEnd()) break;
 
-      const stmt = this.parseStatement();
-      if (stmt) {
-        statements.push(stmt);
+      // Special handling for DECLARE to support comma-separated identifiers
+      if (this.check('KEYWORD') && this.peek().value === 'DECLARE') {
+        const declareNodes = this.parseDeclareStatements();
+        statements.push(...declareNodes);
+      } else {
+        const stmt = this.parseStatement();
+        if (stmt) {
+          statements.push(stmt);
+        }
       }
       this.skipNewlines();
     }
 
     return statements;
+  }
+
+  private parseDeclareStatements(): DeclareNode[] {
+    const line = this.advance().line; // consume DECLARE
+    const nodes: DeclareNode[] = [];
+
+    // Collect all identifiers (comma-separated)
+    const identifiers: string[] = [];
+    identifiers.push(this.consume('IDENTIFIER', 'Expected identifier after DECLARE').value);
+
+    while (this.check('COMMA')) {
+      this.advance(); // consume comma
+      identifiers.push(this.consume('IDENTIFIER', 'Expected identifier after comma').value);
+    }
+
+    this.consume('COLON', 'Expected : after identifier(s) in DECLARE');
+
+    // Check for ARRAY
+    if (this.check('KEYWORD') && this.peek().value === 'ARRAY') {
+      this.advance(); // consume ARRAY
+
+      // Parse bounds
+      this.consume('LBRACKET', 'Expected [ after ARRAY');
+      const dimensions: Array<{ lower: number; upper: number }> = [];
+
+      do {
+        const lowerExpr = this.parseExpression();
+        if (lowerExpr.type !== 'Literal') {
+          throw new Error(`Array bounds must be literal numbers at line ${line}`);
+        }
+        const lower = parseInt((lowerExpr as LiteralNode).value);
+
+        this.consume('COLON', 'Expected : in array bounds');
+
+        const upperExpr = this.parseExpression();
+        if (upperExpr.type !== 'Literal') {
+          throw new Error(`Array bounds must be literal numbers at line ${line}`);
+        }
+        const upper = parseInt((upperExpr as LiteralNode).value);
+
+        dimensions.push({ lower, upper });
+
+        if (this.check('COMMA')) {
+          this.advance();
+        } else {
+          break;
+        }
+      } while (true);
+
+      this.consume('RBRACKET', 'Expected ] after array bounds');
+      this.consume('KEYWORD', 'Expected OF after array bounds');
+      if (this.previous().value !== 'OF') {
+        throw new Error(`Expected OF after array bounds at line ${line}`);
+      }
+
+      const elementType = this.parseDataType();
+
+      // Create a DeclareNode for each identifier with array type
+      for (const identifier of identifiers) {
+        nodes.push({
+          type: 'Declare',
+          identifier,
+          dataType: 'ARRAY',
+          arrayBounds: { dimensions },
+          arrayElementType: elementType,
+          line
+        });
+      }
+    } else {
+      // Regular variable
+      const dataType = this.parseDataType();
+
+      // Create a DeclareNode for each identifier
+      for (const identifier of identifiers) {
+        nodes.push({
+          type: 'Declare',
+          identifier,
+          dataType,
+          line
+        });
+      }
+    }
+
+    return nodes;
   }
 
   private parseStatement(): ASTNode | null {
