@@ -90,17 +90,17 @@ export function tokenize(code: string): Token[] {
       continue;
     }
 
-    // Assignment operator ← or <-
-    if (char === '←' || (char === '<' && code[i + 1] === '-')) {
+    // Assignment operator ← or <--
+    if (char === '←' || (char === '<' && code[i + 1] === '-' && code[i + 2] === '-')) {
       const startColumn = column;
       if (char === '←') {
         i++;
         column++;
       } else {
-        i += 2;
-        column += 2;
+        i += 3;
+        column += 3;
       }
-      tokens.push({ type: 'ASSIGNMENT', value: '<-', line, column: startColumn });
+      tokens.push({ type: 'ASSIGNMENT', value: '<--', line, column: startColumn });
       continue;
     }
 
