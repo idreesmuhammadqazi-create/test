@@ -20,8 +20,6 @@ import {
   FunctionNode,
   CallNode,
   ReturnNode,
-  BinaryOpNode,
-  UnaryOpNode,
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
