@@ -97,6 +97,17 @@ export class Interpreter {
       throw new RuntimeError('Execution timeout: Possible infinite loop', node.line);
     }
 
+    // Debug mode: Pause before executing each statement
+    if (this.debugMode && this.stepCallback) {
+      // Update call stack with current line
+      if (this.callStack.length > 0) {
+        this.callStack[this.callStack.length - 1].line = node.line;
+      }
+      
+      // Wait for step command
+      await this.stepCallback();
+    }
+
     switch (node.type) {
       case 'Declare':
         this.executeDeclare(node as DeclareNode, context);
