@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { EXAMPLES } from '../../constants/examples';
+import { useAuth } from '../../contexts/AuthContext';
 import styles from './Toolbar.module.css';
 
 interface ToolbarProps {
@@ -19,6 +20,7 @@ export default function Toolbar({
   onLoadExample,
   isRunning
 }: ToolbarProps) {
+  const { currentUser, logout } = useAuth();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showExamplesMenu, setShowExamplesMenu] = useState(false);
   const examplesRef = useRef<HTMLDivElement>(null);
@@ -39,6 +41,16 @@ export default function Toolbar({
   const handleExampleClick = (code: string) => {
     setShowExamplesMenu(false);
     onLoadExample(code);
+  };
+
+  const handleLogout = async () => {
+    if (confirm('Are you sure you want to logout?')) {
+      try {
+        await logout();
+      } catch (error) {
+        console.error('Logout error:', error);
+      }
+    }
   };
 
   // Close dropdown when clicking outside
