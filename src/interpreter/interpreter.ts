@@ -52,11 +52,15 @@ export class Interpreter {
     this.inputHandler = inputHandler || this.defaultInputHandler;
   }
 
-  private defaultInputHandler(variableName: string, variableType: string): Promise<string> {
+  private defaultInputHandler(variableName: string): Promise<string> {
     return Promise.resolve(window.prompt(`Enter value for ${variableName}:`) || '');
   }
 
-  async* execute(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
+  public async* executeProgram(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
+    yield* this.execute(ast);
+  }
+
+  public async* execute(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
     // First pass: register procedures and functions
     for (const node of ast) {
       if (node.type === 'Procedure') {
@@ -1162,9 +1166,4 @@ export class Interpreter {
     }
     return String(value);
   }
-}
-
-export async function* executeProgram(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
-  const interpreter = new Interpreter();
-  yield* interpreter.execute(ast);
 }
