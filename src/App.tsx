@@ -360,6 +360,7 @@ function App() {
     <div className={styles.container}>
       <Toolbar
         onRun={handleRun}
+        onDebug={handleDebug}
         onClear={handleClear}
         onDownload={handleDownload}
         onUpload={handleUpload}
@@ -369,12 +370,29 @@ function App() {
         isRunning={isRunning}
       />
 
+      {isDebugging && (
+        <DebugControls
+          onStep={handleDebugStep}
+          onContinue={handleDebugContinue}
+          onStop={handleDebugStop}
+          isDebugging={isDebugging}
+          isPaused={isPaused}
+        />
+      )}
+
       <div className={styles.splitView}>
         <div className={styles.leftPanel}>
           <Editor value={code} onChange={handleCodeChange} />
         </div>
 
         <div className={styles.rightPanel}>
+          {isDebugging && debugState && (
+            <VariablesPanel
+              variables={debugState.variables}
+              currentLine={debugState.currentLine}
+            />
+          )}
+          
           <OutputPanel 
             output={output} 
             isRunning={isRunning}
