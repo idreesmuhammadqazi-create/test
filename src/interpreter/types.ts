@@ -143,6 +143,7 @@ export interface Parameter {
   name: string;
   type: DataType;
   byRef: boolean;
+  arrayElementType?: DataType;
 }
 
 export interface CallNode extends BaseNode {

@@ -618,7 +618,18 @@ export class Parser {
       this.consume('COLON', 'Expected : after parameter name');
       const type = this.parseDataType();
 
-      parameters.push({ name, type, byRef });
+      let arrayElementType: DataType | undefined;
+      
+      // If type is ARRAY, check for "OF TYPE"
+      if (type === 'ARRAY') {
+        const ofToken = this.consume('KEYWORD', 'Expected OF after ARRAY');
+        if (ofToken.value !== 'OF') {
+          throw new Error(`Expected OF after ARRAY at line ${ofToken.line}`);
+        }
+        arrayElementType = this.parseDataType();
+      }
+
+      parameters.push({ name, type, byRef, arrayElementType });
 
       if (this.check('COMMA')) {
         this.advance();
@@ -636,6 +647,10 @@ export class Parser {
 
     if (['INTEGER', 'REAL', 'STRING', 'CHAR', 'BOOLEAN'].includes(type)) {
       return type as DataType;
+    }
+
+    if (type === 'ARRAY') {
+      return 'ARRAY' as DataType;
     }
 
     throw new Error(`Invalid data type '${type}' at line ${token.line}`);
