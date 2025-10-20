@@ -120,7 +120,12 @@ export interface ForNode extends BaseNode {
 export interface CaseNode extends BaseNode {
   type: 'Case';
   expression: ExpressionNode;
-  cases: Array<{ value: ExpressionNode; statements: ASTNode[] }>;
+  cases: Array<{ 
+    value?: ExpressionNode; 
+    rangeStart?: ExpressionNode;
+    rangeEnd?: ExpressionNode;
+    statements: ASTNode[] 
+  }>;
   otherwiseBlock?: ASTNode[];
 }
 
