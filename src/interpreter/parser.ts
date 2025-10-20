@@ -436,7 +436,12 @@ export class Parser {
 
     this.skipNewlines();
 
-    const cases: Array<{ value: ExpressionNode; statements: ASTNode[] }> = [];
+    const cases: Array<{ 
+      value?: ExpressionNode; 
+      rangeStart?: ExpressionNode;
+      rangeEnd?: ExpressionNode;
+      statements: ASTNode[] 
+    }> = [];
     let otherwiseBlock: ASTNode[] | undefined;
 
     while (!this.check('KEYWORD') || (this.peek().value !== 'ENDCASE')) {
@@ -455,6 +460,20 @@ export class Parser {
       }
 
       const caseValue = this.parseExpression();
+      
+      // Check for range (value TO value)
+      let rangeStart: ExpressionNode | undefined;
+      let rangeEnd: ExpressionNode | undefined;
+      let singleValue: ExpressionNode | undefined;
+      
+      if (this.check('KEYWORD') && this.peek().value === 'TO') {
+        this.advance(); // consume TO
+        rangeStart = caseValue;
+        rangeEnd = this.parseExpression();
+      } else {
+        singleValue = caseValue;
+      }
+      
       this.consume('COLON', 'Expected : after case value');
       this.skipNewlines();
 
@@ -477,7 +496,12 @@ export class Parser {
         this.skipNewlines();
       }
 
-      cases.push({ value: caseValue, statements });
+      cases.push({ 
+        value: singleValue, 
+        rangeStart, 
+        rangeEnd, 
+        statements 
+      });
     }
 
     this.consume('KEYWORD', 'Expected ENDCASE to close CASE statement');
