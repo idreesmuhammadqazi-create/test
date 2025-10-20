@@ -88,6 +88,14 @@ export default function Toolbar({
         Run
       </button>
 
+      <button
+        className={styles.debugButton}
+        onClick={onDebug}
+        disabled={isRunning}
+      >
+        🐛 Debug
+      </button>
+
       <button className={styles.secondaryButton} onClick={onClear}>
         Clear
       </button>
