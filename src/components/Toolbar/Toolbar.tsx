@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { EXAMPLES } from '../../constants/examples';
 import { useAuth } from '../../contexts/AuthContext';
+import { useTheme } from '../../contexts/ThemeContext';
 import styles from './Toolbar.module.css';
 
 interface ToolbarProps {
@@ -21,6 +22,7 @@ export default function Toolbar({
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showExamplesMenu, setShowExamplesMenu] = useState(false);
   const examplesRef = useRef<HTMLDivElement>(null);
