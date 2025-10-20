@@ -12,7 +12,6 @@ interface ToolbarProps {
   onLoadExample: (exampleCode: string) => void;
   onSaveAs: () => void;
   onOpenLibrary: () => void;
-  currentProgramName?: string;
   isRunning: boolean;
 }
 
@@ -24,7 +23,6 @@ export default function Toolbar({
   onLoadExample,
   onSaveAs,
   onOpenLibrary,
-  currentProgramName,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
@@ -138,12 +136,6 @@ export default function Toolbar({
       <button className={styles.secondaryButton} onClick={onOpenLibrary}>
         📂 My Programs
       </button>
-
-      {currentProgramName && (
-        <div className={styles.programName}>
-          {currentProgramName}
-        </div>
-      )}
 
       <button 
         className={styles.themeToggle}
