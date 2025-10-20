@@ -27,7 +27,10 @@ import {
   UnaryOpNode,
   ExecutionContext,
   Variable,
-  RuntimeError
+  RuntimeError,
+  CallStackFrame,
+  DebugState,
+  DebuggerYield
 } from './types';
 
 const MAX_ITERATIONS = 10000;
@@ -42,14 +45,24 @@ export class Interpreter {
   private iterationCount = 0;
   private recursionDepth = 0;
   private inputHandler: (variableName: string, variableType: string) => Promise<string>;
+  private debugMode: boolean;
+  private callStack: CallStackFrame[];
+  private stepCallback?: () => Promise<void>;
 
-  constructor(inputHandler?: (variableName: string, variableType: string) => Promise<string>) {
+  constructor(
+    inputHandler?: (variableName: string, variableType: string) => Promise<string>,
+    debugMode: boolean = false,
+    stepCallback?: () => Promise<void>
+  ) {
     this.globalContext = {
       variables: new Map(),
       procedures: new Map(),
       functions: new Map()
     };
     this.inputHandler = inputHandler || this.defaultInputHandler;
+    this.debugMode = debugMode;
+    this.callStack = [{ name: 'main', line: 1, type: 'main' }];
+    this.stepCallback = stepCallback;
   }
 
   private defaultInputHandler(variableName: string): Promise<string> {
