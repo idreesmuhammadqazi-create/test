@@ -54,7 +54,7 @@ export function tokenize(code: string): Token[] {
       continue;
     }
 
-    // String literals
+    // String literals (double quotes)
     if (char === '"') {
       let str = '';
       const startColumn = column;
@@ -70,6 +70,29 @@ export function tokenize(code: string): Token[] {
       }
       if (i >= code.length) {
         throw new Error(`Unterminated string at line ${line}, column ${startColumn}`);
+      }
+      i++; // Skip closing quote
+      column++;
+      tokens.push({ type: 'STRING', value: str, line, column: startColumn });
+      continue;
+    }
+
+    // Character literals (single quotes) - for CHAR type
+    if (char === "'") {
+      let str = '';
+      const startColumn = column;
+      i++;
+      column++;
+      while (i < code.length && code[i] !== "'") {
+        if (code[i] === '\n') {
+          throw new Error(`Unterminated character literal at line ${line}, column ${startColumn}`);
+        }
+        str += code[i];
+        i++;
+        column++;
+      }
+      if (i >= code.length) {
+        throw new Error(`Unterminated character literal at line ${line}, column ${startColumn}`);
       }
       i++; // Skip closing quote
       column++;
