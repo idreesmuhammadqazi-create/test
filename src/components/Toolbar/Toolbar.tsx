@@ -122,6 +122,15 @@ export default function Toolbar({
           </div>
         )}
       </div>
+
+      <div className={styles.userSection}>
+        <span className={styles.userName}>
+          {currentUser?.displayName || currentUser?.email}
+        </span>
+        <button className={styles.logoutButton} onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 }
