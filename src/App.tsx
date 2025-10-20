@@ -245,7 +245,6 @@ function App() {
         onLoadExample={handleLoadExample}
         onSaveAs={() => setShowSaveAsModal(true)}
         onOpenLibrary={handleOpenLibrary}
-        currentProgramName={currentProgram?.name}
         isRunning={isRunning}
       />
 
