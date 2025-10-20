@@ -69,6 +69,16 @@ export class Interpreter {
     return Promise.resolve(window.prompt(`Enter value for ${variableName}:`) || '');
   }
 
+  public getDebugState(): DebugState {
+    return {
+      currentLine: this.callStack.length > 0 ? this.callStack[this.callStack.length - 1].line : 1,
+      callStack: [...this.callStack],
+      variables: new Map(this.globalContext.variables),
+      isPaused: this.debugMode,
+      isRunning: true
+    };
+  }
+
   public async* executeProgram(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
     yield* this.execute(ast);
   }
