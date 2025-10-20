@@ -131,6 +131,20 @@ export default function Toolbar({
         )}
       </div>
 
+      <button className={styles.secondaryButton} onClick={onSaveAs}>
+        💾 Save As
+      </button>
+
+      <button className={styles.secondaryButton} onClick={onOpenLibrary}>
+        📂 My Programs
+      </button>
+
+      {currentProgramName && (
+        <div className={styles.programName}>
+          {currentProgramName}
+        </div>
+      )}
+
       <button 
         className={styles.themeToggle}
         onClick={toggleTheme}
