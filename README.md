@@ -26,8 +26,9 @@
 - ✅ **Error Detection** - Detailed syntax and runtime error messages with line numbers
 - ✅ **Auto-save** - Code persists in browser LocalStorage
 - ✅ **File Operations** - Download/upload code as .txt files
-- ✅ **15 Built-in Examples** - Learn from comprehensive sample programs
+- ✅ **22 Built-in Examples** - Learn from comprehensive sample programs
 - ✅ **Responsive Design** - Works on desktop, tablet, and mobile
+- ✅ **User Authentication** - Secure login with Google or Email/Password
 
 ### 🎨 User Experience
 - 🖱️ **Split-view Editor** - Code on left, output on right
@@ -143,23 +144,30 @@ OUTPUT expression, "text", variable
 
 ## 📚 Examples
 
-The editor includes **15 comprehensive examples** covering:
+The editor includes **22 comprehensive examples** covering:
 
 1. **Basic Input/Output** - Simple I/O operations
 2. **IF Statement** - Grade calculator with multiple conditions
 3. **FOR Loop** - Counter demonstration
 4. **WHILE Loop** - Sum calculation
 5. **Arrays** - 1D array manipulation
-6. **Functions** - Factorial calculation
-7. **Procedures** - Menu display system
-8. **String Manipulation** - String function showcase
-9. **2D Arrays** - Student grades matrix
-10. **Bubble Sort** - Complete sorting algorithm
-11. **Linear Search** - Search with boolean flags
-12. **CASE Statement** - Calculator implementation
-13. **REPEAT UNTIL** - Number guessing game
-14. **BYREF Parameters** - Swap procedure demonstration
-15. **Nested Loops** - Pattern generation
+6. **Functions** - Factorial and IsPrime calculations
+7. **Procedures** - Bubble Sort algorithm
+8. **String Manipulation** - String function showcase with vowel counting
+9. **2D Arrays** - Matrix operations with row and diagonal sums
+10. **Linear Search** - Search with string arrays
+11. **Binary Search** - Efficient search algorithm
+12. **Selection Sort** - Complete sorting algorithm
+13. **CASE Statement with Ranges** - Grade assignment using ranges
+14. **REPEAT UNTIL Loop** - Counter demonstration
+15. **BYREF Parameters** - Swap procedure demonstration
+16. **Nested Loops** - Multiplication table and pattern generation
+17. **Parallel Arrays** - Simulating records with multiple arrays
+18. **Type Conversion** - INT, REAL, STRING functions
+19. **String Concatenation** - Combining strings with & operator
+20. **Nested IF Statements** - Complex conditional logic
+21. **Mathematical Operations** - All arithmetic operators including DIV and MOD
+22. **Advanced Examples** - Combining multiple concepts
 
 ## 🚀 Quick Start
 
@@ -177,11 +185,65 @@ cd test
 # Install dependencies
 npm install
 
+# Set up Firebase Authentication (required)
+# See Firebase Setup section below
+
 # Start development server
 npm run dev
 
 # Open http://localhost:3000
 ```
+
+### Firebase Authentication Setup
+
+This application uses Firebase for user authentication. Follow these steps to set up:
+
+1. **Create a Firebase Project**
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Click "Add project" and follow the setup wizard
+   - Once created, you'll be in your project dashboard
+
+2. **Enable Authentication Methods**
+   - Click "Authentication" in the left sidebar
+   - Go to the "Sign-in method" tab
+   - Enable **Email/Password** authentication
+   - Enable **Google** authentication
+   - For Google sign-in, you may need to set a support email
+
+3. **Register Your Web App**
+   - Click the gear icon (⚙️) next to "Project Overview"
+   - Select "Project settings"
+   - Scroll to "Your apps" section
+   - Click the web icon (`</>`) to add a web app
+   - Give it a nickname (e.g., "Pseudocode Editor")
+   - Copy the Firebase configuration object
+
+4. **Configure Environment Variables**
+   ```bash
+   # Copy the example environment file
+   cp .env.example .env
+   
+   # Edit .env and paste your Firebase config values
+   # Get these from Firebase Console > Project Settings > Your apps
+   ```
+   
+   Your `.env` file should look like:
+   ```env
+   VITE_FIREBASE_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+   VITE_FIREBASE_PROJECT_ID=your-project-id
+   VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+   VITE_FIREBASE_MESSAGING_SENDER_ID=123456789012
+   VITE_FIREBASE_APP_ID=1:123456789012:web:abcdef123456
+   ```
+
+5. **Restart Development Server**
+   ```bash
+   # Stop the server (Ctrl+C) and restart
+   npm run dev
+   ```
+
+**Security Note:** Never commit your `.env` file to version control. The `.gitignore` file is already configured to exclude it.
 
 ### Build for Production
 
@@ -258,6 +320,7 @@ This editor strictly follows Cambridge IGCSE/A-LEVELS pseudocode standards:
 - **TypeScript** - Type-safe development
 - **Vite** - Fast build tool and dev server
 - **CodeMirror 6** - Professional code editor
+- **Firebase Authentication** - Secure user management (Google OAuth & Email/Password)
 - **CSS Modules** - Scoped styling
 - **Netlify** - Production hosting
 
