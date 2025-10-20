@@ -29,8 +29,7 @@ import {
   Variable,
   RuntimeError,
   CallStackFrame,
-  DebugState,
-  DebuggerYield
+  DebugState
 } from './types';
 
 const MAX_ITERATIONS = 10000;
