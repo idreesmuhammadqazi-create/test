@@ -41,13 +41,19 @@ export class Interpreter {
   private globalContext: ExecutionContext;
   private iterationCount = 0;
   private recursionDepth = 0;
+  private inputHandler: (variableName: string, variableType: string) => Promise<string>;
 
-  constructor() {
+  constructor(inputHandler?: (variableName: string, variableType: string) => Promise<string>) {
     this.globalContext = {
       variables: new Map(),
       procedures: new Map(),
       functions: new Map()
     };
+    this.inputHandler = inputHandler || this.defaultInputHandler;
+  }
+
+  private defaultInputHandler(variableName: string, variableType: string): Promise<string> {
+    return Promise.resolve(window.prompt(`Enter value for ${variableName}:`) || '');
   }
 
   async* execute(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
@@ -227,7 +233,7 @@ export class Interpreter {
       throw new RuntimeError(`Variable '${node.identifier}' not declared`, node.line);
     }
 
-    const input = window.prompt(`Enter value for ${node.identifier}:`) || '';
+    const input = await this.inputHandler(node.identifier, variable.type) || '';
 
     // Type conversion based on variable type
     let value: any;
