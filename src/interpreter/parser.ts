@@ -893,6 +893,36 @@ export class Parser {
       return expr;
     }
 
+    // Type conversion functions (INT, REAL, STRING are keywords but can be function calls)
+    if (token.type === 'KEYWORD' && ['INT', 'REAL', 'STRING'].includes(token.value)) {
+      if (this.tokens[this.current + 1]?.type === 'LPAREN') {
+        const name = this.advance().value;
+        this.advance(); // consume (
+
+        const args: ExpressionNode[] = [];
+
+        if (!this.check('RPAREN')) {
+          do {
+            args.push(this.parseExpression());
+            if (this.check('COMMA')) {
+              this.advance();
+            } else {
+              break;
+            }
+          } while (true);
+        }
+
+        this.consume('RPAREN', 'Expected ) after function arguments');
+
+        return {
+          type: 'FunctionCall',
+          name,
+          arguments: args,
+          line: token.line
+        };
+      }
+    }
+
     // Identifier, function call, or array access
     if (token.type === 'IDENTIFIER') {
       const name = this.advance().value;
