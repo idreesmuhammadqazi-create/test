@@ -10,6 +10,9 @@ interface ToolbarProps {
   onDownload: () => void;
   onUpload: (file: File) => void;
   onLoadExample: (exampleCode: string) => void;
+  onSaveAs: () => void;
+  onOpenLibrary: () => void;
+  currentProgramName?: string;
   isRunning: boolean;
 }
 
@@ -19,6 +22,9 @@ export default function Toolbar({
   onDownload,
   onUpload,
   onLoadExample,
+  onSaveAs,
+  onOpenLibrary,
+  currentProgramName,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
