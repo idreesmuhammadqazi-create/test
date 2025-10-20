@@ -49,8 +49,7 @@ export async function getUserPrograms(userId: string): Promise<Program[]> {
   try {
     const q = query(
       collection(db, PROGRAMS_COLLECTION),
-      where('userId', '==', userId),
-      orderBy('updatedAt', 'desc')
+      where('userId', '==', userId)
     );
 
     const querySnapshot = await getDocs(q);
@@ -67,6 +66,9 @@ export async function getUserPrograms(userId: string): Promise<Program[]> {
         updatedAt: data.updatedAt instanceof Timestamp ? data.updatedAt.toDate() : new Date()
       });
     });
+
+    // Sort by updatedAt in JavaScript (newest first)
+    programs.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
 
     return programs;
   } catch (error) {
