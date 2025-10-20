@@ -6,6 +6,7 @@ import styles from './Toolbar.module.css';
 
 interface ToolbarProps {
   onRun: () => void;
+  onDebug: () => void;
   onClear: () => void;
   onDownload: () => void;
   onUpload: (file: File) => void;
@@ -17,6 +18,7 @@ interface ToolbarProps {
 
 export default function Toolbar({
   onRun,
+  onDebug,
   onClear,
   onDownload,
   onUpload,
