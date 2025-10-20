@@ -223,3 +223,26 @@ export class RuntimeError extends Error {
     this.name = 'RuntimeError';
   }
 }
+
+// Debug types
+export type DebugAction = 'step' | 'continue' | 'stop';
+
+export interface CallStackFrame {
+  name: string;
+  line: number;
+  type: 'procedure' | 'function' | 'main';
+}
+
+export interface DebugState {
+  currentLine: number;
+  callStack: CallStackFrame[];
+  variables: Map<string, Variable>;
+  isPaused: boolean;
+  isRunning: boolean;
+}
+
+export interface DebuggerYield {
+  type: 'output' | 'pause';
+  value?: string;
+  debugState?: DebugState;
+}
