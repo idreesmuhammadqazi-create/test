@@ -622,7 +622,10 @@ export class Parser {
       
       // If type is ARRAY, check for "OF TYPE"
       if (type === 'ARRAY') {
-        this.consume('KEYWORD', 'Expected OF after ARRAY', 'OF');
+        const ofToken = this.consume('KEYWORD', 'Expected OF after ARRAY');
+        if (ofToken.value !== 'OF') {
+          throw new Error(`Expected OF after ARRAY at line ${ofToken.line}`);
+        }
         arrayElementType = this.parseDataType();
       }
 
