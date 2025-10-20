@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Editor from './components/Editor/Editor';
 import OutputPanel from './components/OutputPanel/OutputPanel';
 import ErrorDisplay, { ErrorMessage } from './components/ErrorDisplay/ErrorDisplay';
 import Toolbar from './components/Toolbar/Toolbar';
 import { tokenize } from './interpreter/lexer';
 import { parse } from './interpreter/parser';
-import { executeProgram } from './interpreter/interpreter';
+import { Interpreter } from './interpreter/interpreter';
 import { validate } from './validator/validator';
 import { saveCode, loadCode, clearSavedCode } from './utils/storage';
 import { downloadCode, readFile } from './utils/fileHandler';
@@ -19,6 +19,9 @@ function App() {
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [isValidating, setIsValidating] = useState(false);
+  const [waitingForInput, setWaitingForInput] = useState(false);
+  const [inputPrompt, setInputPrompt] = useState('');
+  const inputResolveRef = useRef<((value: string) => void) | null>(null);
 
   // Load code from LocalStorage on mount
   useEffect(() => {
@@ -72,14 +75,24 @@ function App() {
     setOutput([]);
     setErrors([]);
     setIsRunning(true);
+    setWaitingForInput(false);
 
     try {
       // Tokenize and parse
       const tokens = tokenize(code);
       const ast = parse(tokens);
 
+      // Create interpreter with custom input handler
+      const interpreter = new Interpreter(async (variableName: string, variableType: string) => {
+        return new Promise<string>((resolve) => {
+          setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
+          setWaitingForInput(true);
+          inputResolveRef.current = resolve;
+        });
+      });
+
       // Execute with animation
-      const generator = executeProgram(ast);
+      const generator = interpreter.executeProgram(ast);
 
       for await (const line of generator) {
         setOutput(prev => [...prev, line]);
@@ -88,8 +101,10 @@ function App() {
       }
 
       setIsRunning(false);
+      setWaitingForInput(false);
     } catch (error) {
       setIsRunning(false);
+      setWaitingForInput(false);
 
       if (error instanceof RuntimeError) {
         setErrors([{
@@ -141,6 +156,16 @@ function App() {
     }
   };
 
+  // Handle input submission
+  const handleInputSubmit = (value: string) => {
+    if (inputResolveRef.current) {
+      inputResolveRef.current(value);
+      inputResolveRef.current = null;
+      setWaitingForInput(false);
+      setInputPrompt('');
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Toolbar
@@ -158,7 +183,13 @@ function App() {
         </div>
 
         <div className={styles.rightPanel}>
-          <OutputPanel output={output} isRunning={isRunning} />
+          <OutputPanel 
+            output={output} 
+            isRunning={isRunning}
+            waitingForInput={waitingForInput}
+            inputPrompt={inputPrompt}
+            onInputSubmit={handleInputSubmit}
+          />
           <ErrorDisplay errors={errors} isValidating={isValidating} />
         </div>
       </div>
