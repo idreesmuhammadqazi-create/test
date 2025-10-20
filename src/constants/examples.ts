@@ -92,231 +92,305 @@ OUTPUT "Sum: ", sum
 OUTPUT "Average: ", sum / 5`
   },
   {
-    title: 'Functions',
-    code: `// Function to calculate factorial
-FUNCTION Factorial(n : INTEGER) RETURNS INTEGER
-    DECLARE result : INTEGER
-    DECLARE i : INTEGER
+    title: 'Functions - Factorial & IsPrime',
+    code: `// Multiple functions with return values
+DECLARE Num, Result : INTEGER
 
-    result <-- 1
-    FOR i <-- 1 TO n
-        result <-- result * i
-    NEXT i
-
-    RETURN result
+FUNCTION Factorial(N : INTEGER) RETURNS INTEGER
+    DECLARE Fact, Counter : INTEGER
+    Fact <-- 1
+    FOR Counter <-- 1 TO N
+        Fact <-- Fact * Counter
+    NEXT Counter
+    RETURN Fact
 ENDFUNCTION
 
-// Main code
-DECLARE num : INTEGER
-DECLARE answer : INTEGER
+FUNCTION IsPrime(Number : INTEGER) RETURNS BOOLEAN
+    DECLARE Divisor : INTEGER
+    IF Number < 2 THEN
+        RETURN FALSE
+    ENDIF
+    FOR Divisor <-- 2 TO Number - 1
+        IF Number MOD Divisor = 0 THEN
+            RETURN FALSE
+        ENDIF
+    NEXT Divisor
+    RETURN TRUE
+ENDFUNCTION
 
-OUTPUT "Enter a number: "
-INPUT num
-answer <-- Factorial(num)
-OUTPUT "Factorial: ", answer`
+Num <-- 5
+Result <-- Factorial(Num)
+OUTPUT "Factorial of ", Num, " is ", Result
+
+FOR Num <-- 1 TO 20
+    IF IsPrime(Num) THEN
+        OUTPUT Num, " is prime"
+    ENDIF
+NEXT Num`
   },
   {
-    title: 'Procedures',
-    code: `// Procedure to display menu
-PROCEDURE DisplayMenu()
-    OUTPUT "=== MENU ==="
-    OUTPUT "1. Option One"
-    OUTPUT "2. Option Two"
-    OUTPUT "3. Exit"
-    OUTPUT "============"
+    title: 'Procedures - Bubble Sort',
+    code: `// Bubble Sort with procedure
+DECLARE Arr : ARRAY[1:8] OF INTEGER
+DECLARE i : INTEGER
+
+PROCEDURE BubbleSort(BYREF Data : ARRAY OF INTEGER, Size : INTEGER)
+    DECLARE Pass, Index, Swap : INTEGER
+    FOR Pass <-- 1 TO Size - 1
+        FOR Index <-- 1 TO Size - Pass
+            IF Data[Index] > Data[Index + 1] THEN
+                Swap <-- Data[Index]
+                Data[Index] <-- Data[Index + 1]
+                Data[Index + 1] <-- Swap
+            ENDIF
+        NEXT Index
+    NEXT Pass
 ENDPROCEDURE
 
-// Main code
-DECLARE choice : INTEGER
+Arr[1] <-- 64
+Arr[2] <-- 34
+Arr[3] <-- 25
+Arr[4] <-- 12
+Arr[5] <-- 22
+Arr[6] <-- 11
+Arr[7] <-- 90
+Arr[8] <-- 88
 
-CALL DisplayMenu()
-OUTPUT "Enter choice: "
-INPUT choice
+OUTPUT "Before sorting:"
+FOR i <-- 1 TO 8
+    OUTPUT Arr[i]
+NEXT i
 
-IF choice = 1 THEN
-    OUTPUT "You selected Option One"
-ELSE IF choice = 2 THEN
-    OUTPUT "You selected Option Two"
-ELSE
-    OUTPUT "Goodbye!"
-ENDIF`
+CALL BubbleSort(Arr, 8)
+
+OUTPUT "After sorting:"
+FOR i <-- 1 TO 8
+    OUTPUT Arr[i]
+NEXT i`
   },
   {
     title: 'String Manipulation',
-    code: `// String functions
-DECLARE text : STRING
-DECLARE len : INTEGER
+    code: `// Advanced string operations
+DECLARE Text, Word, Result : STRING
+DECLARE Position, Len, Vowels, i : INTEGER
+DECLARE CurrentChar : CHAR
 
-text <-- "Hello World"
-len <-- LENGTH(text)
+Text <-- "IGCSE Computer Science"
+OUTPUT "Original text: ", Text
 
-OUTPUT "Original: ", text
-OUTPUT "Length: ", len
-OUTPUT "Uppercase: ", UCASE(text)
-OUTPUT "Lowercase: ", LCASE(text)
-OUTPUT "Substring: ", SUBSTRING(text, 1, 5)`
+Len <-- LENGTH(Text)
+OUTPUT "Length: ", Len
+
+Word <-- SUBSTRING(Text, 1, 5)
+OUTPUT "First 5 characters: ", Word
+
+Position <-- 7
+Word <-- SUBSTRING(Text, Position, 8)
+OUTPUT "Word at position 7: ", Word
+
+Result <-- UCASE(Text)
+OUTPUT "Uppercase: ", Result
+
+Result <-- LCASE(Text)
+OUTPUT "Lowercase: ", Result
+
+// Count vowels
+Vowels <-- 0
+FOR i <-- 1 TO LENGTH(Text)
+    CurrentChar <-- SUBSTRING(Text, i, 1)
+    IF CurrentChar = "A" OR CurrentChar = "E" OR CurrentChar = "I" OR CurrentChar = "O" OR CurrentChar = "U" THEN
+        Vowels <-- Vowels + 1
+    ENDIF
+    IF CurrentChar = "a" OR CurrentChar = "e" OR CurrentChar = "i" OR CurrentChar = "o" OR CurrentChar = "u" THEN
+        Vowels <-- Vowels + 1
+    ENDIF
+NEXT i
+OUTPUT "Number of vowels: ", Vowels`
   },
   {
     title: '2D Arrays',
-    code: `// 2D Array - Student grades
-DECLARE grades : ARRAY[1:3, 1:4] OF INTEGER
-DECLARE student, subject : INTEGER
-DECLARE total, average : REAL
+    code: `// 2D Array with row and diagonal sums
+DECLARE Matrix : ARRAY[1:3, 1:3] OF INTEGER
+DECLARE Row, Col, Sum, Diagonal : INTEGER
 
-// Initialize grades (3 students, 4 subjects each)
-grades[1, 1] <-- 85
-grades[1, 2] <-- 90
-grades[1, 3] <-- 78
-grades[1, 4] <-- 92
+// Initialize 2D array
+Matrix[1,1] <-- 1
+Matrix[1,2] <-- 2
+Matrix[1,3] <-- 3
+Matrix[2,1] <-- 4
+Matrix[2,2] <-- 5
+Matrix[2,3] <-- 6
+Matrix[3,1] <-- 7
+Matrix[3,2] <-- 8
+Matrix[3,3] <-- 9
 
-grades[2, 1] <-- 76
-grades[2, 2] <-- 88
-grades[2, 3] <-- 91
-grades[2, 4] <-- 84
+OUTPUT "Matrix contents:"
+FOR Row <-- 1 TO 3
+    FOR Col <-- 1 TO 3
+        OUTPUT Matrix[Row, Col], " "
+    NEXT Col
+    OUTPUT ""
+NEXT Row
 
-grades[3, 1] <-- 95
-grades[3, 2] <-- 87
-grades[3, 3] <-- 89
-grades[3, 4] <-- 93
+// Calculate row sums
+FOR Row <-- 1 TO 3
+    Sum <-- 0
+    FOR Col <-- 1 TO 3
+        Sum <-- Sum + Matrix[Row, Col]
+    NEXT Col
+    OUTPUT "Sum of row ", Row, " is ", Sum
+NEXT Row
 
-// Calculate and display average for each student
-FOR student <-- 1 TO 3
-    total <-- 0
-    FOR subject <-- 1 TO 4
-        total <-- total + grades[student, subject]
-    NEXT subject
-    average <-- total / 4
-    OUTPUT "Student ", student, " average: ", average
-NEXT student`
-  },
-  {
-    title: 'Bubble Sort',
-    code: `// Bubble Sort Algorithm
-DECLARE nums : ARRAY[1:5] OF INTEGER
-DECLARE temp, index : INTEGER
-DECLARE isSorted : BOOLEAN
-DECLARE endIndex : INTEGER
-
-// Initialize array
-nums[1] <-- 64
-nums[2] <-- 34
-nums[3] <-- 25
-nums[4] <-- 12
-nums[5] <-- 22
-
-OUTPUT "Original array:"
-FOR index <-- 1 TO 5
-    OUTPUT nums[index]
-NEXT index
-
-// Bubble sort
-endIndex <-- 4
-isSorted <-- FALSE
-
-WHILE isSorted = FALSE DO
-    isSorted <-- TRUE
-    FOR index <-- 1 TO endIndex
-        IF nums[index] > nums[index + 1] THEN
-            temp <-- nums[index]
-            nums[index] <-- nums[index + 1]
-            nums[index + 1] <-- temp
-            isSorted <-- FALSE
-        ENDIF
-    NEXT index
-    endIndex <-- endIndex - 1
-ENDWHILE
-
-OUTPUT "Sorted array:"
-FOR index <-- 1 TO 5
-    OUTPUT nums[index]
-NEXT index`
+// Calculate diagonal sum
+Diagonal <-- 0
+FOR Row <-- 1 TO 3
+    Diagonal <-- Diagonal + Matrix[Row, Row]
+NEXT Row
+OUTPUT "Diagonal sum: ", Diagonal`
   },
   {
     title: 'Linear Search',
-    code: `// Linear Search Algorithm
-DECLARE numbers : ARRAY[1:8] OF INTEGER
-DECLARE target, position, index : INTEGER
-DECLARE found : BOOLEAN
+    code: `// Linear search with string array
+DECLARE Names : ARRAY[1:5] OF STRING
+DECLARE SearchName : STRING
+DECLARE Index : INTEGER
+DECLARE FoundAt : INTEGER
 
-// Initialize array
-numbers[1] <-- 45
-numbers[2] <-- 23
-numbers[3] <-- 78
-numbers[4] <-- 12
-numbers[5] <-- 56
-numbers[6] <-- 34
-numbers[7] <-- 89
-numbers[8] <-- 67
+Names[1] <-- "Ahmed"
+Names[2] <-- "Fatima"
+Names[3] <-- "Hassan"
+Names[4] <-- "Zainab"
+Names[5] <-- "Omar"
 
-OUTPUT "Enter number to search: "
-INPUT target
+SearchName <-- "Hassan"
+FoundAt <-- -1
 
-// Linear search
-found <-- FALSE
-position <-- 0
-
-FOR index <-- 1 TO 8
-    IF numbers[index] = target THEN
-        found <-- TRUE
-        position <-- index
+FOR Index <-- 1 TO 5
+    IF Names[Index] = SearchName THEN
+        FoundAt <-- Index
     ENDIF
-NEXT index
+NEXT Index
 
-IF found = TRUE THEN
-    OUTPUT "Found at position: ", position
+IF FoundAt <> -1 THEN
+    OUTPUT SearchName, " found at position ", FoundAt
 ELSE
-    OUTPUT "Not found"
+    OUTPUT SearchName, " not found"
 ENDIF`
   },
   {
-    title: 'CASE Statement',
-    code: `// Calculator using CASE
-DECLARE num1, num2 : REAL
-DECLARE operator : STRING
-DECLARE result : REAL
+    title: 'Binary Search',
+    code: `// Binary Search algorithm
+DECLARE Numbers : ARRAY[1:10] OF INTEGER
+DECLARE SearchValue, Low, High, Mid : INTEGER
+DECLARE Found : BOOLEAN
 
-OUTPUT "Enter first number: "
-INPUT num1
-OUTPUT "Enter operator (+, -, *, /): "
-INPUT operator
-OUTPUT "Enter second number: "
-INPUT num2
+// Initialize sorted array
+Numbers[1] <-- 5
+Numbers[2] <-- 12
+Numbers[3] <-- 18
+Numbers[4] <-- 23
+Numbers[5] <-- 31
+Numbers[6] <-- 45
+Numbers[7] <-- 56
+Numbers[8] <-- 67
+Numbers[9] <-- 78
+Numbers[10] <-- 89
 
-CASE OF operator
-    "+" : result <-- num1 + num2
-    "-" : result <-- num1 - num2
-    "*" : result <-- num1 * num2
-    "/" : result <-- num1 / num2
-    OTHERWISE : OUTPUT "Invalid operator"
+SearchValue <-- 45
+Low <-- 1
+High <-- 10
+Found <-- FALSE
+
+WHILE Low <= High AND Found = FALSE DO
+    Mid <-- (Low + High) DIV 2
+    IF Numbers[Mid] = SearchValue THEN
+        Found <-- TRUE
+        OUTPUT "Found at position: ", Mid
+    ELSE
+        IF Numbers[Mid] < SearchValue THEN
+            Low <-- Mid + 1
+        ELSE
+            High <-- Mid - 1
+        ENDIF
+    ENDIF
+ENDWHILE
+
+IF Found = FALSE THEN
+    OUTPUT "Value not found"
+ENDIF`
+  },
+  {
+    title: 'Selection Sort',
+    code: `// Selection Sort algorithm
+DECLARE Numbers : ARRAY[1:6] OF INTEGER
+DECLARE i, j, MinIndex, Temp : INTEGER
+
+Numbers[1] <-- 64
+Numbers[2] <-- 25
+Numbers[3] <-- 12
+Numbers[4] <-- 22
+Numbers[5] <-- 11
+Numbers[6] <-- 90
+
+OUTPUT "Before sorting:"
+FOR i <-- 1 TO 6
+    OUTPUT Numbers[i]
+NEXT i
+
+// Selection Sort
+FOR i <-- 1 TO 5
+    MinIndex <-- i
+    FOR j <-- i + 1 TO 6
+        IF Numbers[j] < Numbers[MinIndex] THEN
+            MinIndex <-- j
+        ENDIF
+    NEXT j
+    IF MinIndex <> i THEN
+        Temp <-- Numbers[i]
+        Numbers[i] <-- Numbers[MinIndex]
+        Numbers[MinIndex] <-- Temp
+    ENDIF
+NEXT i
+
+OUTPUT "After sorting:"
+FOR i <-- 1 TO 6
+    OUTPUT Numbers[i]
+NEXT i`
+  },
+  {
+    title: 'CASE Statement with Ranges',
+    code: `// CASE statement with range support
+DECLARE Grade : CHAR
+DECLARE Mark : INTEGER
+
+Mark <-- 75
+
+CASE OF Mark
+    50 TO 59 : Grade <-- 'D'
+    60 TO 69 : Grade <-- 'C'
+    70 TO 79 : Grade <-- 'B'
+    80 TO 100 : Grade <-- 'A'
+    OTHERWISE : Grade <-- 'F'
 ENDCASE
 
-OUTPUT "Result: ", result`
+OUTPUT "Mark: ", Mark, " Grade: ", Grade`
   },
   {
     title: 'REPEAT UNTIL Loop',
-    code: `// Number guessing game
-DECLARE secretNumber, guess, attempts : INTEGER
+    code: `// REPEAT UNTIL with counter
+DECLARE Counter : INTEGER
+DECLARE Total : INTEGER
 
-secretNumber <-- 42
-attempts <-- 0
-
-OUTPUT "Guess the number (1-100)!"
+Counter <-- 1
+Total <-- 0
 
 REPEAT
-    OUTPUT "Enter your guess: "
-    INPUT guess
-    attempts <-- attempts + 1
-    
-    IF guess < secretNumber THEN
-        OUTPUT "Too low!"
-    ENDIF
-    
-    IF guess > secretNumber THEN
-        OUTPUT "Too high!"
-    ENDIF
-UNTIL guess = secretNumber
+    Total <-- Total + Counter
+    OUTPUT "Counter: ", Counter, " Total: ", Total
+    Counter <-- Counter + 1
+UNTIL Counter > 5
 
-OUTPUT "Correct! You guessed in ", attempts, " attempts"`
+OUTPUT "Final total: ", Total`
   },
   {
     title: 'BYREF Parameters',
@@ -345,26 +419,151 @@ OUTPUT "x = ", x
 OUTPUT "y = ", y`
   },
   {
-    title: 'Nested Loops - Pattern',
-    code: `// Print a number pattern
-DECLARE row, col : INTEGER
+    title: 'Nested Loops - Patterns',
+    code: `// Pattern generation
+DECLARE OuterLoop, InnerLoop, Number : INTEGER
 
-OUTPUT "Number Triangle Pattern:"
-
-FOR row <-- 1 TO 5
-    FOR col <-- 1 TO row
-        OUTPUT col
-    NEXT col
+OUTPUT "Multiplication table:"
+FOR OuterLoop <-- 1 TO 5
+    FOR InnerLoop <-- 1 TO 5
+        Number <-- OuterLoop * InnerLoop
+        OUTPUT Number, " "
+    NEXT InnerLoop
     OUTPUT ""
-NEXT row
+NEXT OuterLoop
 
-OUTPUT "Multiplication Table (3x3):"
-
-FOR row <-- 1 TO 3
-    FOR col <-- 1 TO 3
-        OUTPUT row * col, " "
-    NEXT col
+OUTPUT "Triangle pattern:"
+FOR OuterLoop <-- 1 TO 5
+    FOR InnerLoop <-- 1 TO OuterLoop
+        OUTPUT "*"
+    NEXT InnerLoop
     OUTPUT ""
-NEXT row`
+NEXT OuterLoop`
+  },
+  {
+    title: 'Parallel Arrays',
+    code: `// Parallel arrays (simulating records)
+DECLARE StudentIDs : ARRAY[1:3] OF INTEGER
+DECLARE StudentNames : ARRAY[1:3] OF STRING
+DECLARE StudentScores : ARRAY[1:3] OF INTEGER
+DECLARE Highest, HighestIndex, Idx : INTEGER
+
+StudentIDs[1] <-- 101
+StudentNames[1] <-- "Ali"
+StudentScores[1] <-- 88
+
+StudentIDs[2] <-- 102
+StudentNames[2] <-- "Sara"
+StudentScores[2] <-- 95
+
+StudentIDs[3] <-- 103
+StudentNames[3] <-- "Bilal"
+StudentScores[3] <-- 82
+
+OUTPUT "Student Records:"
+FOR Idx <-- 1 TO 3
+    OUTPUT "ID: ", StudentIDs[Idx], " Name: ", StudentNames[Idx], " Score: ", StudentScores[Idx]
+NEXT Idx
+
+Highest <-- StudentScores[1]
+HighestIndex <-- 1
+FOR Idx <-- 2 TO 3
+    IF StudentScores[Idx] > Highest THEN
+        Highest <-- StudentScores[Idx]
+        HighestIndex <-- Idx
+    ENDIF
+NEXT Idx
+
+OUTPUT "Top student: ", StudentNames[HighestIndex], " with score ", Highest`
+  },
+  {
+    title: 'Type Conversion',
+    code: `// Type conversion functions
+DECLARE IntNum : INTEGER
+DECLARE RealNum : REAL
+DECLARE StrNum : STRING
+
+RealNum <-- 3.7
+IntNum <-- INT(RealNum)
+OUTPUT "INT(3.7) = ", IntNum
+
+IntNum <-- 42
+RealNum <-- REAL(IntNum)
+OUTPUT "REAL(42) = ", RealNum
+
+IntNum <-- 123
+StrNum <-- STRING(IntNum)
+OUTPUT "STRING(123) = ", StrNum
+
+RealNum <-- 3.14159
+OUTPUT "Original: ", RealNum
+OUTPUT "ROUND(3.14159, 2) = ", ROUND(RealNum, 2)`
+  },
+  {
+    title: 'String Concatenation',
+    code: `// String concatenation
+DECLARE FirstName, LastName, FullName : STRING
+DECLARE Age : INTEGER
+DECLARE Message : STRING
+
+FirstName <-- "John"
+LastName <-- "Smith"
+Age <-- 16
+
+FullName <-- FirstName & " " & LastName
+OUTPUT "Full name: ", FullName
+
+Message <-- "Hello, " & FullName & "! You are " & STRING(Age) & " years old."
+OUTPUT Message`
+  },
+  {
+    title: 'Nested IF Statements',
+    code: `// Nested IF with complex logic
+DECLARE Age : INTEGER
+DECLARE HasLicense : BOOLEAN
+DECLARE CanDrive : BOOLEAN
+
+Age <-- 18
+HasLicense <-- TRUE
+
+IF Age >= 18 THEN
+    IF HasLicense = TRUE THEN
+        CanDrive <-- TRUE
+        OUTPUT "You can drive"
+    ELSE
+        CanDrive <-- FALSE
+        OUTPUT "You need a license"
+    ENDIF
+ELSE
+    CanDrive <-- FALSE
+    OUTPUT "You are too young to drive"
+ENDIF`
+  },
+  {
+    title: 'Mathematical Operations',
+    code: `// All mathematical operators
+DECLARE a, b, Result : INTEGER
+DECLARE Division : REAL
+
+a <-- 17
+b <-- 5
+
+Result <-- a + b
+OUTPUT a, " + ", b, " = ", Result
+
+Result <-- a - b
+OUTPUT a, " - ", b, " = ", Result
+
+Result <-- a * b
+OUTPUT a, " * ", b, " = ", Result
+
+Division <-- a / b
+OUTPUT a, " / ", b, " = ", Division
+
+Result <-- a DIV b
+OUTPUT a, " DIV ", b, " = ", Result
+
+Result <-- a MOD b
+OUTPUT a, " MOD ", b, " = ", Result`
   }
 ];
