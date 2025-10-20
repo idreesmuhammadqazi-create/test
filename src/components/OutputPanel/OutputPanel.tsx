@@ -1,13 +1,24 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './OutputPanel.module.css';
 
 interface OutputPanelProps {
   output: string[];
   isRunning: boolean;
+  waitingForInput?: boolean;
+  inputPrompt?: string;
+  onInputSubmit?: (value: string) => void;
 }
 
-export default function OutputPanel({ output, isRunning }: OutputPanelProps) {
+export default function OutputPanel({ 
+  output, 
+  isRunning, 
+  waitingForInput = false, 
+  inputPrompt = '',
+  onInputSubmit 
+}: OutputPanelProps) {
   const outputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState('');
 
   // Auto-scroll to bottom when new output appears
   useEffect(() => {
@@ -15,6 +26,21 @@ export default function OutputPanel({ output, isRunning }: OutputPanelProps) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
   }, [output]);
+
+  // Focus input field when waiting for input
+  useEffect(() => {
+    if (waitingForInput && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [waitingForInput]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onInputSubmit && inputValue.trim()) {
+      onInputSubmit(inputValue);
+      setInputValue('');
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -36,6 +62,25 @@ export default function OutputPanel({ output, isRunning }: OutputPanelProps) {
             {line}
           </div>
         ))}
+        
+        {waitingForInput && (
+          <div className={styles.inputContainer}>
+            <div className={styles.inputPrompt}>{inputPrompt}</div>
+            <form onSubmit={handleSubmit} className={styles.inputForm}>
+              <input
+                ref={inputRef}
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                className={styles.inputField}
+                placeholder="Enter value..."
+              />
+              <button type="submit" className={styles.submitButton}>
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );
