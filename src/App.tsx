@@ -179,6 +179,57 @@ function App() {
     }
   };
 
+  // Handle save as (create new program)
+  const handleSaveAs = async (name: string) => {
+    if (!currentUser) return;
+
+    const programId = await createProgram(currentUser.uid, {
+      name,
+      code
+    });
+
+    setCurrentProgram({ id: programId, name });
+    setLastSavedCode(code);
+  };
+
+  // Handle load program
+  const handleLoadProgram = (program: Program) => {
+    if (code !== lastSavedCode && code.trim()) {
+      if (!confirm('You have unsaved changes. Load this program anyway?')) {
+        return;
+      }
+    }
+
+    setCode(program.code);
+    setCurrentProgram({ id: program.id, name: program.name });
+    setLastSavedCode(program.code);
+  };
+
+  // Handle open programs library
+  const handleOpenLibrary = () => {
+    setShowProgramsLibrary(true);
+  };
+
+  // Auto-save current program every 30 seconds
+  useEffect(() => {
+    if (!currentUser || !currentProgram || !currentProgram.id) return;
+    if (code === lastSavedCode) return; // No changes to save
+
+    const autoSaveInterval = setInterval(async () => {
+      if (code !== lastSavedCode) {
+        try {
+          await updateProgram(currentProgram.id, { code });
+          setLastSavedCode(code);
+          console.log('Auto-saved program');
+        } catch (error) {
+          console.error('Auto-save failed:', error);
+        }
+      }
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(autoSaveInterval);
+  }, [currentUser, currentProgram, code, lastSavedCode]);
+
   // Show landing page if not authenticated
   if (!currentUser) {
     return <Landing />;
@@ -192,6 +243,9 @@ function App() {
         onDownload={handleDownload}
         onUpload={handleUpload}
         onLoadExample={handleLoadExample}
+        onSaveAs={() => setShowSaveAsModal(true)}
+        onOpenLibrary={handleOpenLibrary}
+        currentProgramName={currentProgram?.name}
         isRunning={isRunning}
       />
 
@@ -211,6 +265,21 @@ function App() {
           <ErrorDisplay errors={errors} isValidating={isValidating} />
         </div>
       </div>
+
+      {showSaveAsModal && (
+        <SaveAsModal
+          onSave={handleSaveAs}
+          onClose={() => setShowSaveAsModal(false)}
+          defaultName={currentProgram?.name || ''}
+        />
+      )}
+
+      {showProgramsLibrary && (
+        <ProgramsLibrary
+          onLoad={handleLoadProgram}
+          onClose={() => setShowProgramsLibrary(false)}
+        />
+      )}
     </div>
   );
 }
