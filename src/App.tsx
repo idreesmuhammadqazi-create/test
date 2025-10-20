@@ -4,6 +4,8 @@ import OutputPanel from './components/OutputPanel/OutputPanel';
 import ErrorDisplay, { ErrorMessage } from './components/ErrorDisplay/ErrorDisplay';
 import Toolbar from './components/Toolbar/Toolbar';
 import Landing from './components/Landing/Landing';
+import SaveAsModal from './components/SaveAsModal/SaveAsModal';
+import ProgramsLibrary from './components/ProgramsLibrary/ProgramsLibrary';
 import { tokenize } from './interpreter/lexer';
 import { parse } from './interpreter/parser';
 import { Interpreter } from './interpreter/interpreter';
@@ -13,6 +15,8 @@ import { downloadCode, readFile } from './utils/fileHandler';
 import { debounce } from './utils/debounce';
 import { RuntimeError } from './interpreter/types';
 import { useAuth } from './contexts/AuthContext';
+import { Program } from './types/program';
+import { createProgram, updateProgram } from './services/programsService';
 import styles from './App.module.css';
 
 function App() {
@@ -25,6 +29,12 @@ function App() {
   const [waitingForInput, setWaitingForInput] = useState(false);
   const [inputPrompt, setInputPrompt] = useState('');
   const inputResolveRef = useRef<((value: string) => void) | null>(null);
+  
+  // Program management state
+  const [currentProgram, setCurrentProgram] = useState<{ id: string; name: string } | null>(null);
+  const [showSaveAsModal, setShowSaveAsModal] = useState(false);
+  const [showProgramsLibrary, setShowProgramsLibrary] = useState(false);
+  const [lastSavedCode, setLastSavedCode] = useState('');
 
   // Load code from LocalStorage on mount
   useEffect(() => {
