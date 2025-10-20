@@ -78,6 +78,10 @@ export class Interpreter {
     };
   }
 
+  public disableDebugMode(): void {
+    this.debugMode = false;
+  }
+
   public async* executeProgram(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
     yield* this.execute(ast);
   }
