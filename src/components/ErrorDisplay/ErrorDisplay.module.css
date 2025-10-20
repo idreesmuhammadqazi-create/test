@@ -1,6 +1,6 @@
 .container {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 10px;
   margin-top: 10px;
@@ -16,7 +16,7 @@
 }
 
 .validating {
-  color: #999999;
+  color: var(--text-tertiary);
   font-style: italic;
   font-size: 13px;
 }
@@ -36,13 +36,16 @@
 .errorItem {
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #ffebee;
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
   border-radius: 4px;
+  color: var(--text-primary);
 }
 
 .errorLine {
   font-weight: bold;
   margin-right: 8px;
+  color: var(--error-text);
 }
 
 .syntaxBadge {
@@ -71,4 +74,5 @@
   margin-top: 5px;
   font-size: 13px;
   line-height: 1.4;
+  color: var(--error-text);
 }
