@@ -489,9 +489,15 @@ export class Parser {
           break;
         }
 
-        const stmt = this.parseStatement();
-        if (stmt) {
-          statements.push(stmt);
+        // Special handling for DECLARE
+        if (this.check('KEYWORD') && this.peek().value === 'DECLARE') {
+          const declareNodes = this.parseDeclareStatements();
+          statements.push(...declareNodes);
+        } else {
+          const stmt = this.parseStatement();
+          if (stmt) {
+            statements.push(stmt);
+          }
         }
         this.skipNewlines();
       }
