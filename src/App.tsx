@@ -169,6 +169,11 @@ function App() {
     }
   };
 
+  // Show landing page if not authenticated
+  if (!currentUser) {
+    return <Landing />;
+  }
+
   return (
     <div className={styles.container}>
       <Toolbar
