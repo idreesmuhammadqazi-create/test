@@ -375,9 +375,26 @@ export class Interpreter {
     const value = this.evaluateExpression(node.expression, context);
 
     for (const caseBlock of node.cases) {
-      const caseValue = this.evaluateExpression(caseBlock.value, context);
+      let matched = false;
 
-      if (value === caseValue) {
+      if (caseBlock.value !== undefined) {
+        // Single value case
+        const caseValue = this.evaluateExpression(caseBlock.value, context);
+        matched = (value === caseValue);
+      } else if (caseBlock.rangeStart !== undefined && caseBlock.rangeEnd !== undefined) {
+        // Range case (value TO value)
+        const rangeStart = this.evaluateExpression(caseBlock.rangeStart, context);
+        const rangeEnd = this.evaluateExpression(caseBlock.rangeEnd, context);
+        
+        // Convert to numbers for comparison
+        const numValue = typeof value === 'number' ? value : parseFloat(String(value));
+        const numStart = typeof rangeStart === 'number' ? rangeStart : parseFloat(String(rangeStart));
+        const numEnd = typeof rangeEnd === 'number' ? rangeEnd : parseFloat(String(rangeEnd));
+        
+        matched = (numValue >= numStart && numValue <= numEnd);
+      }
+
+      if (matched) {
         for (const stmt of caseBlock.statements) {
           yield* this.executeNode(stmt, context);
         }
@@ -727,9 +744,26 @@ export class Interpreter {
     const value = this.evaluateExpression(node.expression, context);
 
     for (const caseBlock of node.cases) {
-      const caseValue = this.evaluateExpression(caseBlock.value, context);
+      let matched = false;
 
-      if (value === caseValue) {
+      if (caseBlock.value !== undefined) {
+        // Single value case
+        const caseValue = this.evaluateExpression(caseBlock.value, context);
+        matched = (value === caseValue);
+      } else if (caseBlock.rangeStart !== undefined && caseBlock.rangeEnd !== undefined) {
+        // Range case (value TO value)
+        const rangeStart = this.evaluateExpression(caseBlock.rangeStart, context);
+        const rangeEnd = this.evaluateExpression(caseBlock.rangeEnd, context);
+        
+        // Convert to numbers for comparison
+        const numValue = typeof value === 'number' ? value : parseFloat(String(value));
+        const numStart = typeof rangeStart === 'number' ? rangeStart : parseFloat(String(rangeStart));
+        const numEnd = typeof rangeEnd === 'number' ? rangeEnd : parseFloat(String(rangeEnd));
+        
+        matched = (numValue >= numStart && numValue <= numEnd);
+      }
+
+      if (matched) {
         for (const stmt of caseBlock.statements) {
           this.executeSyncNode(stmt, context);
         }
