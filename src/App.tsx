@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Editor from './components/Editor/Editor';
 import OutputPanel from './components/OutputPanel/OutputPanel';
 import ErrorDisplay, { ErrorMessage } from './components/ErrorDisplay/ErrorDisplay';
 import Toolbar from './components/Toolbar/Toolbar';
 import { tokenize } from './interpreter/lexer';
 import { parse } from './interpreter/parser';
-import { executeProgram } from './interpreter/interpreter';
+import { Interpreter } from './interpreter/interpreter';
 import { validate } from './validator/validator';
 import { saveCode, loadCode, clearSavedCode } from './utils/storage';
 import { downloadCode, readFile } from './utils/fileHandler';
@@ -19,6 +19,9 @@ function App() {
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [isValidating, setIsValidating] = useState(false);
+  const [waitingForInput, setWaitingForInput] = useState(false);
+  const [inputPrompt, setInputPrompt] = useState('');
+  const inputResolveRef = useRef<((value: string) => void) | null>(null);
 
   // Load code from LocalStorage on mount
   useEffect(() => {
