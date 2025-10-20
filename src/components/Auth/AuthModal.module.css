@@ -12,7 +12,7 @@
 }
 
 .modal {
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
   border-radius: 8px;
   padding: 40px;
   width: 90%;
@@ -25,17 +25,18 @@
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  color: #333333;
+  color: var(--text-primary);
 }
 
 .error {
-  background-color: #ffebee;
+  background-color: var(--error-bg);
   color: #c62828;
   padding: 12px;
   border-radius: 4px;
   margin-bottom: 16px;
   font-size: 14px;
   text-align: center;
+  border: 1px solid var(--error-border);
 }
 
 .form {
@@ -46,11 +47,13 @@
 
 .input {
   padding: 12px 16px;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .input:focus {
@@ -84,7 +87,7 @@
   align-items: center;
   text-align: center;
   margin: 20px 0;
-  color: #999999;
+  color: var(--text-tertiary);
   font-size: 14px;
 }
 
@@ -92,7 +95,7 @@
 .divider::after {
   content: '';
   flex: 1;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .divider span {
@@ -105,9 +108,9 @@
   justify-content: center;
   gap: 12px;
   padding: 12px 24px;
-  background-color: #ffffff;
-  color: #333333;
-  border: 1px solid #cccccc;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 16px;
   font-weight: 500;
@@ -116,8 +119,8 @@
 }
 
 .googleButton:hover:not(:disabled) {
-  background-color: #f5f5f5;
-  border-color: #999999;
+  background-color: var(--bg-secondary);
+  border-color: var(--text-tertiary);
 }
 
 .googleButton:disabled {
@@ -133,7 +136,7 @@
 .switch {
   text-align: center;
   margin-top: 20px;
-  color: #666666;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
