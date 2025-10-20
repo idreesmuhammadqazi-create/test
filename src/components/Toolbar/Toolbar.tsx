@@ -125,6 +125,14 @@ export default function Toolbar({
         )}
       </div>
 
+      <button 
+        className={styles.themeToggle}
+        onClick={toggleTheme}
+        title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      >
+        {theme === 'light' ? '🌙' : '☀️'}
+      </button>
+
       <div className={styles.userSection}>
         <span className={styles.userName}>
           {currentUser?.displayName || currentUser?.email}
