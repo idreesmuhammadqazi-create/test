@@ -3,6 +3,7 @@ import Editor from './components/Editor/Editor';
 import OutputPanel from './components/OutputPanel/OutputPanel';
 import ErrorDisplay, { ErrorMessage } from './components/ErrorDisplay/ErrorDisplay';
 import Toolbar from './components/Toolbar/Toolbar';
+import Landing from './components/Landing/Landing';
 import { tokenize } from './interpreter/lexer';
 import { parse } from './interpreter/parser';
 import { Interpreter } from './interpreter/interpreter';
@@ -11,9 +12,11 @@ import { saveCode, loadCode, clearSavedCode } from './utils/storage';
 import { downloadCode, readFile } from './utils/fileHandler';
 import { debounce } from './utils/debounce';
 import { RuntimeError } from './interpreter/types';
+import { useAuth } from './contexts/AuthContext';
 import styles from './App.module.css';
 
 function App() {
+  const { currentUser } = useAuth();
   const [code, setCode] = useState('');
   const [output, setOutput] = useState<string[]>([]);
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
@@ -22,6 +25,11 @@ function App() {
   const [waitingForInput, setWaitingForInput] = useState(false);
   const [inputPrompt, setInputPrompt] = useState('');
   const inputResolveRef = useRef<((value: string) => void) | null>(null);
+
+  // Show landing page if not authenticated
+  if (!currentUser) {
+    return <Landing />;
+  }
 
   // Load code from LocalStorage on mount
   useEffect(() => {
@@ -108,8 +116,8 @@ function App() {
 
       if (error instanceof RuntimeError) {
         setErrors([{
-          line: error.line,
-          message: error.message,
+          line: (error as RuntimeError).line,
+          message: (error as RuntimeError).message,
           type: 'runtime'
         }]);
       } else {
