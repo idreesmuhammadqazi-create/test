@@ -88,7 +88,7 @@ export default function ProgramsLibrary({ onLoad, onClose }: ProgramsLibraryProp
     if (!currentUser) return;
 
     try {
-      const newId = await createProgram(currentUser.uid, {
+      await createProgram(currentUser.uid, {
         name: `${program.name} (Copy)`,
         code: program.code
       });
