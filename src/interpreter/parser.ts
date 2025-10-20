@@ -618,7 +618,15 @@ export class Parser {
       this.consume('COLON', 'Expected : after parameter name');
       const type = this.parseDataType();
 
-      parameters.push({ name, type, byRef });
+      let arrayElementType: DataType | undefined;
+      
+      // If type is ARRAY, check for "OF TYPE"
+      if (type === 'ARRAY') {
+        this.consume('KEYWORD', 'Expected OF after ARRAY', 'OF');
+        arrayElementType = this.parseDataType();
+      }
+
+      parameters.push({ name, type, byRef, arrayElementType });
 
       if (this.check('COMMA')) {
         this.advance();
