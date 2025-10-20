@@ -233,7 +233,8 @@ export class Interpreter {
       throw new RuntimeError(`Variable '${node.identifier}' not declared`, node.line);
     }
 
-    const input = await this.inputHandler(node.identifier, variable.type) || '';
+    // Use the inputHandler to get input
+    const input = await this.inputHandler(node.identifier, variable.type);
 
     // Type conversion based on variable type
     let value: any;
@@ -246,10 +247,6 @@ export class Interpreter {
         break;
       case 'BOOLEAN':
         value = input.toLowerCase() === 'true';
-        break;
-      case 'STRING':
-      case 'CHAR':
-        value = input;
         break;
       default:
         value = input;
