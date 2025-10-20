@@ -38,6 +38,13 @@ function App() {
   const [showProgramsLibrary, setShowProgramsLibrary] = useState(false);
   const [lastSavedCode, setLastSavedCode] = useState('');
 
+  // Debug state
+  const [isDebugging, setIsDebugging] = useState(false);
+  const [debugState, setDebugState] = useState<DebugState | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const stepResolveRef = useRef<(() => void) | null>(null);
+  const interpreterRef = useRef<Interpreter | null>(null);
+
   // Load code from LocalStorage on mount
   useEffect(() => {
     const savedCode = loadCode();
