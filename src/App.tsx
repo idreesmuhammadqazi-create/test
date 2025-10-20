@@ -75,14 +75,24 @@ function App() {
     setOutput([]);
     setErrors([]);
     setIsRunning(true);
+    setWaitingForInput(false);
 
     try {
       // Tokenize and parse
       const tokens = tokenize(code);
       const ast = parse(tokens);
 
+      // Create interpreter with custom input handler
+      const interpreter = new Interpreter(async (variableName: string, variableType: string) => {
+        return new Promise<string>((resolve) => {
+          setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
+          setWaitingForInput(true);
+          inputResolveRef.current = resolve;
+        });
+      });
+
       // Execute with animation
-      const generator = executeProgram(ast);
+      const generator = interpreter.executeProgram(ast);
 
       for await (const line of generator) {
         setOutput(prev => [...prev, line]);
@@ -91,8 +101,10 @@ function App() {
       }
 
       setIsRunning(false);
+      setWaitingForInput(false);
     } catch (error) {
       setIsRunning(false);
+      setWaitingForInput(false);
 
       if (error instanceof RuntimeError) {
         setErrors([{
@@ -141,6 +153,16 @@ function App() {
   const handleLoadExample = (exampleCode: string) => {
     if (confirm('Load example? This will replace your current code.')) {
       setCode(exampleCode);
+    }
+  };
+
+  // Handle input submission
+  const handleInputSubmit = (value: string) => {
+    if (inputResolveRef.current) {
+      inputResolveRef.current(value);
+      inputResolveRef.current = null;
+      setWaitingForInput(false);
+      setInputPrompt('');
     }
   };
 
