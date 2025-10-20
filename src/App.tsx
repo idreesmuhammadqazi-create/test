@@ -26,11 +26,6 @@ function App() {
   const [inputPrompt, setInputPrompt] = useState('');
   const inputResolveRef = useRef<((value: string) => void) | null>(null);
 
-  // Show landing page if not authenticated
-  if (!currentUser) {
-    return <Landing />;
-  }
-
   // Load code from LocalStorage on mount
   useEffect(() => {
     const savedCode = loadCode();
