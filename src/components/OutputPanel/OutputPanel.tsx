@@ -64,20 +64,17 @@ export default function OutputPanel({
         ))}
         
         {waitingForInput && (
-          <div className={styles.inputContainer}>
-            <div className={styles.inputPrompt}>{inputPrompt}</div>
-            <form onSubmit={handleSubmit} className={styles.inputForm}>
+          <div className={styles.inputLine}>
+            <span className={styles.inputPromptInline}>{inputPrompt} </span>
+            <form onSubmit={handleSubmit} className={styles.inlineInputForm}>
               <input
                 ref={inputRef}
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                className={styles.inputField}
-                placeholder="Enter value..."
+                className={styles.inlineInputField}
+                autoComplete="off"
               />
-              <button type="submit" className={styles.submitButton}>
-                Submit
-              </button>
             </form>
           </div>
         )}
