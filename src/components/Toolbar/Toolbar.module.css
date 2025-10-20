@@ -32,6 +32,21 @@
   cursor: not-allowed;
 }
 
+.debugButton {
+  composes: button;
+  background-color: #ff9800;
+  color: white;
+}
+
+.debugButton:hover:not(:disabled) {
+  background-color: #f57c00;
+}
+
+.debugButton:disabled {
+  background-color: var(--border-color);
+  cursor: not-allowed;
+}
+
 .secondaryButton {
   composes: button;
   background-color: var(--button-bg);
