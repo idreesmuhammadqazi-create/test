@@ -201,7 +201,7 @@ function App() {
     setErrors([]);
     setIsRunning(true);
     setIsDebugging(true);
-    setIsPaused(true);
+    setIsPaused(false);
     setWaitingForInput(false);
 
     try {
@@ -209,15 +209,7 @@ function App() {
       const tokens = tokenize(code);
       const ast = parse(tokens);
 
-      // Create step callback that waits for user action
-      const stepCallback = () => {
-        return new Promise<void>((resolve) => {
-          stepResolveRef.current = resolve;
-          setIsPaused(true);
-        });
-      };
-
-      // Create interpreter in debug mode
+      // Create interpreter in debug mode first
       const interpreter = new Interpreter(
         async (variableName: string, variableType: string) => {
           return new Promise<string>((resolve) => {
@@ -227,7 +219,17 @@ function App() {
           });
         },
         true, // debug mode
-        stepCallback
+        async () => {
+          // Update debug state when pausing
+          const currentDebugState = interpreter.getDebugState();
+          setDebugState(currentDebugState);
+          setIsPaused(true);
+          
+          // Wait for user to step
+          return new Promise<void>((resolve) => {
+            stepResolveRef.current = resolve;
+          });
+        }
       );
 
       interpreterRef.current = interpreter;
@@ -236,10 +238,6 @@ function App() {
       const generator = interpreter.executeProgram(ast);
 
       for await (const line of generator) {
-        // Update debug state
-        const currentDebugState = interpreter.getDebugState();
-        setDebugState(currentDebugState);
-        
         setOutput(prev => [...prev, line]);
         // Wait 300ms between outputs
         await new Promise(resolve => setTimeout(resolve, 300));
@@ -248,11 +246,13 @@ function App() {
       setIsRunning(false);
       setIsDebugging(false);
       setIsPaused(false);
+      setDebugState(null);
       setWaitingForInput(false);
     } catch (error) {
       setIsRunning(false);
       setIsDebugging(false);
       setIsPaused(false);
+      setDebugState(null);
       setWaitingForInput(false);
 
       if (error instanceof RuntimeError) {
@@ -280,12 +280,20 @@ function App() {
   };
 
   const handleDebugContinue = () => {
-    // Continue execution without pausing
+    // Disable debug mode to stop pausing
     setIsDebugging(false);
     setIsPaused(false);
+    setDebugState(null);
+    
+    // Resume execution
     if (stepResolveRef.current) {
       stepResolveRef.current();
       stepResolveRef.current = null;
+    }
+    
+    // Continue resolving all future steps automatically
+    if (interpreterRef.current) {
+      interpreterRef.current = null;
     }
   };
 
@@ -294,6 +302,8 @@ function App() {
     setIsPaused(false);
     setIsRunning(false);
     setDebugState(null);
+    
+    // This will cause the execution to complete
     if (stepResolveRef.current) {
       stepResolveRef.current();
       stepResolveRef.current = null;
