@@ -183,7 +183,13 @@ function App() {
         </div>
 
         <div className={styles.rightPanel}>
-          <OutputPanel output={output} isRunning={isRunning} />
+          <OutputPanel 
+            output={output} 
+            isRunning={isRunning}
+            waitingForInput={waitingForInput}
+            inputPrompt={inputPrompt}
+            onInputSubmit={handleInputSubmit}
+          />
           <ErrorDisplay errors={errors} isValidating={isValidating} />
         </div>
       </div>
