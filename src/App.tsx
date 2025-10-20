@@ -281,6 +281,10 @@ function App() {
 
   const handleDebugContinue = () => {
     // Disable debug mode to stop pausing
+    if (interpreterRef.current) {
+      interpreterRef.current.disableDebugMode();
+    }
+    
     setIsDebugging(false);
     setIsPaused(false);
     setDebugState(null);
@@ -289,11 +293,6 @@ function App() {
     if (stepResolveRef.current) {
       stepResolveRef.current();
       stepResolveRef.current = null;
-    }
-    
-    // Continue resolving all future steps automatically
-    if (interpreterRef.current) {
-      interpreterRef.current = null;
     }
   };
 
