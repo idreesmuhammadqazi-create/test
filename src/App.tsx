@@ -188,6 +188,118 @@ function App() {
     }
   };
 
+  // Debug handlers
+  const handleDebug = async () => {
+    // Check for syntax errors first
+    if (errors.length > 0 && errors.some(e => e.type === 'syntax')) {
+      alert('Fix syntax errors before debugging');
+      return;
+    }
+
+    // Clear output and errors
+    setOutput([]);
+    setErrors([]);
+    setIsRunning(true);
+    setIsDebugging(true);
+    setIsPaused(true);
+    setWaitingForInput(false);
+
+    try {
+      // Tokenize and parse
+      const tokens = tokenize(code);
+      const ast = parse(tokens);
+
+      // Create step callback that waits for user action
+      const stepCallback = () => {
+        return new Promise<void>((resolve) => {
+          stepResolveRef.current = resolve;
+          setIsPaused(true);
+        });
+      };
+
+      // Create interpreter in debug mode
+      const interpreter = new Interpreter(
+        async (variableName: string, variableType: string) => {
+          return new Promise<string>((resolve) => {
+            setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
+            setWaitingForInput(true);
+            inputResolveRef.current = resolve;
+          });
+        },
+        true, // debug mode
+        stepCallback
+      );
+
+      interpreterRef.current = interpreter;
+
+      // Execute with animation
+      const generator = interpreter.executeProgram(ast);
+
+      for await (const line of generator) {
+        // Update debug state
+        const currentDebugState = interpreter.getDebugState();
+        setDebugState(currentDebugState);
+        
+        setOutput(prev => [...prev, line]);
+        // Wait 300ms between outputs
+        await new Promise(resolve => setTimeout(resolve, 300));
+      }
+
+      setIsRunning(false);
+      setIsDebugging(false);
+      setIsPaused(false);
+      setWaitingForInput(false);
+    } catch (error) {
+      setIsRunning(false);
+      setIsDebugging(false);
+      setIsPaused(false);
+      setWaitingForInput(false);
+
+      if (error instanceof RuntimeError) {
+        setErrors([{
+          line: (error as RuntimeError).line,
+          message: (error as RuntimeError).message,
+          type: 'runtime'
+        }]);
+      } else {
+        setErrors([{
+          line: 1,
+          message: (error as Error).message,
+          type: 'runtime'
+        }]);
+      }
+    }
+  };
+
+  const handleDebugStep = () => {
+    if (stepResolveRef.current) {
+      setIsPaused(false);
+      stepResolveRef.current();
+      stepResolveRef.current = null;
+    }
+  };
+
+  const handleDebugContinue = () => {
+    // Continue execution without pausing
+    setIsDebugging(false);
+    setIsPaused(false);
+    if (stepResolveRef.current) {
+      stepResolveRef.current();
+      stepResolveRef.current = null;
+    }
+  };
+
+  const handleDebugStop = () => {
+    setIsDebugging(false);
+    setIsPaused(false);
+    setIsRunning(false);
+    setDebugState(null);
+    if (stepResolveRef.current) {
+      stepResolveRef.current();
+      stepResolveRef.current = null;
+    }
+  };
+
   // Handle save as (create new program)
   const handleSaveAs = async (name: string) => {
     if (!currentUser) return;
