@@ -638,6 +638,10 @@ export class Parser {
       return type as DataType;
     }
 
+    if (type === 'ARRAY') {
+      return 'ARRAY' as DataType;
+    }
+
     throw new Error(`Invalid data type '${type}' at line ${token.line}`);
   }
 
