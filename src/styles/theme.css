@@ -1,0 +1,118 @@
+/**
+ * Global Theme Variables
+ * Light and Dark mode color schemes
+ */
+
+:root {
+  /* Light Theme (Default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e0e0e0;
+
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+
+  --border-color: #cccccc;
+  --border-light: #e0e0e0;
+
+  --button-bg: #e0e0e0;
+  --button-hover: #d0d0d0;
+  --button-text: #333333;
+
+  --run-button-bg: #4caf50;
+  --run-button-hover: #45a049;
+  --run-button-text: #ffffff;
+
+  --error-bg: #fff3cd;
+  --error-border: #ffecb5;
+  --error-text: #856404;
+
+  --output-bg: #f9f9f9;
+  --output-text: #000000;
+  --output-input: #0066cc;
+
+  --editor-bg: #ffffff;
+  --editor-gutter: #f5f5f5;
+  --editor-line-numbers: #999999;
+
+  --dropdown-bg: #ffffff;
+  --dropdown-hover: #f0f0f0;
+  --dropdown-shadow: rgba(0, 0, 0, 0.15);
+
+  --landing-gradient-start: #667eea;
+  --landing-gradient-end: #764ba2;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --bg-primary: #1e1e1e;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3d3d3d;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --text-tertiary: #808080;
+
+  --border-color: #404040;
+  --border-light: #505050;
+
+  --button-bg: #3d3d3d;
+  --button-hover: #4d4d4d;
+  --button-text: #e0e0e0;
+
+  --run-button-bg: #4caf50;
+  --run-button-hover: #5cbf60;
+  --run-button-text: #ffffff;
+
+  --error-bg: #3d2f1f;
+  --error-border: #5d4a2f;
+  --error-text: #ffb74d;
+
+  --output-bg: #252525;
+  --output-text: #e0e0e0;
+  --output-input: #4da6ff;
+
+  --editor-bg: #1e1e1e;
+  --editor-gutter: #252525;
+  --editor-line-numbers: #858585;
+
+  --dropdown-bg: #2d2d2d;
+  --dropdown-hover: #3d3d3d;
+  --dropdown-shadow: rgba(0, 0, 0, 0.5);
+
+  --landing-gradient-start: #667eea;
+  --landing-gradient-end: #764ba2;
+}
+
+/* Smooth transition for theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* CodeMirror dark theme overrides */
+[data-theme='dark'] .cm-editor {
+  background-color: var(--editor-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme='dark'] .cm-gutters {
+  background-color: var(--editor-gutter) !important;
+  border-right: 1px solid var(--border-color) !important;
+}
+
+[data-theme='dark'] .cm-lineNumbers .cm-gutterElement {
+  color: var(--editor-line-numbers) !important;
+}
+
+[data-theme='dark'] .cm-activeLine {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme='dark'] .cm-selectionBackground {
+  background-color: rgba(100, 149, 237, 0.3) !important;
+}
+
+[data-theme='dark'] .cm-cursor {
+  border-left-color: var(--text-primary) !important;
+}
