@@ -13,6 +13,38 @@
 
 .cm-scroller {
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  overflow: auto !important;
+}
+
+/* Custom Scrollbar for Code Editor */
+.cm-scroller::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.cm-scroller::-webkit-scrollbar-track {
+  background: var(--editor-gutter);
+  border-radius: 5px;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 5px;
+  border: 2px solid var(--editor-gutter);
+}
+
+.cm-scroller::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+.cm-scroller::-webkit-scrollbar-corner {
+  background: var(--editor-gutter);
+}
+
+/* Firefox Scrollbar */
+.cm-scroller {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) var(--editor-gutter);
 }
 
 .cm-gutters {
@@ -66,5 +98,10 @@
     padding: 0 8px;
     min-width: 32px;
     font-size: 12px;
+  }
+
+  .cm-scroller::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
   }
 }
