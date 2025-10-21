@@ -49,6 +49,10 @@ export default function Editor({ value, onChange }: EditorProps) {
             fontSize: '14px',
             fontFamily: 'Consolas, Monaco, "Courier New", monospace',
           },
+          '.cm-scroller': {
+            overflow: 'auto',
+            maxHeight: '100%',
+          },
           '.cm-content': {
             fontFamily: 'Consolas, Monaco, "Courier New", monospace',
             padding: '10px 0',
