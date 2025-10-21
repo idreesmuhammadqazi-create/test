@@ -268,33 +268,82 @@ export class Interpreter {
   }
 
   private async* executeInput(node: InputNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
-    const variable = this.getVariable(node.identifier, context);
+    if (node.target.type === 'Identifier') {
+      // Simple variable input
+      const varName = (node.target as IdentifierNode).name;
+      const variable = this.getVariable(varName, context);
 
-    if (!variable) {
-      throw new RuntimeError(`Variable '${node.identifier}' not declared`, node.line);
+      if (!variable) {
+        throw new RuntimeError(`Variable '${varName}' not declared`, node.line);
+      }
+
+      // Use the inputHandler to get input
+      const input = await this.inputHandler(varName, variable.type);
+
+      // Type conversion based on variable type
+      let value: any;
+      switch (variable.type) {
+        case 'INTEGER':
+          value = parseInt(input) || 0;
+          break;
+        case 'REAL':
+          value = parseFloat(input) || 0.0;
+          break;
+        case 'BOOLEAN':
+          value = input.toLowerCase() === 'true';
+          break;
+        default:
+          value = input;
+      }
+
+      variable.value = value;
+      variable.initialized = true;
+    } else if (node.target.type === 'ArrayAccess') {
+      // Array element input
+      const arrayAccess = node.target as ArrayAccessNode;
+      const variable = this.getVariable(arrayAccess.array, context);
+
+      if (!variable) {
+        throw new RuntimeError(`Array '${arrayAccess.array}' not declared`, node.line);
+      }
+
+      if (variable.type !== 'ARRAY') {
+        throw new RuntimeError(`'${arrayAccess.array}' is not an array`, node.line);
+      }
+
+      const indices = arrayAccess.indices.map(idx => {
+        const val = this.evaluateExpression(idx, context);
+        if (typeof val !== 'number') {
+          throw new RuntimeError(`Array index must be a number`, node.line);
+        }
+        return Math.floor(val);
+      });
+
+      // Determine the type to prompt for based on array element type
+      const elementType = variable.elementType || 'STRING';
+      const promptName = `${arrayAccess.array}[${indices.join(', ')}]`;
+      
+      // Use the inputHandler to get input
+      const input = await this.inputHandler(promptName, elementType);
+
+      // Type conversion based on element type
+      let value: any;
+      switch (elementType) {
+        case 'INTEGER':
+          value = parseInt(input) || 0;
+          break;
+        case 'REAL':
+          value = parseFloat(input) || 0.0;
+          break;
+        case 'BOOLEAN':
+          value = input.toLowerCase() === 'true';
+          break;
+        default:
+          value = input;
+      }
+
+      this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
     }
-
-    // Use the inputHandler to get input
-    const input = await this.inputHandler(node.identifier, variable.type);
-
-    // Type conversion based on variable type
-    let value: any;
-    switch (variable.type) {
-      case 'INTEGER':
-        value = parseInt(input) || 0;
-        break;
-      case 'REAL':
-        value = parseFloat(input) || 0.0;
-        break;
-      case 'BOOLEAN':
-        value = input.toLowerCase() === 'true';
-        break;
-      default:
-        value = input;
-    }
-
-    variable.value = value;
-    variable.initialized = true;
   }
 
   private async* executeIf(node: IfNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
