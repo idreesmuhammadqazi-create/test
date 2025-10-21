@@ -1,0 +1,411 @@
+/* Templates Modal Styles */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background-color: var(--background-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  max-width: 900px;
+  width: 95%;
+  height: 85vh;
+  max-height: 700px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.headerActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.shortcutsButton {
+  padding: 8px 16px;
+  background-color: var(--button-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.shortcutsButton:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--primary-color);
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 32px;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+}
+
+.closeButton:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.shortcutsPanel {
+  padding: 16px 24px;
+  background-color: var(--input-bg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.shortcutsPanel h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.shortcutsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.shortcutItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.shortcutKey {
+  padding: 4px 8px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: 'Consolas', monospace;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.shortcutChar {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.shortcutName {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.shortcutNote {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.shortcutNote code {
+  padding: 2px 6px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: 'Consolas', monospace;
+  font-size: 11px;
+}
+
+.searchBar {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 20px 0;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sidebarTitle {
+  margin: 0 0 12px 0;
+  padding: 0 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.categoryButton {
+  width: 100%;
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 3px solid transparent;
+}
+
+.categoryButton:hover {
+  background-color: var(--hover-bg);
+}
+
+.categoryButton.active {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  font-weight: 600;
+  border-left-color: var(--primary-color);
+}
+
+.count {
+  font-size: 12px;
+  padding: 2px 8px;
+  background-color: var(--border-color);
+  border-radius: 12px;
+  color: var(--text-secondary);
+}
+
+.categoryButton.active .count {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.templates {
+  flex: 1;
+  padding: 20px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+}
+
+.emptyState p {
+  margin: 4px 0;
+}
+
+.emptyHint {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.templateCard {
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--input-bg);
+  transition: all 0.2s;
+}
+
+.templateCard:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.templateHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.templateName {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.insertButton {
+  padding: 6px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.insertButton:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.templateDescription {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.templatePreview {
+  margin: 0;
+  padding: 12px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Scrollbar styling */
+.sidebar::-webkit-scrollbar,
+.templates::-webkit-scrollbar,
+.templatePreview::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.templates::-webkit-scrollbar-thumb,
+.templatePreview::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.templates::-webkit-scrollbar-thumb:hover,
+.templatePreview::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .modal {
+    width: 98%;
+    height: 90vh;
+    max-height: none;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 0;
+    max-height: 200px;
+  }
+
+  .categoryButton {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .templates {
+    padding: 16px;
+  }
+
+  .templateCard {
+    padding: 12px;
+  }
+
+  .shortcutsList {
+    grid-template-columns: 1fr;
+  }
+}
