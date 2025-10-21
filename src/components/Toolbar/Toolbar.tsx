@@ -118,13 +118,9 @@ export default function Toolbar({
         Upload
       </button>
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".txt"
-        onChange={handleFileChange}
-        className={styles.fileInput}
-      />
+      <button className={styles.secondaryButton} onClick={onTemplates}>
+        📝 Templates
+      </button>
 
       <div className={styles.examplesContainer} ref={examplesRef}>
         <button
