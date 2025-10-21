@@ -4,11 +4,93 @@ import { EditorView, keymap, placeholder, lineNumbers } from '@codemirror/view';
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { syntaxHighlighting, HighlightStyle } from '@codemirror/language';
 import { tags as t } from '@lezer/highlight';
+import { autocompletion, CompletionContext } from '@codemirror/autocomplete';
 import styles from './Editor.module.css';
 
 interface EditorProps {
   value: string;
   onChange: (value: string) => void;
+}
+
+// IGCSE Pseudocode autocomplete suggestions
+const igcseCompletions = [
+  // Keywords
+  { label: 'DECLARE', type: 'keyword', info: 'Declare a variable' },
+  { label: 'IF', type: 'keyword', info: 'If statement' },
+  { label: 'THEN', type: 'keyword', info: 'Then clause' },
+  { label: 'ELSE', type: 'keyword', info: 'Else clause' },
+  { label: 'ENDIF', type: 'keyword', info: 'End if statement' },
+  { label: 'WHILE', type: 'keyword', info: 'While loop' },
+  { label: 'DO', type: 'keyword', info: 'Do clause' },
+  { label: 'ENDWHILE', type: 'keyword', info: 'End while loop' },
+  { label: 'REPEAT', type: 'keyword', info: 'Repeat loop' },
+  { label: 'UNTIL', type: 'keyword', info: 'Until clause' },
+  { label: 'FOR', type: 'keyword', info: 'For loop' },
+  { label: 'TO', type: 'keyword', info: 'To keyword in for loop' },
+  { label: 'STEP', type: 'keyword', info: 'Step keyword in for loop' },
+  { label: 'NEXT', type: 'keyword', info: 'Next keyword in for loop' },
+  { label: 'CASE', type: 'keyword', info: 'Case statement' },
+  { label: 'OF', type: 'keyword', info: 'Of keyword' },
+  { label: 'OTHERWISE', type: 'keyword', info: 'Otherwise clause in case' },
+  { label: 'ENDCASE', type: 'keyword', info: 'End case statement' },
+  { label: 'INPUT', type: 'keyword', info: 'Input from user' },
+  { label: 'OUTPUT', type: 'keyword', info: 'Output to screen' },
+  { label: 'PROCEDURE', type: 'keyword', info: 'Define a procedure' },
+  { label: 'ENDPROCEDURE', type: 'keyword', info: 'End procedure definition' },
+  { label: 'FUNCTION', type: 'keyword', info: 'Define a function' },
+  { label: 'ENDFUNCTION', type: 'keyword', info: 'End function definition' },
+  { label: 'RETURN', type: 'keyword', info: 'Return value from function' },
+  { label: 'RETURNS', type: 'keyword', info: 'Function return type' },
+  { label: 'CALL', type: 'keyword', info: 'Call a procedure' },
+  { label: 'BYVAL', type: 'keyword', info: 'Pass parameter by value' },
+  { label: 'BYREF', type: 'keyword', info: 'Pass parameter by reference' },
+  
+  // Data Types
+  { label: 'INTEGER', type: 'type', info: 'Integer data type' },
+  { label: 'REAL', type: 'type', info: 'Real/decimal data type' },
+  { label: 'STRING', type: 'type', info: 'String data type' },
+  { label: 'CHAR', type: 'type', info: 'Character data type' },
+  { label: 'BOOLEAN', type: 'type', info: 'Boolean data type' },
+  { label: 'ARRAY', type: 'type', info: 'Array data type' },
+  
+  // Boolean values
+  { label: 'TRUE', type: 'constant', info: 'Boolean true value' },
+  { label: 'FALSE', type: 'constant', info: 'Boolean false value' },
+  
+  // Operators
+  { label: 'AND', type: 'keyword', info: 'Logical AND' },
+  { label: 'OR', type: 'keyword', info: 'Logical OR' },
+  { label: 'NOT', type: 'keyword', info: 'Logical NOT' },
+  { label: 'DIV', type: 'keyword', info: 'Integer division' },
+  { label: 'MOD', type: 'keyword', info: 'Modulus (remainder)' },
+  
+  // Built-in Functions - String
+  { label: 'LENGTH', type: 'function', info: 'LENGTH(string) - Returns string length' },
+  { label: 'SUBSTRING', type: 'function', info: 'SUBSTRING(string, start, length) - Extracts substring' },
+  { label: 'UCASE', type: 'function', info: 'UCASE(string) - Converts to uppercase' },
+  { label: 'LCASE', type: 'function', info: 'LCASE(string) - Converts to lowercase' },
+  
+  // Built-in Functions - Type Conversion
+  { label: 'INT', type: 'function', info: 'INT(value) - Converts to integer' },
+  { label: 'REAL', type: 'function', info: 'REAL(value) - Converts to real number' },
+  { label: 'STRING', type: 'function', info: 'STRING(value) - Converts to string' },
+  
+  // Built-in Functions - Math
+  { label: 'ROUND', type: 'function', info: 'ROUND(number, decimals) - Rounds number' },
+  { label: 'RANDOM', type: 'function', info: 'RANDOM() - Returns random number 0.0-1.0' },
+];
+
+// Custom autocomplete function
+function igcseAutocomplete(context: CompletionContext) {
+  const word = context.matchBefore(/\w*/);
+  if (!word || (word.from === word.to && !context.explicit)) {
+    return null;
+  }
+
+  return {
+    from: word.from,
+    options: igcseCompletions,
+  };
 }
 
 // Custom syntax highlighting for IGCSE/A-LEVELS pseudocode
