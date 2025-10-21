@@ -13,6 +13,7 @@ interface ToolbarProps {
   onLoadExample: (exampleCode: string) => void;
   onSaveAs: () => void;
   onOpenLibrary: () => void;
+  onShare: () => void;
   isRunning: boolean;
 }
 
@@ -25,6 +26,7 @@ export default function Toolbar({
   onLoadExample,
   onSaveAs,
   onOpenLibrary,
+  onShare,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
