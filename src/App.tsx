@@ -506,13 +506,6 @@ function App() {
           onClose={() => setShowExportModal(false)}
         />
       )}
-
-      {showTemplatesModal && (
-        <TemplatesModal
-          onInsert={handleInsertTemplate}
-          onClose={() => setShowTemplatesModal(false)}
-        />
-      )}
     </div>
   );
 }
