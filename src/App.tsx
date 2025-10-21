@@ -45,6 +45,9 @@ function App() {
   const [showShareModal, setShowShareModal] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
 
+  // Export state
+  const [showExportModal, setShowExportModal] = useState(false);
+
   // Debug state
   const [isDebugging, setIsDebugging] = useState(false);
   const [debugState, setDebugState] = useState<DebugState | null>(null);
