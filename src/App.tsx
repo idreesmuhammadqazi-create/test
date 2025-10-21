@@ -402,19 +402,6 @@ function App() {
     setShowExportModal(true);
   };
 
-  // Handle templates
-  const handleTemplates = () => {
-    setShowTemplatesModal(true);
-  };
-
-  // Handle insert template
-  const handleInsertTemplate = (templateCode: string) => {
-    if (code.trim() && !confirm('This will replace your current code. Continue?')) {
-      return;
-    }
-    setCode(templateCode);
-  };
-
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
