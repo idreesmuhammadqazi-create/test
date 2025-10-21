@@ -145,6 +145,10 @@ export default function Toolbar({
         💾 Save As
       </button>
 
+      <button className={styles.secondaryButton} onClick={onShare}>
+        🔗 Share
+      </button>
+
       <button className={styles.secondaryButton} onClick={onOpenLibrary}>
         📂 My Programs
       </button>
