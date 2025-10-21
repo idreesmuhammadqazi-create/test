@@ -118,6 +118,7 @@ export default function Editor({ value, onChange }: EditorProps) {
         keymap.of([...defaultKeymap, ...historyKeymap]),
         placeholder('// Start typing your IGCSE/A-LEVELS pseudocode here'),
         syntaxHighlighting(igcseHighlightStyle),
+        autocompletion({ override: [igcseAutocomplete] }),
         EditorView.lineWrapping,
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
