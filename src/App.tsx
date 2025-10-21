@@ -9,6 +9,7 @@ import ProgramsLibrary from './components/ProgramsLibrary/ProgramsLibrary';
 import DebugControls from './components/DebugControls/DebugControls';
 import VariablesPanel from './components/VariablesPanel/VariablesPanel';
 import { ShareModal } from './components/ShareModal/ShareModal';
+import { ExportModal } from './components/ExportModal/ExportModal';
 import { tokenize } from './interpreter/lexer';
 import { parse } from './interpreter/parser';
 import { Interpreter } from './interpreter/interpreter';
