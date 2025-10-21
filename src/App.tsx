@@ -457,6 +457,7 @@ function App() {
         onOpenLibrary={handleOpenLibrary}
         onShare={handleShare}
         onExport={handleExport}
+        onTemplates={handleTemplates}
         isRunning={isRunning}
       />
 
@@ -521,6 +522,13 @@ function App() {
           code={code}
           programName={currentProgram?.name}
           onClose={() => setShowExportModal(false)}
+        />
+      )}
+
+      {showTemplatesModal && (
+        <TemplatesModal
+          onInsert={handleInsertTemplate}
+          onClose={() => setShowTemplatesModal(false)}
         />
       )}
     </div>
