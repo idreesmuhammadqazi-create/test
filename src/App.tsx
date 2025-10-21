@@ -393,6 +393,15 @@ function App() {
     }
   };
 
+  // Handle export code
+  const handleExport = () => {
+    if (!code.trim()) {
+      alert('Cannot export empty code');
+      return;
+    }
+    setShowExportModal(true);
+  };
+
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
