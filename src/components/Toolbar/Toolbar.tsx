@@ -15,6 +15,7 @@ interface ToolbarProps {
   onOpenLibrary: () => void;
   onShare: () => void;
   onExport: () => void;
+  onTemplates: () => void;
   isRunning: boolean;
 }
 
@@ -29,6 +30,7 @@ export default function Toolbar({
   onOpenLibrary,
   onShare,
   onExport,
+  onTemplates,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
