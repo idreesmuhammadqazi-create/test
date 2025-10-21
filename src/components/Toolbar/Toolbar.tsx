@@ -15,7 +15,6 @@ interface ToolbarProps {
   onOpenLibrary: () => void;
   onShare: () => void;
   onExport: () => void;
-  onTemplates: () => void;
   isRunning: boolean;
 }
 
@@ -30,7 +29,6 @@ export default function Toolbar({
   onOpenLibrary,
   onShare,
   onExport,
-  onTemplates,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
@@ -125,10 +123,6 @@ export default function Toolbar({
         onChange={handleFileChange}
         className={styles.fileInput}
       />
-
-      <button className={styles.secondaryButton} onClick={onTemplates}>
-        📝 Templates
-      </button>
 
       <div className={styles.examplesContainer} ref={examplesRef}>
         <button
