@@ -48,9 +48,6 @@ function App() {
   // Export state
   const [showExportModal, setShowExportModal] = useState(false);
 
-  // Templates state
-  const [showTemplatesModal, setShowTemplatesModal] = useState(false);
-
   // Debug state
   const [isDebugging, setIsDebugging] = useState(false);
   const [debugState, setDebugState] = useState<DebugState | null>(null);
