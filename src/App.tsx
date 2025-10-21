@@ -425,6 +425,7 @@ function App() {
         onLoadExample={handleLoadExample}
         onSaveAs={() => setShowSaveAsModal(true)}
         onOpenLibrary={handleOpenLibrary}
+        onShare={handleShare}
         isRunning={isRunning}
       />
 
@@ -474,6 +475,13 @@ function App() {
         <ProgramsLibrary
           onLoad={handleLoadProgram}
           onClose={() => setShowProgramsLibrary(false)}
+        />
+      )}
+
+      {showShareModal && (
+        <ShareModal
+          shareUrl={shareUrl}
+          onClose={() => setShowShareModal(false)}
         />
       )}
     </div>
