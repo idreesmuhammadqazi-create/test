@@ -370,6 +370,25 @@ function App() {
     setShowProgramsLibrary(true);
   };
 
+  // Handle share code
+  const handleShare = async () => {
+    if (!code.trim()) {
+      alert('Cannot share empty code');
+      return;
+    }
+
+    try {
+      const title = currentProgram?.name || 'Untitled Program';
+      const shareId = await shareCode(code, title);
+      const url = getShareURL(shareId);
+      setShareUrl(url);
+      setShowShareModal(true);
+    } catch (error) {
+      console.error('Error sharing code:', error);
+      alert('Failed to create share link. Please try again.');
+    }
+  };
+
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
