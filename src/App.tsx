@@ -439,6 +439,7 @@ function App() {
         onSaveAs={() => setShowSaveAsModal(true)}
         onOpenLibrary={handleOpenLibrary}
         onShare={handleShare}
+        onExport={handleExport}
         isRunning={isRunning}
       />
 
@@ -495,6 +496,14 @@ function App() {
         <ShareModal
           shareUrl={shareUrl}
           onClose={() => setShowShareModal(false)}
+        />
+      )}
+
+      {showExportModal && (
+        <ExportModal
+          code={code}
+          programName={currentProgram?.name}
+          onClose={() => setShowExportModal(false)}
         />
       )}
     </div>
