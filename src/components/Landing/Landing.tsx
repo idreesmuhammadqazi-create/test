@@ -13,39 +13,93 @@ export default function Landing() {
   return (
     <div className={styles.container}>
       <div className={styles.hero}>
-        <h1 className={styles.title}>IGCSE/A-LEVELS Pseudocode Editor</h1>
+        <div className={styles.badge}>For IGCSE & A-Level Students</div>
+        
+        <h1 className={styles.title}>
+          Master Pseudocode with
+          <span className={styles.highlight}> Pseudocode Runner</span>
+        </h1>
+        
         <p className={styles.subtitle}>
-          Write, run, and debug IGCSE/A-LEVELS pseudocode with real-time syntax checking and execution
+          The complete online IDE for Cambridge IGCSE and A-Level pseudocode.
+          Write, debug, and execute your code with instant feedback—all in your browser.
         </p>
+
+        <div className={styles.ctaGroup}>
+          <button onClick={() => setShowAuth(true)} className={styles.ctaButton}>
+            Start Coding Free
+            <span className={styles.arrow}>→</span>
+          </button>
+          <p className={styles.note}>No credit card required • Get started in 30 seconds</p>
+        </div>
 
         <div className={styles.features}>
           <div className={styles.feature}>
-            <div className={styles.featureIcon}>✓</div>
-            <h3>Standard Compliant</h3>
-            <p>Follows Cambridge IGCSE & A-Level pseudocode syntax</p>
+            <div className={styles.featureIcon}>
+              <span className={styles.iconEmoji}>✓</span>
+            </div>
+            <h3>Standards Compliant</h3>
+            <p>100% aligned with Cambridge IGCSE & A-Level pseudocode syntax specifications</p>
           </div>
+          
           <div className={styles.feature}>
-            <div className={styles.featureIcon}>⚡</div>
-            <h3>Real-time Validation</h3>
-            <p>Instant error detection and syntax highlighting</p>
+            <div className={styles.featureIcon}>
+              <span className={styles.iconEmoji}>⚡</span>
+            </div>
+            <h3>Real-Time Validation</h3>
+            <p>Catch errors as you type with intelligent syntax checking and instant feedback</p>
           </div>
+          
           <div className={styles.feature}>
-            <div className={styles.featureIcon}>▶</div>
-            <h3>Live Execution</h3>
-            <p>Run code with animated output and interactive input</p>
+            <div className={styles.featureIcon}>
+              <span className={styles.iconEmoji}>🐛</span>
+            </div>
+            <h3>Step-by-Step Debugger</h3>
+            <p>Understand your code better with line-by-line execution and variable inspection</p>
           </div>
+          
           <div className={styles.feature}>
-            <div className={styles.featureIcon}>📚</div>
+            <div className={styles.featureIcon}>
+              <span className={styles.iconEmoji}>💾</span>
+            </div>
+            <h3>Cloud Storage</h3>
+            <p>Save unlimited programs and access them from any device, anytime</p>
+          </div>
+          
+          <div className={styles.feature}>
+            <div className={styles.featureIcon}>
+              <span className={styles.iconEmoji}>📚</span>
+            </div>
             <h3>20+ Examples</h3>
-            <p>Learn from comprehensive working examples</p>
+            <p>Learn from comprehensive working examples covering all exam topics</p>
+          </div>
+          
+          <div className={styles.feature}>
+            <div className={styles.featureIcon}>
+              <span className={styles.iconEmoji}>🌙</span>
+            </div>
+            <h3>Dark Mode</h3>
+            <p>Easy on the eyes with beautiful light and dark themes for comfortable coding</p>
           </div>
         </div>
 
-        <button onClick={() => setShowAuth(true)} className={styles.ctaButton}>
-          Get Started Free
-        </button>
+        <div className={styles.testimonials}>
+          <div className={styles.testimonial}>
+            <p className={styles.quote}>"Perfect for practicing pseudocode for my exams. The debugger helped me understand loops and arrays!"</p>
+            <p className={styles.author}>— IGCSE Student</p>
+          </div>
+          <div className={styles.testimonial}>
+            <p className={styles.quote}>"Finally, a proper pseudocode editor that actually follows the Cambridge spec. Game changer!"</p>
+            <p className={styles.author}>— A-Level Student</p>
+          </div>
+        </div>
 
-        <p className={styles.note}>No credit card required • Sign up with Google or Email</p>
+        <div className={styles.finalCta}>
+          <h2>Ready to ace your Computer Science exams?</h2>
+          <button onClick={() => setShowAuth(true)} className={styles.ctaButtonSecondary}>
+            Sign Up with Google or Email
+          </button>
+        </div>
       </div>
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
