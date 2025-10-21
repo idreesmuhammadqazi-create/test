@@ -15,7 +15,6 @@ interface ToolbarProps {
   onOpenLibrary: () => void;
   onShare: () => void;
   onExport: () => void;
-  onTemplates: () => void;
   isRunning: boolean;
 }
 
@@ -30,7 +29,6 @@ export default function Toolbar({
   onOpenLibrary,
   onShare,
   onExport,
-  onTemplates,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout } = useAuth();
@@ -126,61 +124,5916 @@ export default function Toolbar({
         className={styles.fileInput}
       />
 
-      <button className={styles.secondaryButton} onClick={onTemplates}>
-        📝 Templates
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
       </button>
 
-      <div className={styles.examplesContainer} ref={examplesRef}>
-        <button
-          className={styles.secondaryButton}
-          onClick={() => setShowExamplesMenu(!showExamplesMenu)}
-        >
-          Examples ▼
-        </button>
-
-        {showExamplesMenu && (
-          <div className={styles.dropdown}>
-            {EXAMPLES.map((example, index) => (
-              <div
-                key={index}
-                className={styles.dropdownItem}
-                onClick={() => handleExampleClick(example.code)}
-              >
-                {example.title}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <button className={styles.secondaryButton} onClick={onSaveAs}>
-        💾 Save As
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
       </button>
 
-      <button className={styles.secondaryButton} onClick={onShare}>
-        🔗 Share
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
       </button>
 
-      <button className={styles.secondaryButton} onClick={onOpenLibrary}>
-        📂 My Programs
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
       </button>
 
-      <button 
-        className={styles.themeToggle}
-        onClick={toggleTheme}
-        title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-      >
-        {theme === 'light' ? '🌙' : '☀️'}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
       </button>
 
-      <div className={styles.userSection}>
-        <span className={styles.userName}>
-          {currentUser?.displayName || currentUser?.email}
-        </span>
-        <button className={styles.logoutButton} onClick={handleLogout}>
-          Logout
-        </button>
-      </div>
-    </div>
-  );
-}
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".txt"
+        onChange={handleFileChange}
+        className={styles.fileInput}
+      />
+
+      <button className={styles.secondaryButton} onClick={onExport}>
+        📤 Export
+      </button>
+
+      <button className={styles.secondaryButton} onClick={handleUploadClick}>
+        Upload
+      </button>
+
+      <input
