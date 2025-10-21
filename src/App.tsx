@@ -440,7 +440,6 @@ function App() {
         onOpenLibrary={handleOpenLibrary}
         onShare={handleShare}
         onExport={handleExport}
-        onTemplates={handleTemplates}
         isRunning={isRunning}
       />
 
