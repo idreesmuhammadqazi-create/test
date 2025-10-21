@@ -85,10 +85,20 @@
   border-left: 2px solid var(--primary-color) !important;
 }
 
+/* Dark mode cursor - make it visible */
+[data-theme='dark'] .cm-cursor {
+  border-left: 2px solid #f1f5f9 !important;
+}
+
 /* CodeMirror Content Styling */
 .cm-content {
   padding: 8px 0;
   caret-color: var(--primary-color);
+}
+
+/* Dark mode caret color */
+[data-theme='dark'] .cm-content {
+  caret-color: #f1f5f9 !important;
 }
 
 /* Placeholder Styling */
