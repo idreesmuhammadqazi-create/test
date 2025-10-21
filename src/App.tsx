@@ -40,6 +40,10 @@ function App() {
   const [showProgramsLibrary, setShowProgramsLibrary] = useState(false);
   const [lastSavedCode, setLastSavedCode] = useState('');
 
+  // Share state
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+
   // Debug state
   const [isDebugging, setIsDebugging] = useState(false);
   const [debugState, setDebugState] = useState<DebugState | null>(null);
@@ -53,7 +57,31 @@ function App() {
     if (savedCode) {
       setCode(savedCode);
     }
+
+    // Check for shared code in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const shareId = urlParams.get('share');
+    if (shareId) {
+      loadSharedCode(shareId);
+    }
   }, []);
+
+  // Load shared code
+  const loadSharedCode = async (shareId: string) => {
+    try {
+      const sharedCode = await getSharedCode(shareId);
+      if (sharedCode) {
+        setCode(sharedCode.code);
+        // Clear the share parameter from URL
+        window.history.replaceState({}, '', window.location.pathname);
+      } else {
+        alert('Shared code not found or has expired');
+      }
+    } catch (error) {
+      console.error('Error loading shared code:', error);
+      alert('Failed to load shared code');
+    }
+  };
 
   // Debounced validation
   const debouncedValidate = useCallback(
