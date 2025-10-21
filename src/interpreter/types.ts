@@ -85,7 +85,7 @@ export interface OutputNode extends BaseNode {
 
 export interface InputNode extends BaseNode {
   type: 'Input';
-  identifier: string;
+  target: IdentifierNode | ArrayAccessNode;
 }
 
 export interface IfNode extends BaseNode {
