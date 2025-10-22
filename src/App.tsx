@@ -4,6 +4,7 @@ import OutputPanel from './components/OutputPanel/OutputPanel';
 import ErrorDisplay, { ErrorMessage } from './components/ErrorDisplay/ErrorDisplay';
 import Toolbar from './components/Toolbar/Toolbar';
 import Landing from './components/Landing/Landing';
+import AuthModal from './components/Auth/AuthModal';
 import SaveAsModal from './components/SaveAsModal/SaveAsModal';
 import ProgramsLibrary from './components/ProgramsLibrary/ProgramsLibrary';
 import DebugControls from './components/DebugControls/DebugControls';
@@ -25,7 +26,7 @@ import { shareCode, getSharedCode, getShareURL } from './services/shareService';
 import styles from './App.module.css';
 
 function App() {
-  const { currentUser, isGuestMode } = useAuth();
+  const { currentUser, isGuestMode, setGuestMode } = useAuth();
   const [code, setCode] = useState('');
   const [output, setOutput] = useState<string[]>([]);
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
@@ -54,6 +55,9 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const stepResolveRef = useRef<(() => void) | null>(null);
   const interpreterRef = useRef<Interpreter | null>(null);
+
+  // Guest mode auth modal state
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Load code from LocalStorage on mount
   useEffect(() => {
@@ -402,6 +406,17 @@ function App() {
     setShowExportModal(true);
   };
 
+  // Handle open auth modal from guest mode
+  const handleOpenAuth = () => {
+    setShowAuthModal(true);
+  };
+
+  // Handle close auth modal
+  const handleCloseAuth = () => {
+    setShowAuthModal(false);
+    setGuestMode(true);
+  };
+
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
@@ -440,6 +455,7 @@ function App() {
         onOpenLibrary={handleOpenLibrary}
         onShare={handleShare}
         onExport={handleExport}
+        onOpenAuth={handleOpenAuth}
         isRunning={isRunning}
       />
 
@@ -505,6 +521,10 @@ function App() {
           programName={currentProgram?.name}
           onClose={() => setShowExportModal(false)}
         />
+      )}
+
+      {showAuthModal && (
+        <AuthModal onClose={handleCloseAuth} />
       )}
     </div>
   );
