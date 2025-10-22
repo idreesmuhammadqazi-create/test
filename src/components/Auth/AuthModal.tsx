@@ -130,7 +130,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
         </button>
 
         <button
-          onClick={handleTryNow}
+          onClick={onClose}
           className={styles.tryNowButton}
           type="button"
         >
