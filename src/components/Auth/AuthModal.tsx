@@ -12,7 +12,7 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ onClose }: AuthModalProps) {
-  const { login, signup, loginWithGoogle } = useAuth();
+  const { login, signup, loginWithGoogle, setGuestMode } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -55,6 +55,11 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleTryNow = () => {
+    setGuestMode(true);
+    if (onClose) onClose();
   };
 
   return (
@@ -125,7 +130,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
         </button>
 
         <button
-          onClick={onClose}
+          onClick={handleTryNow}
           className={styles.tryNowButton}
           type="button"
         >
