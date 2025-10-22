@@ -156,7 +156,7 @@ export default function Toolbar({
         )}
       </div>
 
-      {!isGuestMode && (
+      {!isGuestMode && currentUser?.emailVerified && (
         <>
           <button className={styles.secondaryButton} onClick={onSaveAs}>
             💾 Save As
