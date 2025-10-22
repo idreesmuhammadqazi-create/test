@@ -351,6 +351,11 @@ function App() {
   // Handle save as (create new program)
   const handleSaveAs = async (name: string) => {
     if (!currentUser) return;
+    
+    if (!currentUser.emailVerified) {
+      alert('Please verify your email address to save programs. Check your inbox for the verification link.');
+      return;
+    }
 
     const programId = await createProgram(currentUser.uid, {
       name,
@@ -376,11 +381,20 @@ function App() {
 
   // Handle open programs library
   const handleOpenLibrary = () => {
+    if (!currentUser?.emailVerified) {
+      alert('Please verify your email address to access saved programs. Check your inbox for the verification link.');
+      return;
+    }
     setShowProgramsLibrary(true);
   };
 
   // Handle share code
   const handleShare = async () => {
+    if (!currentUser?.emailVerified) {
+      alert('Please verify your email address to share code. Check your inbox for the verification link.');
+      return;
+    }
+    
     if (!code.trim()) {
       alert('Cannot share empty code');
       return;
