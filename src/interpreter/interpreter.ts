@@ -298,6 +298,9 @@ export class Interpreter {
 
       variable.value = value;
       variable.initialized = true;
+      
+      // Echo the entered value to output
+      yield input;
     } else if (node.target.type === 'ArrayAccess') {
       // Array element input
       const arrayAccess = node.target as ArrayAccessNode;
