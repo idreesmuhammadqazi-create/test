@@ -11,7 +11,8 @@ import {
   signOut,
   onAuthStateChanged,
   signInWithPopup,
-  updateProfile
+  updateProfile,
+  sendEmailVerification
 } from 'firebase/auth';
 import { auth, googleProvider } from '../config/firebase';
 
@@ -24,6 +25,7 @@ interface AuthContextType {
   loginWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   setGuestMode: (isGuest: boolean) => void;
+  resendVerificationEmail: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -51,6 +53,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (displayName && userCredential.user) {
       await updateProfile(userCredential.user, { displayName });
     }
+    // Send email verification
+    await sendEmailVerification(userCredential.user);
     setIsGuestMode(false);
   }
 
@@ -77,6 +81,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setIsGuestMode(isGuest);
   }
 
+  // Resend verification email
+  async function resendVerificationEmail() {
+    if (currentUser && !currentUser.emailVerified) {
+      await sendEmailVerification(currentUser);
+    } else {
+      throw new Error('No user to send verification email to');
+    }
+  }
+
   // Listen for auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -95,7 +108,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     login,
     loginWithGoogle,
     logout,
-    setGuestMode
+    setGuestMode,
+    resendVerificationEmail
   };
 
   // Only show loading screen on initial mount, not during transitions
