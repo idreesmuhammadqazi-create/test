@@ -53,8 +53,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
     if (displayName && userCredential.user) {
       await updateProfile(userCredential.user, { displayName });
     }
-    // Send email verification
-    await sendEmailVerification(userCredential.user);
+    
+    // Try to send email verification, but don't fail signup if it errors
+    try {
+      await sendEmailVerification(userCredential.user);
+      console.log('Verification email sent successfully');
+    } catch (emailError: any) {
+      // Log the error but don't throw it
+      console.error('Failed to send verification email:', emailError);
+      console.error('Error code:', emailError.code);
+      console.error('Error message:', emailError.message);
+      
+      // Account is still created, just couldn't send email
+      // User can try resending from the banner later
+    }
+    
     setIsGuestMode(false);
   }
 
