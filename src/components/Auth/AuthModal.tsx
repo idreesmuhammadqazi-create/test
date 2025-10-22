@@ -93,7 +93,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
         {error && <div className={styles.error}>{error}</div>}
 
         {!verificationSent && (
-          <>
+          <form onSubmit={handleSubmit} className={styles.form}>
             {!isLogin && (
               <input
                 type="text"
@@ -131,7 +131,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
             >
               {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
             </button>
-          </>
+          </form>
         )}
 
         <div className={styles.divider}>
