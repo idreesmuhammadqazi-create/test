@@ -68,12 +68,22 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // User can try resending from the banner later
     }
     
+    // Sign out the user so they must verify before accessing the app
+    await signOut(auth);
     setIsGuestMode(false);
   }
 
   // Login with email and password
   async function login(email: string, password: string) {
-    await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    
+    // Check if email is verified
+    if (!userCredential.user.emailVerified) {
+      // Sign them out immediately
+      await signOut(auth);
+      throw new Error('Please verify your email before logging in. Check your inbox for the verification link.');
+    }
+    
     setIsGuestMode(false);
   }
 
