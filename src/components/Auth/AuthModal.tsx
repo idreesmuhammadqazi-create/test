@@ -60,6 +60,14 @@ export default function AuthModal({ onClose }: AuthModalProps) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
+        <button
+          type="button"
+          className={styles.closeButton}
+          onClick={() => onClose?.()}
+          aria-label="Close"
+        >
+          ×
+        </button>
         <h2 className={styles.title}>
           {isLogin ? 'Login' : 'Create Account'}
         </h2>
