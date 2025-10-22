@@ -82,12 +82,15 @@ export default function AuthModal({ onClose }: AuthModalProps) {
             <strong>Account created successfully!</strong>
             <p>We've sent a verification email to <strong>{email}</strong>.</p>
             <p>Please check your inbox and click the verification link to activate your account.</p>
+            <p style={{ marginTop: '12px', fontSize: '13px', opacity: '0.9' }}>
+              You must verify your email before you can log in. In the meantime, you can continue using the editor in guest mode.
+            </p>
             <button
               onClick={() => onClose?.()}
               className={styles.submitButton}
               style={{ marginTop: '16px' }}
             >
-              Got it
+              Continue in Guest Mode
             </button>
           </div>
         )}
