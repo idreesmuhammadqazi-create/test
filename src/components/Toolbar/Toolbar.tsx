@@ -56,6 +56,14 @@ export default function Toolbar({
   };
 
   const handleLogout = async () => {
+    // If in guest mode, clicking "Login" exits guest mode
+    if (isGuestMode) {
+      const { setGuestMode } = useAuth();
+      setGuestMode(false);
+      return;
+    }
+    
+    // Otherwise, normal logout
     if (confirm('Are you sure you want to logout?')) {
       try {
         await logout();
