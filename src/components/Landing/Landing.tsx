@@ -31,6 +31,18 @@ export default function Landing() {
           Write, debug, and execute your code with instant feedback—all in your browser.
         </p>
 
+        <div className={styles.productHuntBadge}>
+          <a href="https://www.producthunt.com/products/igcse-alevels-pseudocode-editor?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-igcse&#0045;alevels&#0045;pseudocode&#0045;editor" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1029676&theme=light&t=1761148821132" 
+              alt="IGCSE/ALevels pseudocode editor - Run Cambridge pseudocode like real code. | Product Hunt" 
+              style={{ width: '250px', height: '54px' }} 
+              width="250" 
+              height="54" 
+            />
+          </a>
+        </div>
+
         <div className={styles.ctaGroup}>
           <button onClick={() => setShowAuth(true)} className={styles.ctaButton}>
             Start Coding Free
