@@ -173,6 +173,27 @@
   border-color: var(--border-focus);
 }
 
+.productHuntLink {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.productHuntLink:hover {
+  transform: translateY(-1px);
+  opacity: 0.9;
+}
+
+.productHuntBadge {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
 .userSection {
   display: flex;
   align-items: center;
