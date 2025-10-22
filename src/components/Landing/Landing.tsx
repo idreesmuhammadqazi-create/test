@@ -5,10 +5,16 @@
 
 import { useState } from 'react';
 import AuthModal from '../Auth/AuthModal';
+import { useAuth } from '../../contexts/AuthContext';
 import styles from './Landing.module.css';
 
 export default function Landing() {
   const [showAuth, setShowAuth] = useState(false);
+  const { setGuestMode } = useAuth();
+
+  const handleTryNow = () => {
+    setGuestMode(true);
+  };
 
   return (
     <div className={styles.container}>
@@ -29,6 +35,9 @@ export default function Landing() {
           <button onClick={() => setShowAuth(true)} className={styles.ctaButton}>
             Start Coding Free
             <span className={styles.arrow}>→</span>
+          </button>
+          <button onClick={handleTryNow} className={styles.tryNowButton}>
+            Try Now without Login
           </button>
           <p className={styles.note}>No credit card required • Get started in 30 seconds</p>
         </div>
