@@ -147,17 +147,21 @@ export default function Toolbar({
         )}
       </div>
 
-      <button className={styles.secondaryButton} onClick={onSaveAs}>
-        💾 Save As
-      </button>
+      {!isGuestMode && (
+        <>
+          <button className={styles.secondaryButton} onClick={onSaveAs}>
+            💾 Save As
+          </button>
 
-      <button className={styles.secondaryButton} onClick={onShare}>
-        🔗 Share
-      </button>
+          <button className={styles.secondaryButton} onClick={onShare}>
+            🔗 Share
+          </button>
 
-      <button className={styles.secondaryButton} onClick={onOpenLibrary}>
-        📂 My Programs
-      </button>
+          <button className={styles.secondaryButton} onClick={onOpenLibrary}>
+            📂 My Programs
+          </button>
+        </>
+      )}
 
       <button 
         className={styles.themeToggle}
@@ -169,10 +173,10 @@ export default function Toolbar({
 
       <div className={styles.userSection}>
         <span className={styles.userName}>
-          {currentUser?.displayName || currentUser?.email}
+          {isGuestMode ? 'Guest' : (currentUser?.displayName || currentUser?.email)}
         </span>
         <button className={styles.logoutButton} onClick={handleLogout}>
-          Logout
+          {isGuestMode ? 'Login' : 'Logout'}
         </button>
       </div>
     </div>
