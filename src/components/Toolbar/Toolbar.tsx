@@ -31,7 +31,7 @@ export default function Toolbar({
   onExport,
   isRunning
 }: ToolbarProps) {
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, isGuestMode } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showExamplesMenu, setShowExamplesMenu] = useState(false);
