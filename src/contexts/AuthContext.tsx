@@ -96,10 +96,30 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   // Resend verification email
   async function resendVerificationEmail() {
-    if (currentUser && !currentUser.emailVerified) {
+    if (!currentUser) {
+      throw new Error('No user logged in');
+    }
+    
+    if (currentUser.emailVerified) {
+      throw new Error('Email is already verified');
+    }
+    
+    try {
       await sendEmailVerification(currentUser);
-    } else {
-      throw new Error('No user to send verification email to');
+      console.log('Verification email resent successfully');
+    } catch (error: any) {
+      console.error('Failed to resend verification email:', error);
+      console.error('Error code:', error.code);
+      console.error('Error message:', error.message);
+      
+      // Throw a more user-friendly error
+      if (error.code === 'auth/too-many-requests') {
+        throw new Error('Too many requests. Please wait a few minutes before trying again.');
+      } else if (error.code === 'auth/network-request-failed') {
+        throw new Error('Network error. Please check your connection and try again.');
+      } else {
+        throw new Error('Failed to send verification email. Please try again later.');
+      }
     }
   }
 
