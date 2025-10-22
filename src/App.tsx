@@ -9,6 +9,7 @@ import SaveAsModal from './components/SaveAsModal/SaveAsModal';
 import ProgramsLibrary from './components/ProgramsLibrary/ProgramsLibrary';
 import DebugControls from './components/DebugControls/DebugControls';
 import VariablesPanel from './components/VariablesPanel/VariablesPanel';
+import EmailVerificationBanner from './components/EmailVerificationBanner/EmailVerificationBanner';
 import { ShareModal } from './components/ShareModal/ShareModal';
 import { ExportModal } from './components/ExportModal/ExportModal';
 import { tokenize } from './interpreter/lexer';
@@ -468,6 +469,8 @@ function App() {
           isPaused={isPaused}
         />
       )}
+
+      <EmailVerificationBanner />
 
       <div className={styles.splitView}>
         <div className={styles.leftPanel}>
