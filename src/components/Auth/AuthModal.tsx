@@ -29,7 +29,8 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     try {
       if (isLogin) {
         await login(email, password);
-        if (onClose) onClose();
+        // Reload page to ensure all authenticated features load
+        window.location.reload();
       } else {
         if (!displayName.trim()) {
           setError('Please enter your name');
@@ -52,7 +53,8 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     setLoading(true);
     try {
       await loginWithGoogle();
-      if (onClose) onClose();
+      // Reload page to ensure all authenticated features load
+      window.location.reload();
     } catch (err: any) {
       setError(err.message || 'Google login failed');
     } finally {
