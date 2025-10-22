@@ -33,7 +33,7 @@ export default function Toolbar({
   onOpenAuth,
   isRunning
 }: ToolbarProps) {
-  const { currentUser, logout, isGuestMode, setGuestMode } = useAuth();
+  const { currentUser, logout, isGuestMode } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showExamplesMenu, setShowExamplesMenu] = useState(false);
