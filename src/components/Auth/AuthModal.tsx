@@ -19,6 +19,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [verificationSent, setVerificationSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +29,7 @@ export default function AuthModal({ onClose }: AuthModalProps) {
     try {
       if (isLogin) {
         await login(email, password);
+        if (onClose) onClose();
       } else {
         if (!displayName.trim()) {
           setError('Please enter your name');
@@ -35,8 +37,9 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           return;
         }
         await signup(email, password, displayName);
+        setVerificationSent(true);
+        // Don't close modal, show verification message instead
       }
-      if (onClose) onClose();
     } catch (err: any) {
       setError(err.message || 'Authentication failed');
     } finally {
@@ -72,47 +75,64 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           {isLogin ? 'Login' : 'Create Account'}
         </h2>
 
+        {verificationSent && (
+          <div className={styles.success}>
+            <strong>Account created successfully!</strong>
+            <p>We've sent a verification email to <strong>{email}</strong>.</p>
+            <p>Please check your inbox and click the verification link to activate your account.</p>
+            <button
+              onClick={() => onClose?.()}
+              className={styles.submitButton}
+              style={{ marginTop: '16px' }}
+            >
+              Got it
+            </button>
+          </div>
+        )}
+
         {error && <div className={styles.error}>{error}</div>}
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          {!isLogin && (
+        {!verificationSent && (
+          <>
+            {!isLogin && (
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                className={styles.input}
+                required={!isLogin}
+              />
+            )}
+
             <input
-              type="text"
-              placeholder="Full Name"
-              value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className={styles.input}
-              required={!isLogin}
+              required
             />
-          )}
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className={styles.input}
-            required
-          />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={styles.input}
+              required
+              minLength={6}
+            />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={styles.input}
-            required
-            minLength={6}
-          />
-
-          <button
-            type="submit"
-            className={styles.submitButton}
-            disabled={loading}
-          >
-            {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
-          </button>
-        </form>
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={loading}
+            >
+              {loading ? 'Please wait...' : isLogin ? 'Login' : 'Sign Up'}
+            </button>
+          </>
+        )}
 
         <div className={styles.divider}>
           <span>OR</span>
