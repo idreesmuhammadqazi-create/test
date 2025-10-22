@@ -15,6 +15,7 @@ interface ToolbarProps {
   onOpenLibrary: () => void;
   onShare: () => void;
   onExport: () => void;
+  onOpenAuth: () => void;
   isRunning: boolean;
 }
 
@@ -29,6 +30,7 @@ export default function Toolbar({
   onOpenLibrary,
   onShare,
   onExport,
+  onOpenAuth,
   isRunning
 }: ToolbarProps) {
   const { currentUser, logout, isGuestMode, setGuestMode } = useAuth();
@@ -56,9 +58,9 @@ export default function Toolbar({
   };
 
   const handleLogout = async () => {
-    // If in guest mode, clicking "Login" exits guest mode
+    // If in guest mode, clicking "Login" opens auth modal
     if (isGuestMode) {
-      setGuestMode(false);
+      onOpenAuth();
       return;
     }
     
