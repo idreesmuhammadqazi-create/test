@@ -124,6 +124,14 @@ export default function AuthModal({ onClose }: AuthModalProps) {
           Continue with Google
         </button>
 
+        <button
+          onClick={onClose}
+          className={styles.tryNowButton}
+          type="button"
+        >
+          Try Now without Login
+        </button>
+
         <div className={styles.switch}>
           {isLogin ? "Don't have an account? " : "Already have an account? "}
           <button
