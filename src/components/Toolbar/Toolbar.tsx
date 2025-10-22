@@ -31,7 +31,7 @@ export default function Toolbar({
   onExport,
   isRunning
 }: ToolbarProps) {
-  const { currentUser, logout, isGuestMode } = useAuth();
+  const { currentUser, logout, isGuestMode, setGuestMode } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [showExamplesMenu, setShowExamplesMenu] = useState(false);
@@ -58,7 +58,6 @@ export default function Toolbar({
   const handleLogout = async () => {
     // If in guest mode, clicking "Login" exits guest mode
     if (isGuestMode) {
-      const { setGuestMode } = useAuth();
       setGuestMode(false);
       return;
     }
