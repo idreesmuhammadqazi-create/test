@@ -26,7 +26,7 @@ import { shareCode, getSharedCode, getShareURL } from './services/shareService';
 import styles from './App.module.css';
 
 function App() {
-  const { currentUser, isGuestMode } = useAuth();
+  const { currentUser, isGuestMode, setGuestMode } = useAuth();
   const [code, setCode] = useState('');
   const [output, setOutput] = useState<string[]>([]);
   const [errors, setErrors] = useState<ErrorMessage[]>([]);
