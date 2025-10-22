@@ -1,0 +1,70 @@
+.banner {
+  background-color: #fff3cd;
+  border-bottom: 2px solid #ffc107;
+  padding: 12px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.text {
+  flex: 1;
+  font-size: 14px;
+  color: #856404;
+}
+
+.text strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.text p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.button {
+  background-color: #ffc107;
+  color: #856404;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #ffb300;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  font-size: 13px;
+  color: #856404;
+  text-align: center;
+}
