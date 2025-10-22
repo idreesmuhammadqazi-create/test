@@ -40,6 +40,28 @@
   border: 1px solid var(--error-border);
 }
 
+.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 16px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #81c784;
+}
+
+.success strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.success p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
 .form {
   display: flex;
   flex-direction: column;
