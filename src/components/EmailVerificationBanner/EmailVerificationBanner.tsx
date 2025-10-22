@@ -22,9 +22,10 @@ export default function EmailVerificationBanner() {
 
     try {
       await resendVerificationEmail();
-      setMessage('Verification email sent! Please check your inbox.');
-    } catch (error) {
-      setMessage('Failed to send email. Please try again later.');
+      setMessage('✓ Verification email sent! Please check your inbox.');
+    } catch (error: any) {
+      console.error('Resend error:', error);
+      setMessage(`✗ ${error.message || 'Failed to send email. Please try again later.'}`);
     } finally {
       setResending(false);
     }
