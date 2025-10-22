@@ -70,7 +70,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     
     // Sign out the user so they must verify before accessing the app
     await signOut(auth);
-    setIsGuestMode(false);
+    // Keep user in guest mode so they can continue using the app
+    setIsGuestMode(true);
   }
 
   // Login with email and password
