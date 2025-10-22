@@ -422,8 +422,8 @@ function App() {
     return () => clearInterval(autoSaveInterval);
   }, [currentUser, currentProgram, code, lastSavedCode]);
 
-  // Show landing page if not authenticated
-  if (!currentUser) {
+  // Show landing page if not authenticated and not in guest mode
+  if (!currentUser && !isGuestMode) {
     return <Landing />;
   }
 
