@@ -346,6 +346,9 @@ export class Interpreter {
       }
 
       this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
+      
+      // Echo the entered value to output
+      yield input;
     }
   }
 
