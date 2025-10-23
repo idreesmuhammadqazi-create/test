@@ -774,6 +774,70 @@ export class Interpreter {
     }
   }
 
+  private async* executeProcedure(
+    procedure: ProcedureNode,
+    args: ExpressionNode[],
+    callerContext: ExecutionContext,
+    callLine: number
+  ): AsyncGenerator<string, void, unknown> {
+    if (args.length !== procedure.parameters.length) {
+      throw new RuntimeError(`Incorrect number of arguments for procedure '${procedure.name}'`, callLine);
+    }
+
+    this.recursionDepth++;
+    if (this.recursionDepth > MAX_RECURSION_DEPTH) {
+      throw new RuntimeError(`Maximum recursion depth exceeded`, callLine);
+    }
+
+    const localContext: ExecutionContext = {
+      variables: new Map(),
+      procedures: this.globalContext.procedures,
+      functions: this.globalContext.functions,
+      parent: this.globalContext
+    };
+
+    // Bind parameters
+    for (let i = 0; i < procedure.parameters.length; i++) {
+      const param = procedure.parameters[i];
+      const arg = args[i];
+
+      if (param.byRef) {
+        if (arg.type !== 'Identifier') {
+          throw new RuntimeError(`BYREF parameter must be a variable`, callLine);
+        }
+
+        const varName = (arg as IdentifierNode).name;
+        const variable = this.getVariable(varName, callerContext);
+
+        if (!variable) {
+          throw new RuntimeError(`Variable '${varName}' not found`, callLine);
+        }
+
+        localContext.variables.set(param.name, variable);
+      } else {
+        const value = this.evaluateExpression(arg, callerContext);
+        localContext.variables.set(param.name, {
+          type: param.type,
+          value,
+          initialized: true
+        });
+      }
+    }
+
+    // Add to call stack
+    this.callStack.push({ name: procedure.name, line: callLine, type: 'procedure' });
+
+    try {
+      // Execute procedure body
+      for (const stmt of procedure.body) {
+        yield* this.executeNode(stmt, localContext);
+      }
+    } finally {
+      this.callStack.pop();
+      this.recursionDepth--;
+    }
+  }
+
   private executeFunction(
     func: FunctionNode,
     args: ExpressionNode[],
