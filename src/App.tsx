@@ -508,7 +508,7 @@ function App() {
         onOpenSyntaxReference={() => setShowSyntaxReference(true)}
         onOpenPracticeProblems={() => setShowPracticeProblems(true)}
         onOpenExamMode={() => setShowExamModeStart(true)}
-        onOpenLearningTools={() => setShowLearningTools(true)}
+        // onOpenLearningTools={() => setShowLearningTools(true)}
         isRunning={isRunning}
         examModeActive={examMode.active}
       />
