@@ -180,20 +180,6 @@ export default function Toolbar({
         {theme === 'light' ? '🌙' : '☀️'}
       </button>
 
-      <a 
-        href="https://www.producthunt.com/products/igcse-alevels-pseudocode-editor?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-igcse&#0045;alevels&#0045;pseudocode&#0045;editor" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className={styles.productHuntLink}
-        title="Featured on Product Hunt"
-      >
-        <img 
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1029676&theme=light&t=1761148821132" 
-          alt="Product Hunt" 
-          className={styles.productHuntBadge}
-        />
-      </a>
-
       <div className={styles.userSection}>
         <span className={styles.userName}>
           {isGuestMode ? 'Guest' : (currentUser?.displayName || currentUser?.email)}
