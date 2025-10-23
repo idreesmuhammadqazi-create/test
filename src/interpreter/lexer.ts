@@ -12,7 +12,8 @@ const KEYWORDS = new Set([
   'INPUT', 'OUTPUT', 'PROCEDURE', 'ENDPROCEDURE', 'FUNCTION', 'ENDFUNCTION',
   'RETURN', 'RETURNS', 'CALL', 'BYVAL', 'BYREF', 'TRUE', 'FALSE',
   'AND', 'OR', 'NOT', 'DIV', 'MOD',
-  'OPENFILE', 'CLOSEFILE', 'READFILE', 'WRITEFILE', 'EOF'
+  'OPENFILE', 'CLOSEFILE', 'READFILE', 'WRITEFILE', 'EOF',
+  'READ', 'WRITE', 'APPEND'
 ]);
 
 export function tokenize(code: string): Token[] {
