@@ -78,29 +78,6 @@
   animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
-.productHuntBadge {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 32px;
-  animation: fadeInUp 0.8s ease-out 0.25s both;
-}
-
-.productHuntBadge a {
-  display: inline-block;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.productHuntBadge a:hover {
-  transform: translateY(-3px);
-  opacity: 0.9;
-}
-
-.productHuntBadge img {
-  display: block;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-}
-
 .ctaGroup {
   margin-bottom: 80px;
   animation: fadeInUp 0.8s ease-out 0.3s both;
@@ -322,15 +299,6 @@
   .subtitle {
     font-size: 17px;
     margin-bottom: 36px;
-  }
-
-  .productHuntBadge {
-    margin-bottom: 24px;
-  }
-
-  .productHuntBadge img {
-    width: 200px !important;
-    height: auto !important;
   }
 
   .ctaButton {
