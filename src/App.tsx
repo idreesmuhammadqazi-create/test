@@ -43,6 +43,12 @@ function App() {
   const [inputPrompt, setInputPrompt] = useState('');
   const inputResolveRef = useRef<((value: string) => void) | null>(null);
   
+  // File upload state
+  const [waitingForFileUpload, setWaitingForFileUpload] = useState(false);
+  const [fileUploadPrompt, setFileUploadPrompt] = useState('');
+  const fileUploadResolveRef = useRef<((content: string) => void) | null>(null);
+  const [createdFiles, setCreatedFiles] = useState<Array<{ filename: string; mode: string; lineCount: number }>>([]);
+  
   // Program management state
   const [currentProgram, setCurrentProgram] = useState<{ id: string; name: string } | null>(null);
   const [showSaveAsModal, setShowSaveAsModal] = useState(false);
