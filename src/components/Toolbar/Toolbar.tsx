@@ -149,6 +149,7 @@ export default function Toolbar({
         <button
           className={styles.secondaryButton}
           onClick={() => setShowExamplesMenu(!showExamplesMenu)}
+          disabled={examModeActive}
         >
           Examples ▼
         </button>
@@ -167,6 +168,49 @@ export default function Toolbar({
           </div>
         )}
       </div>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenTutorial}
+        title="Interactive Tutorial"
+      >
+        📚 Tutorial
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenSyntaxReference}
+        disabled={examModeActive}
+        title="Syntax Reference"
+      >
+        📖 Syntax
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenPracticeProblems}
+        disabled={examModeActive}
+        title="Practice Problems"
+      >
+        🎯 Practice
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenLearningTools}
+        title="Code Analysis & Tips"
+      >
+        💡 Analyze
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenExamMode}
+        disabled={examModeActive}
+        title="Start Exam Mode"
+      >
+        ⏱️ Exam Mode
+      </button>
 
       {!isGuestMode && currentUser?.emailVerified && (
         <>
