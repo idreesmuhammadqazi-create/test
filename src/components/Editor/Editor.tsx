@@ -116,7 +116,7 @@ export default function Editor({ value, onChange }: EditorProps) {
         lineNumbers(),
         history(),
         keymap.of([...defaultKeymap, ...historyKeymap]),
-        placeholder('// Start typing your IGCSE/A-LEVELS pseudocode here'),
+        placeholder('// Start typing your IGCSE/A-LEVELS pseudocode here\n// Press Ctrl+Space for autocomplete suggestions'),
         syntaxHighlighting(igcseHighlightStyle),
         autocompletion({ override: [igcseAutocomplete] }),
         EditorView.lineWrapping,
