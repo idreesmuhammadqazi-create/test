@@ -13,6 +13,11 @@ import VariablesPanel from './components/VariablesPanel/VariablesPanel';
 import EmailVerificationBanner from './components/EmailVerificationBanner/EmailVerificationBanner';
 import { ShareModal } from './components/ShareModal/ShareModal';
 import { ExportModal } from './components/ExportModal/ExportModal';
+import Tutorial from './components/Tutorial/Tutorial';
+import SyntaxReference from './components/SyntaxReference/SyntaxReference';
+import PracticeProblems from './components/PracticeProblems/PracticeProblems';
+import ExamMode, { ExamModeStartModal } from './components/ExamMode/ExamMode';
+import LearningTools from './components/LearningTools/LearningTools';
 import { tokenize } from './interpreter/lexer';
 import { parse } from './interpreter/parser';
 import { Interpreter } from './interpreter/interpreter';
@@ -60,6 +65,14 @@ function App() {
 
   // Guest mode auth modal state
   const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // Learning features state
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [showSyntaxReference, setShowSyntaxReference] = useState(false);
+  const [showPracticeProblems, setShowPracticeProblems] = useState(false);
+  const [showLearningTools, setShowLearningTools] = useState(false);
+  const [showExamModeStart, setShowExamModeStart] = useState(false);
+  const [examMode, setExamMode] = useState<{ active: boolean; duration: number }>({ active: false, duration: 45 });
 
   // Load code from LocalStorage on mount
   useEffect(() => {
@@ -433,6 +446,25 @@ function App() {
     setGuestMode(true);
   };
 
+  // Learning features handlers
+  const handleStartExam = (duration: number) => {
+    setExamMode({ active: true, duration });
+    setShowExamModeStart(false);
+  };
+
+  const handleExamTimeout = () => {
+    alert('Time is up! Exam mode has ended.');
+    setExamMode({ active: false, duration: 45 });
+  };
+
+  const handleExitExam = () => {
+    setExamMode({ active: false, duration: 45 });
+  };
+
+  const handleLoadCodeFromFeature = (newCode: string) => {
+    setCode(newCode);
+  };
+
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
@@ -472,7 +504,20 @@ function App() {
         onShare={handleShare}
         onExport={handleExport}
         onOpenAuth={handleOpenAuth}
+        onOpenTutorial={() => setShowTutorial(true)}
+        onOpenSyntaxReference={() => setShowSyntaxReference(true)}
+        onOpenPracticeProblems={() => setShowPracticeProblems(true)}
+        onOpenExamMode={() => setShowExamModeStart(true)}
+        onOpenLearningTools={() => setShowLearningTools(true)}
         isRunning={isRunning}
+        examModeActive={examMode.active}
+      />
+
+      <ExamMode
+        isActive={examMode.active}
+        duration={examMode.duration}
+        onTimeout={handleExamTimeout}
+        onExit={handleExitExam}
       />
 
       {isDebugging && (
@@ -543,6 +588,38 @@ function App() {
 
       {showAuthModal && (
         <AuthModal onClose={handleCloseAuth} />
+      )}
+
+      {showTutorial && (
+        <Tutorial
+          onClose={() => setShowTutorial(false)}
+          onLoadCode={handleLoadCodeFromFeature}
+        />
+      )}
+
+      {showSyntaxReference && (
+        <SyntaxReference onClose={() => setShowSyntaxReference(false)} />
+      )}
+
+      {showPracticeProblems && (
+        <PracticeProblems
+          onClose={() => setShowPracticeProblems(false)}
+          onLoadCode={handleLoadCodeFromFeature}
+        />
+      )}
+
+      {showLearningTools && (
+        <LearningTools
+          code={code}
+          onClose={() => setShowLearningTools(false)}
+        />
+      )}
+
+      {showExamModeStart && (
+        <ExamModeStartModal
+          onStart={handleStartExam}
+          onCancel={() => setShowExamModeStart(false)}
+        />
       )}
 
       <Analytics />

@@ -16,7 +16,13 @@ interface ToolbarProps {
   onShare: () => void;
   onExport: () => void;
   onOpenAuth: () => void;
+  onOpenTutorial: () => void;
+  onOpenSyntaxReference: () => void;
+  onOpenPracticeProblems: () => void;
+  onOpenExamMode: () => void;
+  onOpenLearningTools: () => void;
   isRunning: boolean;
+  examModeActive: boolean;
 }
 
 export default function Toolbar({
@@ -31,7 +37,13 @@ export default function Toolbar({
   onShare,
   onExport,
   onOpenAuth,
-  isRunning
+  onOpenTutorial,
+  onOpenSyntaxReference,
+  onOpenPracticeProblems,
+  onOpenExamMode,
+  onOpenLearningTools,
+  isRunning,
+  examModeActive
 }: ToolbarProps) {
   const { currentUser, logout, isGuestMode } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -137,6 +149,7 @@ export default function Toolbar({
         <button
           className={styles.secondaryButton}
           onClick={() => setShowExamplesMenu(!showExamplesMenu)}
+          disabled={examModeActive}
         >
           Examples ▼
         </button>
@@ -155,6 +168,49 @@ export default function Toolbar({
           </div>
         )}
       </div>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenTutorial}
+        title="Interactive Tutorial"
+      >
+        📚 Tutorial
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenSyntaxReference}
+        disabled={examModeActive}
+        title="Syntax Reference"
+      >
+        📖 Syntax
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenPracticeProblems}
+        disabled={examModeActive}
+        title="Practice Problems"
+      >
+        🎯 Practice
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenLearningTools}
+        title="Code Analysis & Tips"
+      >
+        💡 Analyze
+      </button>
+
+      <button 
+        className={styles.secondaryButton} 
+        onClick={onOpenExamMode}
+        disabled={examModeActive}
+        title="Start Exam Mode"
+      >
+        ⏱️ Exam Mode
+      </button>
 
       {!isGuestMode && currentUser?.emailVerified && (
         <>
