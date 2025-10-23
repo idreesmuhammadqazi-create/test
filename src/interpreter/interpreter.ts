@@ -554,64 +554,203 @@ export class Interpreter {
     throw new RuntimeError(`Procedure '${node.name}' not found`, node.line);
   }
 
-  private async* executeProcedure(
-    procedure: ProcedureNode,
-    args: ExpressionNode[],
-    callerContext: ExecutionContext,
-    callLine: number
-  ): AsyncGenerator<string, void, unknown> {
-    if (args.length !== procedure.parameters.length) {
-      throw new RuntimeError(`Incorrect number of arguments for procedure '${procedure.name}'`, callLine);
+  private async* executeOpenFile(node: OpenFileNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
+    const filenameValue = this.evaluateExpression(node.filename, context);
+    const filename = this.valueToString(filenameValue);
+
+    if (filename === '') {
+      throw new RuntimeError(`Filename cannot be empty`, node.line);
     }
 
-    this.recursionDepth++;
-    if (this.recursionDepth > MAX_RECURSION_DEPTH) {
-      throw new RuntimeError(`Maximum recursion depth exceeded`, callLine);
+    if (this.fileHandles.has(filename)) {
+      throw new RuntimeError(`File '${filename}' is already open`, node.line);
     }
 
-    const localContext: ExecutionContext = {
-      variables: new Map(),
-      procedures: this.globalContext.procedures,
-      functions: this.globalContext.functions,
-      parent: this.globalContext
-    };
+    const mode = node.mode;
+    let fileHandle: FileHandle;
 
-    // Bind parameters
-    for (let i = 0; i < procedure.parameters.length; i++) {
-      const param = procedure.parameters[i];
-      const arg = args[i];
+    if (mode === 'READ') {
+      if (!this.fileUploadHandler) {
+        throw new RuntimeError(`Cannot open file for reading: No file upload handler available`, node.line);
+      }
 
-      if (param.byRef) {
-        // BYREF: pass reference
-        if (arg.type !== 'Identifier') {
-          throw new RuntimeError(`BYREF parameter must be a variable`, callLine);
-        }
+      const content = await this.fileUploadHandler(filename);
+      const lines = content.split('\n');
 
-        const varName = (arg as IdentifierNode).name;
-        const variable = this.getVariable(varName, callerContext);
-
-        if (!variable) {
-          throw new RuntimeError(`Variable '${varName}' not found`, callLine);
-        }
-
-        localContext.variables.set(param.name, variable);
+      fileHandle = {
+        mode: 'READ',
+        data: lines,
+        position: 0
+      };
+    } else if (mode === 'WRITE') {
+      fileHandle = {
+        mode: 'WRITE',
+        data: [],
+        position: 0
+      };
+    } else { // APPEND
+      const existingHandle = this.fileHandles.get(filename);
+      if (existingHandle) {
+        fileHandle = {
+          mode: 'APPEND',
+          data: existingHandle.data,
+          position: existingHandle.data.length
+        };
       } else {
-        // BYVAL: pass copy
-        const value = this.evaluateExpression(arg, callerContext);
-        localContext.variables.set(param.name, {
-          type: param.type,
-          value,
-          initialized: true
-        });
+        fileHandle = {
+          mode: 'APPEND',
+          data: [],
+          position: 0
+        };
       }
     }
 
-    try {
-      for (const stmt of procedure.body) {
-        yield* this.executeNode(stmt, localContext);
+    this.fileHandles.set(filename, fileHandle);
+    yield `Opened file '${filename}' in ${mode} mode`;
+  }
+
+  private async* executeCloseFile(node: CloseFileNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
+    const filenameValue = this.evaluateExpression(node.filename, context);
+    const filename = this.valueToString(filenameValue);
+
+    if (filename === '') {
+      throw new RuntimeError(`Filename cannot be empty`, node.line);
+    }
+
+    if (!this.fileHandles.has(filename)) {
+      throw new RuntimeError(`File '${filename}' is not open`, node.line);
+    }
+
+    const fileHandle = this.fileHandles.get(filename)!;
+
+    if (fileHandle.mode === 'WRITE' || fileHandle.mode === 'APPEND') {
+      yield `Closed file '${filename}' (${fileHandle.data.length} lines written)`;
+      // Keep file in fileHandles for potential APPEND operations
+    } else {
+      this.fileHandles.delete(filename);
+      yield `Closed file '${filename}'`;
+    }
+  }
+
+  private async* executeReadFile(node: ReadFileNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
+    const filenameValue = this.evaluateExpression(node.filename, context);
+    const filename = this.valueToString(filenameValue);
+
+    if (filename === '') {
+      throw new RuntimeError(`Filename cannot be empty`, node.line);
+    }
+
+    if (!this.fileHandles.has(filename)) {
+      throw new RuntimeError(`File '${filename}' is not open`, node.line);
+    }
+
+    const fileHandle = this.fileHandles.get(filename)!;
+
+    if (fileHandle.mode !== 'READ') {
+      throw new RuntimeError(`File '${filename}' not opened for reading`, node.line);
+    }
+
+    if (fileHandle.position >= fileHandle.data.length) {
+      throw new RuntimeError(`Attempt to read past end of file '${filename}'`, node.line);
+    }
+
+    const line = fileHandle.data[fileHandle.position];
+    fileHandle.position++;
+
+    // Store data in target variable (same logic as INPUT)
+    if (node.target.type === 'Identifier') {
+      const varName = (node.target as IdentifierNode).name;
+      const variable = this.getVariable(varName, context);
+
+      if (!variable) {
+        throw new RuntimeError(`Variable '${varName}' not declared`, node.line);
       }
-    } finally {
-      this.recursionDepth--;
+
+      let value: any;
+      switch (variable.type) {
+        case 'INTEGER':
+          value = parseInt(line) || 0;
+          break;
+        case 'REAL':
+          value = parseFloat(line) || 0.0;
+          break;
+        case 'BOOLEAN':
+          value = line.toLowerCase() === 'true';
+          break;
+        default:
+          value = line;
+      }
+
+      variable.value = value;
+      variable.initialized = true;
+    } else if (node.target.type === 'ArrayAccess') {
+      const arrayAccess = node.target as ArrayAccessNode;
+      const variable = this.getVariable(arrayAccess.array, context);
+
+      if (!variable) {
+        throw new RuntimeError(`Array '${arrayAccess.array}' not declared`, node.line);
+      }
+
+      if (variable.type !== 'ARRAY') {
+        throw new RuntimeError(`'${arrayAccess.array}' is not an array`, node.line);
+      }
+
+      const indices = arrayAccess.indices.map(idx => {
+        const val = this.evaluateExpression(idx, context);
+        if (typeof val !== 'number') {
+          throw new RuntimeError(`Array index must be a number`, node.line);
+        }
+        return Math.floor(val);
+      });
+
+      const elementType = variable.elementType || 'STRING';
+      let value: any;
+      switch (elementType) {
+        case 'INTEGER':
+          value = parseInt(line) || 0;
+          break;
+        case 'REAL':
+          value = parseFloat(line) || 0.0;
+          break;
+        case 'BOOLEAN':
+          value = line.toLowerCase() === 'true';
+          break;
+        default:
+          value = line;
+      }
+
+      this.setArrayElement(variable.value, indices, value, variable.dimensions!, node.line);
+    }
+
+    yield line;
+  }
+
+  private async* executeWriteFile(node: WriteFileNode, context: ExecutionContext): AsyncGenerator<string, void, unknown> {
+    const filenameValue = this.evaluateExpression(node.filename, context);
+    const filename = this.valueToString(filenameValue);
+
+    if (filename === '') {
+      throw new RuntimeError(`Filename cannot be empty`, node.line);
+    }
+
+    if (!this.fileHandles.has(filename)) {
+      throw new RuntimeError(`File '${filename}' is not open`, node.line);
+    }
+
+    const fileHandle = this.fileHandles.get(filename)!;
+
+    if (fileHandle.mode === 'READ') {
+      throw new RuntimeError(`File '${filename}' not opened for writing`, node.line);
+    }
+
+    const dataValue = this.evaluateExpression(node.data, context);
+    const dataString = this.valueToString(dataValue);
+
+    fileHandle.data.push(dataString);
+    fileHandle.position++;
+
+    if (this.fileWriteOutput) {
+      yield `[Write to ${filename}] ${dataString}`;
     }
   }
 
