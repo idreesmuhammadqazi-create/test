@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Editor from './components/Editor/Editor';
 import OutputPanel from './components/OutputPanel/OutputPanel';
 import ErrorDisplay, { ErrorMessage } from './components/ErrorDisplay/ErrorDisplay';
@@ -543,6 +544,8 @@ function App() {
       {showAuthModal && (
         <AuthModal onClose={handleCloseAuth} />
       )}
+
+      <Analytics />
     </div>
   );
 }
