@@ -157,20 +157,40 @@ function App() {
     setErrors([]);
     setIsRunning(true);
     setWaitingForInput(false);
+    setCreatedFiles([]);
 
     try {
       // Tokenize and parse
       const tokens = tokenize(code);
       const ast = parse(tokens);
 
-      // Create interpreter with custom input handler
-      const interpreter = new Interpreter(async (variableName: string, variableType: string) => {
-        return new Promise<string>((resolve) => {
-          setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
-          setWaitingForInput(true);
-          inputResolveRef.current = resolve;
-        });
-      });
+      // Create interpreter with custom input handler and file upload handler
+      const interpreter = new Interpreter(
+        // Input handler
+        async (variableName: string, variableType: string) => {
+          return new Promise<string>((resolve) => {
+            setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
+            setWaitingForInput(true);
+            inputResolveRef.current = resolve;
+          });
+        },
+        // Debug mode
+        false,
+        // Step callback
+        undefined,
+        // File write output
+        true,
+        // File upload handler
+        async (filename: string) => {
+          return new Promise<string>((resolve) => {
+            setFileUploadPrompt(`Upload file: ${filename}`);
+            setWaitingForFileUpload(true);
+            fileUploadResolveRef.current = resolve;
+          });
+        }
+      );
+
+      interpreterRef.current = interpreter;
 
       // Execute with animation
       const generator = interpreter.executeProgram(ast);
@@ -180,6 +200,10 @@ function App() {
         // Wait 300ms between outputs
         await new Promise(resolve => setTimeout(resolve, 300));
       }
+
+      // Get list of created/opened files
+      const files = interpreter.getAllFiles();
+      setCreatedFiles(files);
 
       setIsRunning(false);
       setWaitingForInput(false);
