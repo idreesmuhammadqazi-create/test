@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { explainCode, CodeExplanation } from '../../utils/codeExplainer';
 import { detectCommonMistakes, CommonMistake } from '../../utils/commonMistakes';
 import {
@@ -21,14 +21,65 @@ export default function LearningTools({ code, onClose }: LearningToolsProps) {
   const [explanation, setExplanation] = useState<CodeExplanation | null>(null);
   const [mistakes, setMistakes] = useState<CommonMistake[]>([]);
   const [flowchart, setFlowchart] = useState<Flowchart | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const svgContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (code.trim()) {
       setExplanation(explainCode(code));
       setMistakes(detectCommonMistakes(code));
       setFlowchart(generateFlowchart(code));
+      // Reset zoom and pan when code changes
+      setZoom(1);
+      setPan({ x: 0, y: 0 });
     }
   }, [code]);
+
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev + 0.2, 3));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(prev => Math.max(prev - 0.2, 0.5));
+  };
+
+  const handleResetZoom = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+    setZoom(prev => Math.max(0.5, Math.min(3, prev + delta)));
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 0) { // Left mouse button
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setPan({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
 
   if (!code.trim()) {
     return (
@@ -199,12 +250,56 @@ export default function LearningTools({ code, onClose }: LearningToolsProps) {
                   </div>
                 </div>
 
-                <div className={styles.svgContainer}>
+                <div className={styles.flowchartControls}>
+                  <div className={styles.zoomControls}>
+                    <button
+                      className={styles.zoomButton}
+                      onClick={handleZoomOut}
+                      disabled={zoom <= 0.5}
+                      title="Zoom Out"
+                    >
+                      −
+                    </button>
+                    <span className={styles.zoomLevel}>{Math.round(zoom * 100)}%</span>
+                    <button
+                      className={styles.zoomButton}
+                      onClick={handleZoomIn}
+                      disabled={zoom >= 3}
+                      title="Zoom In"
+                    >
+                      +
+                    </button>
+                    <button
+                      className={styles.resetButton}
+                      onClick={handleResetZoom}
+                      title="Reset Zoom and Pan"
+                    >
+                      Reset
+                    </button>
+                  </div>
+                  <div className={styles.controlsHint}>
+                    💡 Use mouse wheel to zoom, drag to pan
+                  </div>
+                </div>
+
+                <div
+                  ref={svgContainerRef}
+                  className={`${styles.svgContainer} ${isDragging ? styles.dragging : ''}`}
+                  onWheel={handleWheel}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <svg
                     width={flowchart.width}
                     height={flowchart.height}
                     viewBox={`0 0 ${flowchart.width} ${flowchart.height}`}
                     className={styles.flowchartSvg}
+                    style={{
+                      transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+                      transition: isDragging ? 'none' : 'transform 0.1s ease-out'
+                    }}
                   >
                     {/* Render connections first (so they appear behind nodes) */}
                     <g className={styles.connections}>
