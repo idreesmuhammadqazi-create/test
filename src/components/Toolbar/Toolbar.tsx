@@ -16,7 +16,13 @@ interface ToolbarProps {
   onShare: () => void;
   onExport: () => void;
   onOpenAuth: () => void;
+  onOpenTutorial: () => void;
+  onOpenSyntaxReference: () => void;
+  onOpenPracticeProblems: () => void;
+  onOpenExamMode: () => void;
+  onOpenLearningTools: () => void;
   isRunning: boolean;
+  examModeActive: boolean;
 }
 
 export default function Toolbar({
@@ -31,7 +37,13 @@ export default function Toolbar({
   onShare,
   onExport,
   onOpenAuth,
-  isRunning
+  onOpenTutorial,
+  onOpenSyntaxReference,
+  onOpenPracticeProblems,
+  onOpenExamMode,
+  onOpenLearningTools,
+  isRunning,
+  examModeActive
 }: ToolbarProps) {
   const { currentUser, logout, isGuestMode } = useAuth();
   const { theme, toggleTheme } = useTheme();
