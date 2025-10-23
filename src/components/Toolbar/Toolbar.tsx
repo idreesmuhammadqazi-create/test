@@ -195,13 +195,13 @@ export default function Toolbar({
         🎯 Practice
       </button>
 
-      <button 
+      {/* <button 
         className={styles.secondaryButton} 
         onClick={onOpenLearningTools}
         title="Code Analysis & Tips"
       >
         💡 Analyze
-      </button>
+      </button> */}
 
       <button 
         className={styles.secondaryButton} 
