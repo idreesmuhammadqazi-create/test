@@ -331,9 +331,83 @@
   flex-shrink: 0;
 }
 
+.flowchartControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.zoomControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.zoomButton {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.zoomButton:hover:not(:disabled) {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.zoomButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.zoomLevel {
+  min-width: 50px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.resetButton {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.resetButton:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.controlsHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
 .svgContainer {
-  overflow-x: auto;
-  overflow-y: auto;
+  overflow: hidden;
   max-height: 600px;
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-md);
@@ -341,11 +415,20 @@
   border: 1px solid var(--border-color);
   display: flex;
   justify-content: center;
+  align-items: center;
+  cursor: grab;
+  position: relative;
+  user-select: none;
+}
+
+.svgContainer.dragging {
+  cursor: grabbing;
 }
 
 .flowchartSvg {
   min-width: 100%;
   height: auto;
+  transform-origin: center center;
 }
 
 .flowchartNote {
