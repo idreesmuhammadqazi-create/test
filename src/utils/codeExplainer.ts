@@ -11,8 +11,6 @@ export interface CodeExplanation {
 }
 
 export function explainCode(code: string): CodeExplanation {
-  const lines = code.split('\n').filter(line => line.trim() && !line.trim().startsWith('//'));
-
   const summary = generateSummary(code);
   const details = generateDetails(code);
   const complexity = analyzeComplexity(code);
