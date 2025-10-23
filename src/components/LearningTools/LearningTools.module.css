@@ -286,152 +286,165 @@
 }
 
 /* Flowchart View */
-.flowchartView {
+.traceTableView {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.flowchartContainer {
+.traceTableHeader {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.flowchartLegend {
-  background-color: var(--bg-tertiary);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  border: 1px solid var(--border-color);
-}
-
-.flowchartLegend h4 {
-  margin: 0 0 12px 0;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.legendItems {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.legendItem {
-  display: flex;
-  align-items: center;
   gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-secondary);
 }
 
-.legendItem svg {
-  flex-shrink: 0;
-}
-
-.flowchartControls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  background-color: var(--bg-tertiary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-}
-
-.zoomControls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.zoomButton {
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border-radius: var(--radius-md);
+.traceTableHeader h3 {
+  margin: 0;
   font-size: 20px;
   font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+  color: var(--text-primary);
 }
 
-.zoomButton:hover:not(:disabled) {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-.zoomButton:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.zoomLevel {
-  min-width: 50px;
-  text-align: center;
+.traceTableDescription {
+  margin: 0;
   font-size: 14px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.resetButton {
-  padding: 8px 16px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-card);
-  color: var(--text-primary);
-  border-radius: var(--radius-md);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.resetButton:hover {
-  background-color: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-.controlsHint {
-  font-size: 12px;
+  line-height: 1.6;
   color: var(--text-secondary);
-  font-weight: 500;
 }
 
-.svgContainer {
-  overflow: hidden;
-  max-height: 600px;
+.noTraceData {
+  text-align: center;
+  padding: 48px 24px;
   background-color: var(--bg-tertiary);
   border-radius: var(--radius-md);
-  padding: 24px;
+}
+
+.noTraceData .icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+}
+
+.noTraceData p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.tableContainer {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: grab;
-  position: relative;
-  user-select: none;
+  background-color: var(--bg-card);
 }
 
-.svgContainer.dragging {
-  cursor: grabbing;
+.traceTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
 }
 
-.flowchartSvg {
-  min-width: 100%;
-  height: auto;
-  transform-origin: center center;
+.traceTable thead {
+  background-color: var(--primary-color);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.flowchartNote {
+.traceTable thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.traceTable thead th:last-child {
+  border-right: none;
+}
+
+.traceTable tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.15s ease;
+}
+
+.traceTable tbody tr:hover {
+  background-color: var(--bg-hover);
+}
+
+.traceTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+.traceTable tbody td {
+  padding: 12px 16px;
+  border-right: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.traceTable tbody td:last-child {
+  border-right: none;
+}
+
+.stepColumn {
+  width: 60px;
+  min-width: 60px;
+}
+
+.lineColumn {
+  width: 60px;
+  min-width: 60px;
+}
+
+.statementColumn {
+  width: 250px;
+  min-width: 200px;
+}
+
+.variableColumn {
+  width: 100px;
+  min-width: 80px;
+}
+
+.outputColumn {
+  width: 150px;
+  min-width: 120px;
+}
+
+.stepCell,
+.lineCell {
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.statementCell {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.statementCell code {
+  background: none;
+  padding: 0;
+  color: var(--text-primary);
+}
+
+.variableCell {
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.outputCell {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-style: italic;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.traceTableNote {
   font-size: 13px;
   color: var(--text-secondary);
   padding: 12px 16px;
@@ -441,7 +454,7 @@
   line-height: 1.6;
 }
 
-.flowchartNote strong {
+.traceTableNote strong {
   color: var(--text-primary);
   font-weight: 700;
 }
