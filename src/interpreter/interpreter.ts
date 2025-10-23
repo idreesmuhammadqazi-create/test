@@ -39,6 +39,12 @@ import {
 const MAX_ITERATIONS = 10000;
 const MAX_RECURSION_DEPTH = 1000;
 
+interface FileHandle {
+  mode: 'READ' | 'WRITE' | 'APPEND';
+  data: string[];
+  position: number;
+}
+
 class ReturnValue {
   constructor(public value: any) {}
 }
@@ -51,11 +57,16 @@ export class Interpreter {
   private debugMode: boolean;
   private callStack: CallStackFrame[];
   private stepCallback?: () => Promise<void>;
+  private fileHandles: Map<string, FileHandle> = new Map();
+  private fileWriteOutput: boolean;
+  private fileUploadHandler?: (filename: string) => Promise<string>;
 
   constructor(
     inputHandler?: (variableName: string, variableType: string) => Promise<string>,
     debugMode: boolean = false,
-    stepCallback?: () => Promise<void>
+    stepCallback?: () => Promise<void>,
+    fileWriteOutput: boolean = true,
+    fileUploadHandler?: (filename: string) => Promise<string>
   ) {
     this.globalContext = {
       variables: new Map(),
@@ -66,6 +77,8 @@ export class Interpreter {
     this.debugMode = debugMode;
     this.callStack = [{ name: 'main', line: 1, type: 'main' }];
     this.stepCallback = stepCallback;
+    this.fileWriteOutput = fileWriteOutput;
+    this.fileUploadHandler = fileUploadHandler;
   }
 
   private defaultInputHandler(variableName: string): Promise<string> {
