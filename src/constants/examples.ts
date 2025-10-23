@@ -565,5 +565,148 @@ OUTPUT a, " DIV ", b, " = ", Result
 
 Result <-- a MOD b
 OUTPUT a, " MOD ", b, " = ", Result`
+  },
+  {
+    title: 'File Operations - Reading',
+    code: `// Read and display file contents
+DECLARE FileName : STRING
+DECLARE Line : STRING
+DECLARE LineCount : INTEGER
+
+FileName <-- "data.txt"
+LineCount <-- 0
+
+OPENFILE FileName FOR READ
+
+WHILE NOT EOF(FileName) DO
+    READFILE FileName, Line
+    LineCount <-- LineCount + 1
+    OUTPUT "Line ", LineCount, ": ", Line
+ENDWHILE
+
+CLOSEFILE FileName
+
+OUTPUT "Total lines read: ", LineCount`
+  },
+  {
+    title: 'File Operations - Writing',
+    code: `// Write student names to file
+DECLARE OutputFile : STRING
+DECLARE StudentName : STRING
+DECLARE Count, i : INTEGER
+
+OutputFile <-- "students.txt"
+Count <-- 3
+
+OPENFILE OutputFile FOR WRITE
+
+FOR i <-- 1 TO Count
+    OUTPUT "Enter student name ", i, ": "
+    INPUT StudentName
+    WRITEFILE OutputFile, StudentName
+NEXT i
+
+CLOSEFILE OutputFile
+
+OUTPUT "Successfully wrote ", Count, " names to ", OutputFile
+OUTPUT "Use the Download button to save the file"`
+  },
+  {
+    title: 'File Operations - Processing Grades',
+    code: `// Read grades, calculate statistics, write report
+DECLARE InputFile, OutputFile : STRING
+DECLARE Grade, Total, Count : INTEGER
+DECLARE Average : REAL
+DECLARE Highest, Lowest : INTEGER
+
+InputFile <-- "grades.txt"
+OutputFile <-- "report.txt"
+Total <-- 0
+Count <-- 0
+Highest <-- 0
+Lowest <-- 100
+
+OPENFILE InputFile FOR READ
+
+// Read all grades and calculate statistics
+WHILE NOT EOF(InputFile) DO
+    READFILE InputFile, Grade
+    Total <-- Total + Grade
+    Count <-- Count + 1
+    
+    IF Grade > Highest THEN
+        Highest <-- Grade
+    ENDIF
+    
+    IF Grade < Lowest THEN
+        Lowest <-- Grade
+    ENDIF
+    
+    OUTPUT "Read grade: ", Grade
+ENDWHILE
+
+CLOSEFILE InputFile
+
+// Calculate average
+IF Count > 0 THEN
+    Average <-- REAL(Total) / REAL(Count)
+ELSE
+    Average <-- 0.0
+ENDIF
+
+// Write report
+OPENFILE OutputFile FOR WRITE
+
+WRITEFILE OutputFile, "Grade Statistics Report"
+WRITEFILE OutputFile, "======================="
+WRITEFILE OutputFile, "Total grades: " & STRING(Count)
+WRITEFILE OutputFile, "Average: " & STRING(ROUND(Average, 2))
+WRITEFILE OutputFile, "Highest: " & STRING(Highest)
+WRITEFILE OutputFile, "Lowest: " & STRING(Lowest)
+
+CLOSEFILE OutputFile
+
+OUTPUT ""
+OUTPUT "Report generated successfully!"
+OUTPUT "Average grade: ", ROUND(Average, 2)
+OUTPUT "Download report.txt to see full report"`
+  },
+  {
+    title: 'File Operations - Append to Log',
+    code: `// Add entries to a log file
+DECLARE LogFile, Entry, Action : STRING
+DECLARE Timestamp, Counter : INTEGER
+DECLARE ContinueLogging : BOOLEAN
+
+LogFile <-- "activity.log"
+Counter <-- 1
+ContinueLogging <-- TRUE
+
+OPENFILE LogFile FOR APPEND
+
+WRITEFILE LogFile, "=== New Session Started ==="
+
+WHILE ContinueLogging = TRUE AND Counter <= 5 DO
+    OUTPUT "Enter log entry ", Counter, " (or 'DONE' to finish): "
+    INPUT Entry
+    
+    IF Entry = "DONE" THEN
+        ContinueLogging <-- FALSE
+    ELSE
+        Timestamp <-- Counter * 1000
+        Action <-- "[" & STRING(Timestamp) & "] " & Entry
+        WRITEFILE LogFile, Action
+        OUTPUT "Logged: ", Action
+        Counter <-- Counter + 1
+    ENDIF
+ENDWHILE
+
+WRITEFILE LogFile, "=== Session Ended ==="
+
+CLOSEFILE LogFile
+
+OUTPUT ""
+OUTPUT "Log file updated successfully"
+OUTPUT "Download activity.log to view all entries"`
   }
 ];
