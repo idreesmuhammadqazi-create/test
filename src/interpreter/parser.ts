@@ -20,6 +20,10 @@ import {
   FunctionNode,
   CallNode,
   ReturnNode,
+  OpenFileNode,
+  CloseFileNode,
+  ReadFileNode,
+  WriteFileNode,
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
@@ -171,11 +175,15 @@ export class Parser {
         case 'RETURN':
           return this.parseReturn();
         case 'CONSTANT':
-        case 'OPENFILE':
-        case 'CLOSEFILE':
-        case 'READFILE':
-        case 'WRITEFILE':
           throw new Error(`Feature not supported: ${token.value} at line ${token.line}`);
+        case 'OPENFILE':
+          return this.parseOpenFile();
+        case 'CLOSEFILE':
+          return this.parseCloseFile();
+        case 'READFILE':
+          return this.parseReadFile();
+        case 'WRITEFILE':
+          return this.parseWriteFile();
         default:
           throw new Error(`Unexpected keyword '${token.value}' at line ${token.line}`);
       }
@@ -657,6 +665,110 @@ export class Parser {
     return {
       type: 'Return',
       value,
+      line
+    };
+  }
+
+  private parseOpenFile(): OpenFileNode {
+    const line = this.advance().line; // consume OPENFILE
+
+    const filename = this.parseExpression();
+
+    this.consume('KEYWORD', 'Expected FOR after filename in OPENFILE');
+    if (this.previous().value !== 'FOR') {
+      throw new Error(`Expected FOR after filename in OPENFILE at line ${line}`);
+    }
+
+    const modeToken = this.consume('KEYWORD', 'Expected file mode (READ, WRITE, or APPEND) after FOR');
+    const mode = modeToken.value;
+
+    if (mode !== 'READ' && mode !== 'WRITE' && mode !== 'APPEND') {
+      throw new Error(`Invalid file mode, expected READ, WRITE, or APPEND at line ${modeToken.line}`);
+    }
+
+    return {
+      type: 'OpenFile',
+      filename,
+      mode: mode as 'READ' | 'WRITE' | 'APPEND',
+      line
+    };
+  }
+
+  private parseCloseFile(): CloseFileNode {
+    const line = this.advance().line; // consume CLOSEFILE
+
+    const filename = this.parseExpression();
+
+    return {
+      type: 'CloseFile',
+      filename,
+      line
+    };
+  }
+
+  private parseReadFile(): ReadFileNode {
+    const line = this.advance().line; // consume READFILE
+
+    const filename = this.parseExpression();
+
+    this.consume('COMMA', 'Expected , after filename in READFILE');
+
+    // Parse target (identifier or array access) - same as INPUT
+    let target: IdentifierNode | ArrayAccessNode;
+
+    const identifier = this.consume('IDENTIFIER', 'Expected identifier after , in READFILE').value;
+
+    if (this.check('LBRACKET')) {
+      // Array access
+      this.advance(); // consume [
+      const indices: ExpressionNode[] = [];
+
+      do {
+        indices.push(this.parseExpression());
+        if (this.check('COMMA')) {
+          this.advance();
+        } else {
+          break;
+        }
+      } while (true);
+
+      this.consume('RBRACKET', 'Expected ] after array indices');
+
+      target = {
+        type: 'ArrayAccess',
+        array: identifier,
+        indices,
+        line
+      };
+    } else {
+      target = {
+        type: 'Identifier',
+        name: identifier,
+        line
+      };
+    }
+
+    return {
+      type: 'ReadFile',
+      filename,
+      target,
+      line
+    };
+  }
+
+  private parseWriteFile(): WriteFileNode {
+    const line = this.advance().line; // consume WRITEFILE
+
+    const filename = this.parseExpression();
+
+    this.consume('COMMA', 'Expected , after filename in WRITEFILE');
+
+    const data = this.parseExpression();
+
+    return {
+      type: 'WriteFile',
+      filename,
+      data,
       line
     };
   }

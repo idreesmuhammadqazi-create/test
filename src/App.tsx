@@ -43,6 +43,12 @@ function App() {
   const [inputPrompt, setInputPrompt] = useState('');
   const inputResolveRef = useRef<((value: string) => void) | null>(null);
   
+  // File upload state
+  const [waitingForFileUpload, setWaitingForFileUpload] = useState(false);
+  const [fileUploadPrompt, setFileUploadPrompt] = useState('');
+  const fileUploadResolveRef = useRef<((content: string) => void) | null>(null);
+  const [createdFiles, setCreatedFiles] = useState<Array<{ filename: string; mode: string; lineCount: number }>>([]);
+  
   // Program management state
   const [currentProgram, setCurrentProgram] = useState<{ id: string; name: string } | null>(null);
   const [showSaveAsModal, setShowSaveAsModal] = useState(false);
@@ -151,20 +157,40 @@ function App() {
     setErrors([]);
     setIsRunning(true);
     setWaitingForInput(false);
+    setCreatedFiles([]);
 
     try {
       // Tokenize and parse
       const tokens = tokenize(code);
       const ast = parse(tokens);
 
-      // Create interpreter with custom input handler
-      const interpreter = new Interpreter(async (variableName: string, variableType: string) => {
-        return new Promise<string>((resolve) => {
-          setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
-          setWaitingForInput(true);
-          inputResolveRef.current = resolve;
-        });
-      });
+      // Create interpreter with custom input handler and file upload handler
+      const interpreter = new Interpreter(
+        // Input handler
+        async (variableName: string, variableType: string) => {
+          return new Promise<string>((resolve) => {
+            setInputPrompt(`Enter value for ${variableName} (${variableType}):`);
+            setWaitingForInput(true);
+            inputResolveRef.current = resolve;
+          });
+        },
+        // Debug mode
+        false,
+        // Step callback
+        undefined,
+        // File write output
+        true,
+        // File upload handler
+        async (filename: string) => {
+          return new Promise<string>((resolve) => {
+            setFileUploadPrompt(`Upload file: ${filename}`);
+            setWaitingForFileUpload(true);
+            fileUploadResolveRef.current = resolve;
+          });
+        }
+      );
+
+      interpreterRef.current = interpreter;
 
       // Execute with animation
       const generator = interpreter.executeProgram(ast);
@@ -174,6 +200,10 @@ function App() {
         // Wait 300ms between outputs
         await new Promise(resolve => setTimeout(resolve, 300));
       }
+
+      // Get list of created/opened files
+      const files = interpreter.getAllFiles();
+      setCreatedFiles(files);
 
       setIsRunning(false);
       setWaitingForInput(false);
@@ -241,6 +271,31 @@ function App() {
     }
   };
 
+  // Handle file upload submission
+  const handleFileUploadSubmit = async (file: File) => {
+    if (fileUploadResolveRef.current) {
+      try {
+        const content = await readFile(file);
+        fileUploadResolveRef.current(content);
+        fileUploadResolveRef.current = null;
+        setWaitingForFileUpload(false);
+        setFileUploadPrompt('');
+      } catch (error) {
+        alert((error as Error).message);
+      }
+    }
+  };
+
+  // Handle file upload cancel
+  const handleFileUploadCancel = () => {
+    if (fileUploadResolveRef.current) {
+      fileUploadResolveRef.current(''); // Empty content = empty file
+      fileUploadResolveRef.current = null;
+      setWaitingForFileUpload(false);
+      setFileUploadPrompt('');
+    }
+  };
+
   // Debug handlers
   const handleDebug = async () => {
     // Check for syntax errors first
@@ -256,6 +311,7 @@ function App() {
     setIsDebugging(true);
     setIsPaused(false);
     setWaitingForInput(false);
+    setCreatedFiles([]);
 
     try {
       // Tokenize and parse
@@ -282,6 +338,14 @@ function App() {
           return new Promise<void>((resolve) => {
             stepResolveRef.current = resolve;
           });
+        },
+        true, // file write output
+        async (filename: string) => {
+          return new Promise<string>((resolve) => {
+            setFileUploadPrompt(`Upload file: ${filename}`);
+            setWaitingForFileUpload(true);
+            fileUploadResolveRef.current = resolve;
+          });
         }
       );
 
@@ -295,6 +359,10 @@ function App() {
         // Wait 300ms between outputs
         await new Promise(resolve => setTimeout(resolve, 300));
       }
+
+      // Get list of created/opened files
+      const files = interpreter.getAllFiles();
+      setCreatedFiles(files);
 
       setIsRunning(false);
       setIsDebugging(false);
@@ -551,6 +619,12 @@ function App() {
             waitingForInput={waitingForInput}
             inputPrompt={inputPrompt}
             onInputSubmit={handleInputSubmit}
+            waitingForFileUpload={waitingForFileUpload}
+            fileUploadPrompt={fileUploadPrompt}
+            onFileUploadSubmit={handleFileUploadSubmit}
+            onFileUploadCancel={handleFileUploadCancel}
+            createdFiles={createdFiles}
+            interpreterRef={interpreterRef}
           />
           <ErrorDisplay errors={errors} isValidating={isValidating} />
         </div>

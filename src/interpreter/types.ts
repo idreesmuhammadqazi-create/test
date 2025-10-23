@@ -45,6 +45,10 @@ export type ASTNode =
   | FunctionNode
   | CallNode
   | ReturnNode
+  | OpenFileNode
+  | CloseFileNode
+  | ReadFileNode
+  | WriteFileNode
   | ExpressionNode;
 
 export type ExpressionNode =
@@ -160,6 +164,29 @@ export interface CallNode extends BaseNode {
 export interface ReturnNode extends BaseNode {
   type: 'Return';
   value: ExpressionNode;
+}
+
+export interface OpenFileNode extends BaseNode {
+  type: 'OpenFile';
+  filename: ExpressionNode;
+  mode: 'READ' | 'WRITE' | 'APPEND';
+}
+
+export interface CloseFileNode extends BaseNode {
+  type: 'CloseFile';
+  filename: ExpressionNode;
+}
+
+export interface ReadFileNode extends BaseNode {
+  type: 'ReadFile';
+  filename: ExpressionNode;
+  target: IdentifierNode | ArrayAccessNode;
+}
+
+export interface WriteFileNode extends BaseNode {
+  type: 'WriteFile';
+  filename: ExpressionNode;
+  data: ExpressionNode;
 }
 
 export interface BinaryOpNode extends BaseNode {

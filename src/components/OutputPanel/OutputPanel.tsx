@@ -7,6 +7,12 @@ interface OutputPanelProps {
   waitingForInput?: boolean;
   inputPrompt?: string;
   onInputSubmit?: (value: string) => void;
+  waitingForFileUpload?: boolean;
+  fileUploadPrompt?: string;
+  onFileUploadSubmit?: (file: File) => void;
+  onFileUploadCancel?: () => void;
+  createdFiles?: Array<{ filename: string; mode: string; lineCount: number }>;
+  interpreterRef?: React.RefObject<any>;
 }
 
 export default function OutputPanel({ 
@@ -14,7 +20,13 @@ export default function OutputPanel({
   isRunning, 
   waitingForInput = false, 
   inputPrompt = '',
-  onInputSubmit 
+  onInputSubmit,
+  waitingForFileUpload = false,
+  fileUploadPrompt = '',
+  onFileUploadSubmit,
+  onFileUploadCancel,
+  createdFiles = [],
+  interpreterRef
 }: OutputPanelProps) {
   const outputRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -78,7 +90,63 @@ export default function OutputPanel({
             </form>
           </div>
         )}
+
+        {waitingForFileUpload && (
+          <div className={styles.fileUploadSection}>
+            <label>{fileUploadPrompt}</label>
+            <input
+              type="file"
+              accept=".txt,.csv,.dat"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file && onFileUploadSubmit) {
+                  onFileUploadSubmit(file);
+                }
+              }}
+              className={styles.fileInput}
+            />
+            <button
+              onClick={onFileUploadCancel}
+              className={styles.cancelButton}
+            >
+              Cancel (Use Empty File)
+            </button>
+          </div>
+        )}
       </div>
+
+      {createdFiles && createdFiles.length > 0 && (
+        <div className={styles.filesSection}>
+          <h3 className={styles.filesHeader}>Files Created/Opened:</h3>
+          {createdFiles.map((file, index) => (
+            <div key={index} className={styles.fileItem}>
+              <span className={styles.fileName}>{file.filename}</span>
+              <span className={styles.fileMode}>({file.mode})</span>
+              <span className={styles.fileLines}>{file.lineCount} lines</span>
+              {(file.mode === 'WRITE' || file.mode === 'APPEND') && interpreterRef?.current && (
+                <button
+                  onClick={() => {
+                    const content = interpreterRef.current.getFileContent(file.filename);
+                    if (content !== null) {
+                      // Download file
+                      const blob = new Blob([content], { type: 'text/plain' });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = file.filename;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }
+                  }}
+                  className={styles.downloadButton}
+                >
+                  Download
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
