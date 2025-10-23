@@ -504,7 +504,20 @@ function App() {
         onShare={handleShare}
         onExport={handleExport}
         onOpenAuth={handleOpenAuth}
+        onOpenTutorial={() => setShowTutorial(true)}
+        onOpenSyntaxReference={() => setShowSyntaxReference(true)}
+        onOpenPracticeProblems={() => setShowPracticeProblems(true)}
+        onOpenExamMode={() => setShowExamModeStart(true)}
+        onOpenLearningTools={() => setShowLearningTools(true)}
         isRunning={isRunning}
+        examModeActive={examMode.active}
+      />
+
+      <ExamMode
+        isActive={examMode.active}
+        duration={examMode.duration}
+        onTimeout={handleExamTimeout}
+        onExit={handleExitExam}
       />
 
       {isDebugging && (
