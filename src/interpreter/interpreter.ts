@@ -172,6 +172,18 @@ export class Interpreter {
       case 'Return':
         const returnValue = this.evaluateExpression((node as ReturnNode).value, context);
         throw new ReturnValue(returnValue);
+      case 'OpenFile':
+        yield* this.executeOpenFile(node as OpenFileNode, context);
+        break;
+      case 'CloseFile':
+        yield* this.executeCloseFile(node as CloseFileNode, context);
+        break;
+      case 'ReadFile':
+        yield* this.executeReadFile(node as ReadFileNode, context);
+        break;
+      case 'WriteFile':
+        yield* this.executeWriteFile(node as WriteFileNode, context);
+        break;
       default:
         throw new RuntimeError(`Unknown node type: ${node.type}`, node.line);
     }
