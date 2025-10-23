@@ -446,6 +446,25 @@ function App() {
     setGuestMode(true);
   };
 
+  // Learning features handlers
+  const handleStartExam = (duration: number) => {
+    setExamMode({ active: true, duration });
+    setShowExamModeStart(false);
+  };
+
+  const handleExamTimeout = () => {
+    alert('Time is up! Exam mode has ended.');
+    setExamMode({ active: false, duration: 45 });
+  };
+
+  const handleExitExam = () => {
+    setExamMode({ active: false, duration: 45 });
+  };
+
+  const handleLoadCodeFromFeature = (newCode: string) => {
+    setCode(newCode);
+  };
+
   // Auto-save current program every 30 seconds
   useEffect(() => {
     if (!currentUser || !currentProgram || !currentProgram.id) return;
