@@ -1399,6 +1399,28 @@ export class Interpreter {
         }
         return Math.random();
 
+      case 'EOF':
+        if (args.length !== 1) {
+          throw new RuntimeError(`EOF requires 1 parameter`, line);
+        }
+        const filename = this.valueToString(this.evaluateExpression(args[0], context));
+        
+        if (filename === '') {
+          throw new RuntimeError(`Filename cannot be empty`, line);
+        }
+        
+        const fileHandle = this.fileHandles.get(filename);
+        
+        if (!fileHandle) {
+          throw new RuntimeError(`File '${filename}' is not open`, line);
+        }
+        
+        if (fileHandle.mode !== 'READ') {
+          throw new RuntimeError(`EOF can only be used with files opened for reading`, line);
+        }
+        
+        return fileHandle.position >= fileHandle.data.length;
+
       default:
         return undefined;
     }
