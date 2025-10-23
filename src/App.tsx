@@ -590,6 +590,38 @@ function App() {
         <AuthModal onClose={handleCloseAuth} />
       )}
 
+      {showTutorial && (
+        <Tutorial
+          onClose={() => setShowTutorial(false)}
+          onLoadCode={handleLoadCodeFromFeature}
+        />
+      )}
+
+      {showSyntaxReference && (
+        <SyntaxReference onClose={() => setShowSyntaxReference(false)} />
+      )}
+
+      {showPracticeProblems && (
+        <PracticeProblems
+          onClose={() => setShowPracticeProblems(false)}
+          onLoadCode={handleLoadCodeFromFeature}
+        />
+      )}
+
+      {showLearningTools && (
+        <LearningTools
+          code={code}
+          onClose={() => setShowLearningTools(false)}
+        />
+      )}
+
+      {showExamModeStart && (
+        <ExamModeStartModal
+          onStart={handleStartExam}
+          onCancel={() => setShowExamModeStart(false)}
+        />
+      )}
+
       <Analytics />
     </div>
   );
