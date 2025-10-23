@@ -20,7 +20,7 @@ interface ToolbarProps {
   onOpenSyntaxReference: () => void;
   onOpenPracticeProblems: () => void;
   onOpenExamMode: () => void;
-  onOpenLearningTools: () => void;
+  // onOpenLearningTools: () => void;
   isRunning: boolean;
   examModeActive: boolean;
 }
@@ -41,7 +41,7 @@ export default function Toolbar({
   onOpenSyntaxReference,
   onOpenPracticeProblems,
   onOpenExamMode,
-  onOpenLearningTools,
+  // onOpenLearningTools,
   isRunning,
   examModeActive
 }: ToolbarProps) {
@@ -195,13 +195,13 @@ export default function Toolbar({
         🎯 Practice
       </button>
 
-      <button 
+      {/* <button 
         className={styles.secondaryButton} 
         onClick={onOpenLearningTools}
         title="Code Analysis & Tips"
       >
         💡 Analyze
-      </button>
+      </button> */}
 
       <button 
         className={styles.secondaryButton} 
