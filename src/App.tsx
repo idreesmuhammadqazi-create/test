@@ -619,6 +619,12 @@ function App() {
             waitingForInput={waitingForInput}
             inputPrompt={inputPrompt}
             onInputSubmit={handleInputSubmit}
+            waitingForFileUpload={waitingForFileUpload}
+            fileUploadPrompt={fileUploadPrompt}
+            onFileUploadSubmit={handleFileUploadSubmit}
+            onFileUploadCancel={handleFileUploadCancel}
+            createdFiles={createdFiles}
+            interpreterRef={interpreterRef}
           />
           <ErrorDisplay errors={errors} isValidating={isValidating} />
         </div>
