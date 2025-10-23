@@ -20,6 +20,10 @@ import {
   FunctionNode,
   CallNode,
   ReturnNode,
+  OpenFileNode,
+  CloseFileNode,
+  ReadFileNode,
+  WriteFileNode,
   LiteralNode,
   IdentifierNode,
   ArrayAccessNode,
@@ -171,11 +175,15 @@ export class Parser {
         case 'RETURN':
           return this.parseReturn();
         case 'CONSTANT':
-        case 'OPENFILE':
-        case 'CLOSEFILE':
-        case 'READFILE':
-        case 'WRITEFILE':
           throw new Error(`Feature not supported: ${token.value} at line ${token.line}`);
+        case 'OPENFILE':
+          return this.parseOpenFile();
+        case 'CLOSEFILE':
+          return this.parseCloseFile();
+        case 'READFILE':
+          return this.parseReadFile();
+        case 'WRITEFILE':
+          return this.parseWriteFile();
         default:
           throw new Error(`Unexpected keyword '${token.value}' at line ${token.line}`);
       }
