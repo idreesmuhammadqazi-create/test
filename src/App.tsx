@@ -66,6 +66,14 @@ function App() {
   // Guest mode auth modal state
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+  // Learning features state
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [showSyntaxReference, setShowSyntaxReference] = useState(false);
+  const [showPracticeProblems, setShowPracticeProblems] = useState(false);
+  const [showLearningTools, setShowLearningTools] = useState(false);
+  const [showExamModeStart, setShowExamModeStart] = useState(false);
+  const [examMode, setExamMode] = useState<{ active: boolean; duration: number }>({ active: false, duration: 45 });
+
   // Load code from LocalStorage on mount
   useEffect(() => {
     const savedCode = loadCode();
