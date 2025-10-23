@@ -99,6 +99,26 @@ export class Interpreter {
     this.debugMode = false;
   }
 
+  public getFileContent(filename: string): string | null {
+    const fileHandle = this.fileHandles.get(filename);
+    if (!fileHandle) {
+      return null;
+    }
+    return fileHandle.data.join('\n');
+  }
+
+  public getAllFiles(): Array<{ filename: string; mode: string; lineCount: number }> {
+    const files: Array<{ filename: string; mode: string; lineCount: number }> = [];
+    for (const [filename, handle] of this.fileHandles.entries()) {
+      files.push({
+        filename,
+        mode: handle.mode,
+        lineCount: handle.data.length
+      });
+    }
+    return files;
+  }
+
   public async* executeProgram(ast: ASTNode[]): AsyncGenerator<string, void, unknown> {
     yield* this.execute(ast);
   }
