@@ -5,8 +5,7 @@ import {
   generateFlowchart,
   renderNodePath,
   renderConnection,
-  Flowchart,
-  FlowchartNode
+  Flowchart
 } from '../../utils/flowchartGenerator';
 import styles from './LearningTools.module.css';
 
